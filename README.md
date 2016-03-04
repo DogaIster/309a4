@@ -5,8 +5,19 @@ For phase 2 (the actual coding part), to set up the app, go to the app/app_name 
 ```bash
 npm install
 ```
+
 (root/superuser access is needed), and then type
+
+
 ```bash
-grunt
-``
+bower update
+```
+
+to get the front-end AngularJS code, and finally, run the server with 
+
+```bash
+gulp
+```
 to start the server.
+
+See [the MEAN.js docs](http://meanjs.org/docs.html) for more.
