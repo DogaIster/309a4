@@ -7,6 +7,8 @@ npm install
 ```
 (root/superuser access is needed), and then type
 ```bash
-grunt
+gulp
 ```
 to start the server.
+
+See [the MEAN.js docs](http://meanjs.org/docs.html) for more.
