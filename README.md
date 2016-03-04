@@ -8,5 +8,5 @@ npm install
 (root/superuser access is needed), and then type
 ```bash
 grunt
-``
+```
 to start the server.
