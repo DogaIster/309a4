@@ -5,7 +5,16 @@ For phase 2 (the actual coding part), to set up the app, go to the app/app_name 
 ```bash
 npm install
 ```
+
 (root/superuser access is needed), and then type
+
+
+```bash
+bower update
+```
+
+to get the front-end AngularJS code, and finally, run the server with 
+
 ```bash
 gulp
 ```
