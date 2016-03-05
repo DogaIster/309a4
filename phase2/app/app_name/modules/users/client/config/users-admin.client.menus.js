@@ -24,7 +24,7 @@ angular.module('users').run(['Menus',
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'users', {
       title: 'List Users',
-      state: 'users.list'
+      state: 'admin.list'
     });
   }
 ]);
