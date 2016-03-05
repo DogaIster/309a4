@@ -12,7 +12,7 @@ angular.module('users.admin.routes').config(['$stateProvider',
       .state('list', { // added for listing users
         url: '/users',
         templateUrl: 'modules/users/client/views/list-users-nonadmin.client.view.html',
-        controller: 'UserListController'
+        controller: 'UserNonAdminListController'
       })
       .state('admin.user', {
         url: '/users/:userId',
