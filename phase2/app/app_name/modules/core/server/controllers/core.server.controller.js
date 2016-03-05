@@ -14,7 +14,6 @@ exports.renderIndex = function (req, res) {
  */
 exports.renderAdmin = function (req, res) {
   res.render('modules/core/server/views/admin', {
-    user: req.user || null
   });
 };
 
