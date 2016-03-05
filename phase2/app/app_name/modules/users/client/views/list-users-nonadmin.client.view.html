@@ -12,6 +12,7 @@
   <div class="list-group">
     <a ng-repeat="user in pagedItems" ui-sref="admin.user({userId: user._id})" class="list-group-item">
       <h4 class="list-group-item-heading" ng-bind="user.username"></h4>
+      <h5 style="font-weight: bold" class="list-group-item-heading" ng-bind="user.typeOfUser"></h5>
       <img ng-src="{{user.profileImageURL}}" alt="Profile Image" width="50px;" height="50px;">
       <p class="list-group-item-text" ng-bind="user.firstName"></p>
       <p class="list-group-item-text" ng-bind="user.email"></p>
