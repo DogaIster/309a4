@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('admin.list').controller('UserListsController', ['$scope', '$filter', 'Admin',
+angular.module('list').controller('UserListsController', ['$scope', '$filter', 'Admin',
   function ($scope, $filter, Admin) {
     Admin.query(function (data) {
       $scope.users = data;

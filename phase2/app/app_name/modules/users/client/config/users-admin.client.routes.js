@@ -9,10 +9,10 @@ angular.module('users.admin.routes').config(['$stateProvider',
         templateUrl: 'modules/users/client/views/admin/list-users.client.view.html',
         controller: 'UserListController'
       })
-      .state('admin.list', { // added for listing users
+      .state('list', { // added for listing users
         url: '/users',
-        templateUrl: 'modules/users/client/views/admin/list-users.client.view.html',
-        controller: 'UserListsController'
+        templateUrl: 'modules/users/client/views/list-users-nonadmin.client.view.html',
+        controller: 'UserListController'
       })
       .state('admin.user', {
         url: '/users/:userId',
