@@ -11,7 +11,7 @@ Patrick Moran
 A system for students that they can book office hours with professors/TAs.
 We think that it matches with all the requirements.
 
-For phase 2 (the actual coding part), to set up the app, go to the app/app_name folder, and first [install ```gulp```,  ```grunt-cli```,  ```bower``` globally with ```npm``](http://meanjs.org/docs.html#getting-started). After you've done that, in the app directory, 
+For phase 2 (the actual coding part), to set up the app, go to the app/app_name folder, and first [install ```gulp```,  ```grunt-cli```,  ```bower``` globally with ```npm```](http://meanjs.org/docs.html#getting-started). After you've done that, in the app directory, 
 ```bash
 npm install
 ```
