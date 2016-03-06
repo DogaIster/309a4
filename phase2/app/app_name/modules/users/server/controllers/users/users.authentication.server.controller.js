@@ -30,6 +30,13 @@ exports.signup = function (req, res) {
   user.provider = 'local';
   user.displayName = user.firstName + ' ' + user.lastName;
 
+
+  // Professors are site admins, have special priveledges
+  if (user.typeOfUser == "professor") {
+    user.roles = ['user', 'admin'];
+    user.site_admin = true;
+    }
+
   // Then save the user
   user.save(function (err) {
     if (err) {

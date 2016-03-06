@@ -10,10 +10,11 @@ exports.renderIndex = function (req, res) {
 };
 
 /**
- * Render the Admin page
+ * Render the Admin login page
  */
 exports.renderAdmin = function (req, res) {
-  res.render('modules/core/server/views/admin', {
+  res.render('modules/users/client/views/authentication/signin.client', {
+    user: req.user || null
   });
 };
 
