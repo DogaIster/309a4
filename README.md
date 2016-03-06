@@ -1,6 +1,16 @@
 # 309a4
 CSC309 A4 Repo
 
+##Members:
+Adam Kasztenny
+Doga Ister
+Sean Williams
+Patrick Moran
+
+##Idea:
+A system for students that they can book office hours with professors/TAs.
+We think that it matches with all the requirements.
+
 For phase 2 (the actual coding part), to set up the app, go to the app/app_name folder, and type
 ```bash
 npm install
