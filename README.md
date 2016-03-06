@@ -20,10 +20,11 @@ npm install
 
 
 ```bash
+bower install
 bower update
 ```
 
-to get the front-end AngularJS code, and finally, run the server with 
+to get the front-end code, and finally, run the server with 
 
 ```bash
 gulp
