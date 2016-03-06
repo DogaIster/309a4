@@ -2,7 +2,14 @@
 
 var defaultEnvConfig = require('./default');
 
+// our db, which is hosted on MongoLab
 process.env.MONGOLAB_URI = 'mongodb://app:app@ds019668.mlab.com:19668/309a4';
+
+// for GitHub integration
+// these defaults are for localhost (http://127.0.0.1:3000/)
+// if we decide to host it, we'll need to change this
+process.env.GITHUB_ID = 'b0d5c2d66ae9ddfe4f78';
+process.env.GITHUB_SECRET = '61ff23f04a0a0a55ad0b1499568628fa71cf386e';
 
 module.exports = {
   db: {
