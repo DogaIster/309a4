@@ -57,6 +57,11 @@ var UserSchema = new Schema({
     unique: false,
     lowercase: true,
     trim: true,
+    default: 'Student',
+  },
+  description: {
+    type: String,
+    unique: false,
     default: '',
   },
   username: {
