@@ -50,7 +50,7 @@
                 </div>
             </div>
 
-             <button type="button" class="btn btn-primary">Users</button>
+             <button id="users" type="button" class="btn btn-primary">Users</button>
 
             <div class="dropdown btn-group">
                 <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
@@ -88,9 +88,30 @@
         </div>
 
          <div id="messageBoard" class = "row" hidden>
+	
+	 <h1>CSC309 Office Hour</h1>
 
-	 <span> </span>	
+	 <table class="table table-bordered">
+	 <caption>Replies</caption>
+	 	<tr><td>
+		<div><b>Jimmy</b>, 3rd year CS student
+		<br />
+		March 9th, 2016 3:50 pm
+		</div>
+		</td></tr>
+	 	<tr><td style="text-indent: 100px">I love CSC309, its the greatest.</td></tr>
+	 	<tr><td>
+
+		<div><b>Bob</b>, 4rd year Eng. student
+		<br />
+		March 9th, 2016 4:52 pm
+		</div>
+		</td></tr>
+	 	<tr><td style="text-indent: 100px">I would have to agree.</td></tr>
+	 </table>
+
 	  <form id="messageForm" action="" class-"input-group">
+	  <caption>Post a reply</caption>
 
   <div>
     <textarea class="" id="postMessage"></textarea></div>
@@ -102,6 +123,53 @@
 	</div>
 
     </div>
+
+   <div id="fakeUsers" hidden> 
+	 <table class="table table-bordered">
+	 <caption>Users</caption>
+	<tr>
+		<td><b>Username</b></td>
+		<td><b>Name</b></td>
+		<td><b>Classes</b></td>
+		<td><b>Description</b></td>
+	</tr>
+	<tr>
+		<td>jimmy123</td>
+		<td>James</td>
+		<td>CSC309, CSC301</td>
+		<td>3rd year CS student</td>
+	</tr>
+	<tr>
+		<td>bob_rulez</td>
+		<td>Robert</td>
+		<td>CSC309, CSC321</td>
+		<td>4th year ENG student</td>
+	</tr>
+	<tr>
+		<td>cook</td>
+		<td>Stephen</td>
+		<td>CSC263</td>
+		<td>Professor</td>
+	</tr>
+	</table>
+   </div>
+
+   <div id="fakeSignIn" hidden>
+                 <div class = "input-group">
+                    <input type = "text" class = "form-control" placeholder = "Username">
+                    <input type = "text" class = "form-control" placeholder = "Password">
+                </div>
+   </div>
+   <div id="fakeSignUp" hidden>
+                 <div class = "input-group">
+                    <input type = "text" class = "form-control" placeholder = "First Name">
+                    <input type = "text" class = "form-control" placeholder = "Last Name">
+                    <input type = "text" class = "form-control" placeholder = "Username">
+                    <input type = "text" class = "form-control" placeholder = "Password">
+                    <input type = "text" class = "form-control" placeholder = "Email">
+                </div>
+   </div>
+
 
     <footer>
         <img id="image" class="myClass text-center" src="img/uoftlogo.jpg" alt="Computer Science UofT logo"><br/>
