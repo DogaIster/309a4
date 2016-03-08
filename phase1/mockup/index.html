@@ -3,7 +3,7 @@
     <meta content="text/html; charset=UTF-8" http-equiv="content-type">
     <link type="text/css" rel="stylesheet" href="stylesheets/style.css"/>
     <link rel="shortcut icon" href="img/favicon.ico"/>
-    <title>A4</title>
+    <title>OfficeHR</title>
 
     <!-- jQuery library -->
     <script src="scripts/jquery-2.2.0.min.js"></script>
@@ -16,13 +16,15 @@
 
     <link rel="stylesheet" href="stylesheets/style.css">
 
+    <script src="scripts/fakeData.js"></script>
+
 </head>
 <body>
 
    <div class = "jumbotron text-center">
         <div class = "container">
 		<div id="Header" class="title">
-			<h1>OfficeHR</h1>
+			<h1><a href="index.html">OfficeHR</a></h1>
 		</div>
     	</div>
     </div>
@@ -37,11 +39,11 @@
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Book Office Hour</a></li>
-                    <li><a href="#">Request Office Hour(s)</a></li>
-                    <li><a href="#">Offer Office Hour(s)</a></li>
-                    <li><a href="#">Book Group Office Hour</a></li>
-                    <li><a href="#">List Booked Office Hours</a></li>
+                    <li><a id="bookOfficeHour" href="#">Book Office Hour</a></li>
+                    <li><a id="requestOfficeHour" href="#">Request Office Hour(s)</a></li>
+                    <li><a id="offerOfficeHour" href="#">Offer Office Hour(s)</a></li>
+                    <li><a id="bookGroupOfficeHour" href="#">Book Group Office Hour</a></li>
+                    <li><a id="listBookedOfficeHours" href="#">List Booked Office Hours</a></li>
                 </ul>
                  <div class = "input-group">
                     <input type = "text" class = "form-control" placeholder = "Search Office Hours">
@@ -56,16 +58,16 @@
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Personal Chat</a></li>
-                    <li><a href="#">Group Chat</a></li>
+                    <li><a id="personalChat" href="#">Personal Chat</a></li>
+                    <li><a id="groupChat" href="#">Group Chat</a></li>
                 </ul>
             </div>
 
-            <button type="button" class="btn btn-primary">Discussion Board</button>
+            <button type="button" id="discussionBoard" class="btn btn-primary">Discussion Board</button>
             
             <div class="pull-right">
-                <button type="button" class="btn btn-warning">Sign up</button>
-                <button type="button" class="btn btn-success">Sign in</button>
+                <button type="button" id="signUp" class="btn btn-warning">Sign up</button>
+                <button type="button" id="signIn" class="btn btn-success">Sign in</button>
             </div>
             <br/>
 
