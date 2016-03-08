@@ -4,3 +4,16 @@ footer{
 	text-align: center;
 	width: 100%;
 }
+
+#image{
+	position: absolute;
+	bottom: 50px;
+	text-align: center;
+	margin-left: -150px;
+	width: 20%;
+}
+
+.description p{
+	font-size: 2em;
+	font-style: bold;
+}

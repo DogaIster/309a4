@@ -19,10 +19,10 @@
 </head>
 <body>
 
-   <div class = "jumbotron">
+   <div class = "jumbotron text-center">
         <div class = "container">
 		<div id="Header" class="title">
-			<h1>Welcome to our A4!</h1>
+			<h1>OfficeHR</h1>
 		</div>
     	</div>
     </div>
@@ -38,6 +38,8 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li><a href="#">Book Office Hour</a></li>
+                    <li><a href="#">Request Office Hour(s)</a></li>
+                    <li><a href="#">Offer Office Hour(s)</a></li>
                     <li><a href="#">Book Group Office Hour</a></li>
                     <li><a href="#">List Booked Office Hours</a></li>
                 </ul>
@@ -46,9 +48,18 @@
                 </div>
             </div>
 
-            <button type="button" class="btn btn-primary">Users</button>
-               
-            <button type="button" class="btn btn-primary">Chat</button>
+             <button type="button" class="btn btn-primary">Users</button>
+
+            <div class="dropdown btn-group">
+                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                    Chat
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Personal Chat</a></li>
+                    <li><a href="#">Group Chat</a></li>
+                </ul>
+            </div>
 
             <button type="button" class="btn btn-primary">Discussion Board</button>
             
@@ -56,16 +67,31 @@
                 <button type="button" class="btn btn-warning">Sign up</button>
                 <button type="button" class="btn btn-success">Sign in</button>
             </div>
-            
-        </div>
+            <br/>
 
-        <footer>
-        	<a href="http://web.cs.toronto.edu/" target="http://web.cs.toronto.edu/" >Faculty of Computer Science</a>
-         	<br/>
-         	<element>Site is designed by Group Perfect.</element> <br/>
-        </footer>
+        </div>
+        <div class="row description">
+            <p id="description">
+                Welcome to OfficeHR! 
+            </p>
+            <p>
+                The world's leading office hour organisation website. Yep. It really is.
+            </p>
+            <p>
+                We have features. Buttons too. They work. We tested this.
+            </p>
+            <p>
+                You can offer or request office hours as either an instructor or student. Questions about the course and tutorials etc. can be discussed in the discussion board. There is a chat feature for chatting too. Check it out.
+            </p>
+        </div>
     </div>
 
+    <footer>
+        <img id="image" class="myClass text-center" src="img/uoftlogo.jpg" alt="Computer Science UofT logo"><br/>
+        <a href="http://web.cs.toronto.edu/" target="http://web.cs.toronto.edu/" >Faculty of Computer Science</a>
+        <br/>
+        <element>Site is designed by Group Perfect.</element> <br/>
+    </footer>
 
 </body>
 </html>
