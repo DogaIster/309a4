@@ -18,10 +18,31 @@ $(document).ready(function(){
 
     $('#personalChat').click(function() {
 	showPersonalChat();
-    })
-;
+    });
+
     $('#groupChat').click(function() {
 	showGroupChat();
+    });
+
+    $('#bookOfficeHour').click(function() {
+	showBookOfficeHour();
+    });
+ 
+    $('#requestOfficeHour').click(function() {
+	showRequestOfficeHour();
+    });
+ 
+
+    $('#offerOfficeHour').click(function() {
+	showOfferOfficeHour();
+    });
+ 
+    $('#bookGroupOfficeHour').click(function() {
+	showBookGroupOfficeHour();
+    });
+ 
+    $('#listBookedOfficeHours').click(function() {
+	showListBookedOfficeHours();
     });
  
 });
@@ -35,6 +56,12 @@ var clearInfo = function()
     $('#fakeSignUp').hide();
     $('#fakePersonalChat').hide();
     $('#fakeGroupChat').hide();
+    $('#fakeBookOfficeHour').hide();
+    $('#fakeRequestOfficeHour').hide();
+    $('#fakeBookOfficeHour').hide();
+    $('#fakeOfferOfficeHour').hide();
+    $('#fakeBookGroupOfficeHour').hide();
+    $('#listBookedOfficeHours').hide();
 };
 
 var showDiscussionBoard = function()
@@ -71,4 +98,34 @@ var showGroupChat = function()
 {
     clearInfo();
     $('#fakeGroupChat').show();
+};
+
+var showBookOfficeHour = function()
+{
+    clearInfo();
+    $('#fakeBookOfficeHour').show();
+};
+
+var showRequestOfficeHour = function()
+{
+    clearInfo();
+    $('#fakeRequestOfficeHour').show();
+};
+
+var showOfferOfficeHour = function()
+{
+    clearInfo();
+    $('#fakeOfferOfficeHour').show();
+};
+
+var showBookGroupOfficeHour = function()
+{
+    clearInfo();
+    $('#fakeBookGroupOfficeHour').show();
+};
+
+var showListBookedOfficeHours = function()
+{
+    clearInfo();
+    $('#listBookedOfficeHours').show();
 };
