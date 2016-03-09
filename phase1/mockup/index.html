@@ -3,7 +3,7 @@
     <meta content="text/html; charset=UTF-8" http-equiv="content-type">
     <link type="text/css" rel="stylesheet" href="stylesheets/style.css"/>
     <link rel="shortcut icon" href="img/favicon.ico"/>
-    <title>A4</title>
+    <title>OfficeHR</title>
 
     <!-- jQuery library -->
     <script src="scripts/jquery-2.2.0.min.js"></script>
@@ -16,13 +16,15 @@
 
     <link rel="stylesheet" href="stylesheets/style.css">
 
+    <script src="scripts/fakeData.js"></script>
+
 </head>
 <body>
 
    <div class = "jumbotron text-center">
         <div class = "container">
 		<div id="Header" class="title">
-			<h1>OfficeHR</h1>
+			<h1><a href="index.html">OfficeHR</a></h1>
 		</div>
     	</div>
     </div>
@@ -37,18 +39,18 @@
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Book Office Hour</a></li>
-                    <li><a href="#">Request Office Hour(s)</a></li>
-                    <li><a href="#">Offer Office Hour(s)</a></li>
-                    <li><a href="#">Book Group Office Hour</a></li>
-                    <li><a href="#">List Booked Office Hours</a></li>
+                    <li><a id="bookOfficeHour" href="#">Book Office Hour</a></li>
+                    <li><a id="requestOfficeHour" href="#">Request Office Hour(s)</a></li>
+                    <li><a id="offerOfficeHour" href="#">Offer Office Hour(s)</a></li>
+                    <li><a id="bookGroupOfficeHour" href="#">Book Group Office Hour</a></li>
+                    <li><a id="listBookedOfficeHours" href="#">List Booked Office Hours</a></li>
                 </ul>
                  <div class = "input-group">
                     <input type = "text" class = "form-control" placeholder = "Search Office Hours">
                 </div>
             </div>
 
-             <button type="button" class="btn btn-primary">Users</button>
+             <button id="users" type="button" class="btn btn-primary">Users</button>
 
             <div class="dropdown btn-group">
                 <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
@@ -56,21 +58,21 @@
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Personal Chat</a></li>
-                    <li><a href="#">Group Chat</a></li>
+                    <li><a id="personalChat" href="#">Personal Chat</a></li>
+                    <li><a id="groupChat" href="#">Group Chat</a></li>
                 </ul>
             </div>
 
-            <button type="button" class="btn btn-primary">Discussion Board</button>
+            <button type="button" id="discussionBoard" class="btn btn-primary">Discussion Board</button>
             
             <div class="pull-right">
-                <button type="button" class="btn btn-warning">Sign up</button>
-                <button type="button" class="btn btn-success">Sign in</button>
+                <button type="button" id="signUp" class="btn btn-warning">Sign up</button>
+                <button type="button" id="signIn" class="btn btn-success">Sign in</button>
             </div>
             <br/>
 
         </div>
-        <div class="row description">
+        <div id="infoDiv" class="row description">
             <p id="description">
                 Welcome to OfficeHR! 
             </p>
@@ -84,7 +86,230 @@
                 You can offer or request office hours as either an instructor or student. Questions about the course and tutorials etc. can be discussed in the discussion board. There is a chat feature for chatting too. Check it out.
             </p>
         </div>
+
+         <div id="messageBoard" class = "row" hidden>
+	
+	 <h1>CSC309 Office Hour</h1>
+
+	 <table class="table table-bordered">
+	 <caption>Replies</caption>
+	 	<tr><td>
+		<div><b>Jimmy</b>, 3rd year CS student
+		<br />
+		March 9th, 2016 3:50 pm
+		</div>
+		</td></tr>
+	 	<tr><td style="text-indent: 100px">I love CSC309, its the greatest.</td></tr>
+	 	<tr><td>
+
+		<div><b>Bob</b>, 4rd year Eng. student
+		<br />
+		March 9th, 2016 4:52 pm
+		</div>
+		</td></tr>
+	 	<tr><td style="text-indent: 100px">I would have to agree.</td></tr>
+	 </table>
+
+	  <form id="messageForm" action="" class-"input-group">
+	  <caption>Post a reply</caption>
+
+  <div>
+    <textarea class="" id="postMessage"></textarea></div>
+
+  <div>
+     <button type="button" class="btn btn-primary">Post</button>
+  </form>
+	
+	</div>
+
     </div>
+
+   <div id="fakeUsers" hidden> 
+	 <table class="table table-bordered">
+	 <caption>Users</caption>
+	<tr>
+		<td><b>Username</b></td>
+		<td><b>Name</b></td>
+		<td><b>Classes</b></td>
+		<td><b>Description</b></td>
+	</tr>
+	<tr>
+		<td>jimmy123</td>
+		<td>James</td>
+		<td>CSC309, CSC301</td>
+		<td>3rd year CS student</td>
+	</tr>
+	<tr>
+		<td>bob_rulez</td>
+		<td>Robert</td>
+		<td>CSC309, CSC321</td>
+		<td>4th year ENG student</td>
+	</tr>
+	<tr>
+		<td>prof_in_da_house</td>
+		<td>Professerson</td>
+		<td>CSC263</td>
+		<td>Professor</td>
+	</tr>
+	</table>
+   </div>
+
+   <div id="fakeSignIn" hidden>
+                 <div class = "input-group">
+                    <input type = "text" class = "form-control" placeholder = "Username">
+                    <input type = "text" class = "form-control" placeholder = "Password">
+     <button type="button" class="btn btn-success">Sign in</button>
+                </div>
+   </div>
+   <div id="fakeSignUp" hidden>
+                 <div class = "input-group">
+                    <input type = "text" class = "form-control" placeholder = "First Name">
+                    <input type = "text" class = "form-control" placeholder = "Last Name">
+                    <input type = "text" class = "form-control" placeholder = "Username">
+                    <input type = "text" class = "form-control" placeholder = "Password">
+                    <input type = "text" class = "form-control" placeholder = "Email">
+	            <caption>Type of user: </caption>
+ 		    <select>
+ 	 		<option value="volvo">Professor</option>
+ 	 		<option value="saab">TA</option>
+ 			<option value="mercedes">Student</option>
+                 </select> 
+		 <br />
+	     <button type="button" class="btn btn-success">Sign up</button>
+                </div>
+   </div>
+
+   <div id="fakePersonalChat" hidden>
+
+	 <table class="table table-bordered">
+	 <caption>Personal Chat</caption>
+	 	<tr><td>
+		<div><b>Jimmy</b>
+		<br />
+		3:58 pm
+	 	<div style="text-indent: 100px">Hey Bob.</div>
+		</div>
+
+	 	<tr><td>
+		<div><b>Bob</b>
+		<br />
+		3:58 pm
+	 	<div style="text-indent: 600px">Wazzup?</div>
+		</div>
+                </table>
+
+	<div class="row">
+	    <input type = "text" class = "form-control" placeholder = "Message text">
+	    <button type="button" class="btn btn-success">Send</button>
+	    
+	</div>
+   </div>
+
+   <div id="fakeGroupChat" hidden>
+
+	 <table class="table table-bordered">
+	 <caption>Personal Chat</caption>
+	 	<tr><td>
+		<div><b>Bob</b>
+		<br />
+		2:40 pm
+	 	<div style="text-indent: 100px">Can I get 100 in your course?</div>
+		</div>
+
+	 	<tr><td>
+		<div><b>Professerson</b>
+		<br />
+		2:42 pm
+	 	<div style="text-indent: 600px">Sure.</div>
+		</div>
+                </table>
+
+	<div class="row">
+	    <input type = "text" class = "form-control" placeholder = "Message text">
+	    <button type="button" class="btn btn-success">Send</button>
+	</div>
+   </div>
+
+   <div id="fakeBookOfficeHour" hidden>
+	<div class="row">
+	    <input type = "text" class = "form-control" placeholder = "Class">
+	    <input type = "text" class = "form-control" placeholder = "Time">
+
+	</div>	   
+	<button type="button" class="btn btn-primary">Book</button>
+   </div>
+
+   <div id="fakeRequestOfficeHour" hidden>
+	<div class="row">
+	    <input type = "text" class = "form-control" placeholder = "Class">
+	    <input type = "text" class = "form-control" placeholder = "Time">
+
+	    <input type = "checkbox">
+		Do you want the professor to be present? <br/>
+
+	    <input type = "checkbox">
+			Do you want a TA to be present? <br/>
+
+	</div>	   
+	<button type="button" class="btn btn-primary">Request</button>
+   </div>
+
+   <div id="fakeOfferOfficeHour" hidden>
+	<caption>This option is for professors, who are admins, not TAs or students.</caption>
+	<div class="row">
+	    <input type = "text" class = "form-control" placeholder = "Class">
+	    <input type = "text" class = "form-control" placeholder = "Time">
+	    <input type = "text" class = "form-control" placeholder = "Length">
+	    <input type = "text" class = "form-control" placeholder = "TAs joining you">
+	</div>	   
+	<button type="button" class="btn btn-primary">Offer</button>
+   </div>
+
+   <div id="fakeBookGroupOfficeHour" hidden>
+	<div class="row">
+	    <input type = "text" class = "form-control" placeholder = "Class">
+	    <input type = "text" class = "form-control" placeholder = "Time">
+	    <input type = "text" class = "form-control" placeholder = "Number of people">
+
+	    <input type = "checkbox">
+		Do you want the professor to be present? <br/>
+
+	    <input type = "checkbox">
+			Do you want a TA to be present? <br/>
+
+	</div>	   
+	<button type="button" class="btn btn-primary">Book</button>
+   </div>
+
+   <div id="fakeListBookedOfficeHours" hidden>
+	 <table class="table table-bordered">
+	 <caption>Office Hours</caption>
+	<tr>
+		<td><b>Class</b></td>
+		<td><b>Time</b></td>
+		<td><b>Professor present</b></td>
+		<td><b>TAs present</b></td>
+	</tr>
+	<tr>
+		<td>CSC309</td>
+		<td>4 pm, Monday</td>
+		<td>Mashiyat</td>
+		<td>Kyriakos Georgiou</td>
+	</tr>
+	<tr>
+		<td>CSC309</td>
+		<td>5 pm, Wednesday</td>
+		<td>Mashiyat</td>
+		<td>None</td>
+	</tr>
+	<tr>
+		<td>CSC263</td>
+		<td>3 pm, Friday</td>
+		<td>Professerson</td>
+		<td>None</td>
+	</tr>
+	</table>
+   </div>
 
     <footer>
         <img id="image" class="myClass text-center" src="img/uoftlogo.jpg" alt="Computer Science UofT logo"><br/>
