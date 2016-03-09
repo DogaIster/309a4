@@ -15,6 +15,14 @@ $(document).ready(function(){
     $('#signUp').click(function() {
 	showSignUp();
     });
+
+    $('#personalChat').click(function() {
+	showPersonalChat();
+    })
+;
+    $('#groupChat').click(function() {
+	showGroupChat();
+    });
  
 });
 
@@ -25,6 +33,8 @@ var clearInfo = function()
     $('#fakeUsers').hide();
     $('#fakeSignIn').hide();
     $('#fakeSignUp').hide();
+    $('#fakePersonalChat').hide();
+    $('#fakeGroupChat').hide();
 };
 
 var showDiscussionBoard = function()
@@ -49,4 +59,16 @@ var showSignUp = function()
 {
     clearInfo();
     $('#fakeSignUp').show();
+};
+
+var showPersonalChat = function()
+{
+    clearInfo();
+    $('#fakePersonalChat').show();
+};
+
+var showGroupChat = function()
+{
+    clearInfo();
+    $('#fakeGroupChat').show();
 };
