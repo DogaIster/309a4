@@ -168,7 +168,14 @@
                     <input type = "text" class = "form-control" placeholder = "Username">
                     <input type = "text" class = "form-control" placeholder = "Password">
                     <input type = "text" class = "form-control" placeholder = "Email">
-     <button type="button" class="btn btn-success">Sign up</button>
+	            <caption>Type of user: </caption>
+ 		    <select>
+ 	 		<option value="volvo">Professor</option>
+ 	 		<option value="saab">TA</option>
+ 			<option value="mercedes">Student</option>
+                 </select> 
+		 <br />
+	     <button type="button" class="btn btn-success">Sign up</button>
                 </div>
    </div>
 
@@ -240,8 +247,34 @@
 
    </div>
 
-   <div id="listBookedOfficeHours" hidden>
-	
+   <div id="fakeListBookedOfficeHours" hidden>
+	 <table class="table table-bordered">
+	 <caption>Office Hours</caption>
+	<tr>
+		<td><b>Class</b></td>
+		<td><b>Time</b></td>
+		<td><b>Professor present</b></td>
+		<td><b>TAs present</b></td>
+	</tr>
+	<tr>
+		<td>CSC309</td>
+		<td>4 pm, Monday</td>
+		<td>Mashiyat</td>
+		<td>Kyriakos Georgiou</td>
+	</tr>
+	<tr>
+		<td>CSC309</td>
+		<td>5 pm, Wednesday</td>
+		<td>Mashiyat</td>
+		<td>None</td>
+	</tr>
+	<tr>
+		<td>CSC263</td>
+		<td>3 pm, Friday</td>
+		<td>Professerson</td>
+		<td>None</td>
+	</tr>
+	</table>
    </div>
 
     <footer>

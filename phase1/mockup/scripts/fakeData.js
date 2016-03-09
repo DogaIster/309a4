@@ -61,7 +61,7 @@ var clearInfo = function()
     $('#fakeBookOfficeHour').hide();
     $('#fakeOfferOfficeHour').hide();
     $('#fakeBookGroupOfficeHour').hide();
-    $('#listBookedOfficeHours').hide();
+    $('#fakeListBookedOfficeHours').hide();
 };
 
 var showDiscussionBoard = function()
@@ -127,5 +127,5 @@ var showBookGroupOfficeHour = function()
 var showListBookedOfficeHours = function()
 {
     clearInfo();
-    $('#listBookedOfficeHours').show();
+    $('#fakeListBookedOfficeHours').show();
 };
