@@ -227,24 +227,58 @@
 	<div class="row">
 	    <input type = "text" class = "form-control" placeholder = "Message text">
 	    <button type="button" class="btn btn-success">Send</button>
-	    
 	</div>
    </div>
 
    <div id="fakeBookOfficeHour" hidden>
+	<div class="row">
+	    <input type = "text" class = "form-control" placeholder = "Class">
+	    <input type = "text" class = "form-control" placeholder = "Time">
 
+	</div>	   
+	<button type="button" class="btn btn-primary">Book</button>
    </div>
 
    <div id="fakeRequestOfficeHour" hidden>
+	<div class="row">
+	    <input type = "text" class = "form-control" placeholder = "Class">
+	    <input type = "text" class = "form-control" placeholder = "Time">
 
+	    <input type = "checkbox">
+		Do you want the professor to be present? <br/>
+
+	    <input type = "checkbox">
+			Do you want a TA to be present? <br/>
+
+	</div>	   
+	<button type="button" class="btn btn-primary">Request</button>
    </div>
 
    <div id="fakeOfferOfficeHour" hidden>
-
+	<caption>This option is for professors, who are admins, not TAs or students.</caption>
+	<div class="row">
+	    <input type = "text" class = "form-control" placeholder = "Class">
+	    <input type = "text" class = "form-control" placeholder = "Time">
+	    <input type = "text" class = "form-control" placeholder = "Length">
+	    <input type = "text" class = "form-control" placeholder = "TAs joining you">
+	</div>	   
+	<button type="button" class="btn btn-primary">Offer</button>
    </div>
 
    <div id="fakeBookGroupOfficeHour" hidden>
+	<div class="row">
+	    <input type = "text" class = "form-control" placeholder = "Class">
+	    <input type = "text" class = "form-control" placeholder = "Time">
+	    <input type = "text" class = "form-control" placeholder = "Number of people">
 
+	    <input type = "checkbox">
+		Do you want the professor to be present? <br/>
+
+	    <input type = "checkbox">
+			Do you want a TA to be present? <br/>
+
+	</div>	   
+	<button type="button" class="btn btn-primary">Book</button>
    </div>
 
    <div id="fakeListBookedOfficeHours" hidden>
