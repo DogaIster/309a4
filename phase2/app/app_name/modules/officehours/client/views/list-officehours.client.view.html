@@ -21,6 +21,7 @@
         <span data-ng-bind="officehour.students.length"></span>
       <!-- Iterate through the students -->
       <span data-ng-repeat="student in officehour.students">
+      <span data-ng-bind="student.id"></span>
       <span data-ng-repeat="user in vm.users"
       data-ui-sref="users.view({ userId: user._id })">
         <span data-ng-if="student.id == user.id" data-ng-bind="student.username"></span>
