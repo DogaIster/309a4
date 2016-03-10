@@ -20,10 +20,10 @@
       Students interested: <div class="list-group-item">
         <span data-ng-bind="officehour.students.length"></span>
       <!-- Iterate through the students -->
-      <span data-ng-repeat="student in officehour.students"
+      <span data-ng-repeat="student in officehour.students">
+      <span data-ng-repeat="user in vm.users"
       data-ui-sref="users.view({ userId: user._id })">
-        <span data-ng-bind="student.username"></span>
-        <img ng-src="{{student.profileImageURL}}" alt="Profile Image" width="10px;" height="10px;">
+        <span data-ng-if="student.id == user.id" data-ng-bind="student.username"></span>
       </div>
 
       <br />

@@ -30,7 +30,8 @@ var OfficehourSchema = new Schema({
     required: 'Please select a time for this office hour.'
   },
   professor : {
-    type: String
+    type: String,
+    default: ''
   },
   tas : {
     type: Array,
@@ -42,6 +43,10 @@ var OfficehourSchema = new Schema({
     required: 'Please enter a location for this office hour.'
   },
   students: {
+    type: Array,
+    default: []
+  },
+  comments: {
     type: Array,
     default: []
   }
