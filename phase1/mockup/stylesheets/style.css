@@ -1,8 +1,10 @@
 footer{
-	position: absolute;
-	bottom: 0px;
+	position: relative;
+	bottom: 0;
 	text-align: center;
 	width: 100%;
+	background:#111;
+	height: 50px;
 }
 
 #image{
