@@ -1,6 +1,6 @@
 <section>
   <div class="page-header">
-    <h1>Officehours</h1>
+    <h1>All Office Hours</h1>
   </div>
   <div class="list-group">
     <a data-ng-repeat="officehour in vm.officehours"
@@ -13,7 +13,12 @@
         <span data-ng-if="officehour.user" data-ng-bind="officehour.user.displayName"></span>
         <span data-ng-if="!officehour.user">Deleted User</span>
       </small>
-      <h4 class="list-group-item-heading" data-ng-bind="officehour.name"></h4>
+      <h4 class="list-group-item-heading" data-ng-bind="officehour.class | uppercase"></h4>
+      Time: <div class="list-group-item" data-ng-bind="officehour.time"></div>
+      Location: <div class="list-group-item" data-ng-bind="officehour.location"></div>
+      <br />
+      <div class="alert alert-danger" data-ng-if="!officehour.professor">No professor signed up yet.</div>
+      <div class="alert alert-warning" data-ng-if="!officehour.tas.length">No TAs signed up yet.</div>
     </a>
   </div>
   <div class="alert alert-warning text-center" data-ng-if="vm.officehours.$resolved && !vm.officehours.length">

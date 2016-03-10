@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
  * Officehour Schema
  */
 var OfficehourSchema = new Schema({
-  name: {
+  class: {
     type: String,
     default: '',
     required: 'Please select a class for this office hour.',
@@ -25,8 +25,8 @@ var OfficehourSchema = new Schema({
     ref: 'User'
   },
   time: {
-    type: Date,
-    default: Date.now,
+    type: String,
+    default: Date.now.toString(),
     required: 'Please select a time for this office hour.'
   },
   professor : {
@@ -39,7 +39,7 @@ var OfficehourSchema = new Schema({
   location : {
     type: String,
     default: '',
-    required: 'Please enter a time for this office hour.'
+    required: 'Please enter a location for this office hour.'
   },
   students: {
     type: Array,

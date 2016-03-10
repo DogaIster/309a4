@@ -6,11 +6,20 @@
     <form name="vm.form.officehourForm" class="form-horizontal" ng-submit="vm.save(vm.form.officehourForm.$valid)" novalidate>
       <fieldset>
         <div class="form-group" show-errors>
-          <label class="control-label" for="name">Name</label>
-          <input name="name" type="text" ng-model="vm.officehour.name" id="name" class="form-control" placeholder="Name" required>
+          <label class="control-label" for="name">Class</label>
+          <input name="name" type="text" ng-model="vm.officehour.class" id="class" class="form-control" placeholder="Class Name" required>
           <div ng-messages="vm.form.officehourForm.name.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Officehour name is required.</p>
+            <p class="help-block error-text" ng-message="required">Office hour class is required.</p>
           </div>
+          <label class="control-label" for="time">Time</label>
+          <input name="name" type="text" ng-model="vm.officehour.time" id="time" class="form-control" placeholder="Time" required>
+          <div ng-messages="vm.form.officehourForm.time.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Office hour time is required.</p>
+          </div>
+        <label class="control-label" for="location">Location</label>
+        <input name="name" type="text" ng-model="vm.officehour.location" id="location" class="form-control" placeholder="Location" required>
+        <div ng-messages="vm.form.officehourForm.location.$error" role="alert">
+          <p class="help-block error-text" ng-message="required">Office hour location is required.</p>
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-default">{{vm.officehour._id ? 'Update' : 'Create'}}</button>
@@ -18,7 +27,8 @@
         <div ng-show="vm.error" class="text-danger">
           <strong ng-bind="vm.error"></strong>
         </div>
+      </div>
       </fieldset>
     </form>
-  </div>
+</div>
 </section>
