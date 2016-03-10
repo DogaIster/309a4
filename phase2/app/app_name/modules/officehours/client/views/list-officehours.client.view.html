@@ -16,6 +16,16 @@
       <h4 class="list-group-item-heading" data-ng-bind="officehour.class | uppercase"></h4>
       Time: <div class="list-group-item" data-ng-bind="officehour.time"></div>
       Location: <div class="list-group-item" data-ng-bind="officehour.location"></div>
+
+      Students interested: <div class="list-group-item">
+        <span data-ng-bind="officehour.students.length"></span>
+      <!-- Iterate through the students -->
+      <span data-ng-repeat="student in officehour.students"
+      data-ui-sref="users.view({ userId: user._id })">
+        <span data-ng-bind="student.username"></span>
+        <img ng-src="{{student.profileImageURL}}" alt="Profile Image" width="10px;" height="10px;">
+      </div>
+
       <br />
       <div class="alert alert-danger" data-ng-if="!officehour.professor">No professor signed up yet.</div>
       <div class="alert alert-warning" data-ng-if="!officehour.tas.length">No TAs signed up yet.</div>

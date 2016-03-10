@@ -16,6 +16,9 @@ exports.create = function(req, res) {
   var officehour = new Officehour(req.body);
   officehour.user = req.user;
 
+  // add the requested users to list of users
+  officehour.students.push(req.user);
+
   officehour.save(function(err) {
     if (err) {
       return res.status(400).send({
@@ -80,7 +83,7 @@ exports.delete = function(req, res) {
 /**
  * List of Officehours
  */
-exports.list = function(req, res) { 
+exports.list = function(req, res) {
   Officehour.find().sort('-created').populate('user', 'displayName').exec(function(err, officehours) {
     if (err) {
       return res.status(400).send({

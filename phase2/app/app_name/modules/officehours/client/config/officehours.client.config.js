@@ -24,7 +24,7 @@
 
     // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'officehours', {
-      title: 'Create Office Hour Booking',
+      title: 'Request Office Hour Booking',
       state: 'officehours.create',
       roles: ['user']
     });
