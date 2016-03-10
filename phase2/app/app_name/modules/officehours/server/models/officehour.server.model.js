@@ -13,7 +13,7 @@ var OfficehourSchema = new Schema({
   name: {
     type: String,
     default: '',
-    required: 'Please fill Officehour name',
+    required: 'Please select a class for this office hour.',
     trim: true
   },
   created: {
@@ -23,6 +23,27 @@ var OfficehourSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User'
+  },
+  time: {
+    type: Date,
+    default: Date.now,
+    required: 'Please select a time for this office hour.'
+  },
+  professor : {
+    type: String
+  },
+  tas : {
+    type: Array,
+    default: []
+  },
+  location : {
+    type: String,
+    default: '',
+    required: 'Please enter a time for this office hour.'
+  },
+  students: {
+    type: Array,
+    default: []
   }
 });
 
