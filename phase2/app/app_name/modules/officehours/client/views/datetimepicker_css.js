@@ -13,6 +13,11 @@
 //New Css style version added by Yvan Lavoie (Québec, Canada) 29-Jan-2009
 //Formatted for JSLint compatibility by Labsmedia.com (30-Dec-2010)
 
+// function I added for formatting
+var replaceSpace = function() {
+	var dateInput = document.getElementById("demo1");
+	dateInput.value = dateInput.value.replace(" ", "-");
+}
 
 //Global variables
 

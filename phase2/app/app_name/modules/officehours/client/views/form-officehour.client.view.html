@@ -15,7 +15,8 @@
           <label class="control-label" for="time">Date and Time</label>
           <!-- JS calendar used from http://www.rainforestnet.com/datetimepicker/datetimepicker-tutorial.htm-->
           <!-- We're legally allowed to use this because its under the BSD License -->
-          <input name="time" ng-model="vm.officehour.time" onclick="javascript:NewCssCal('demo1')" id="demo1" class="form-control" placeholder="Date and Time" required>
+          <!--<img src="modules/officehours/client/views/images2/cal.gif" onclick="javascript:NewCssCal('demo1')" style="cursor:pointer"/>-->
+          <input name="time" ng-model="vm.officehour.time" id="demo1" onclick="javascript:NewCssCal('demo1');replaceSpace();" class="form-control" placeholder="Date and Time" required>
           <div ng-messages="vm.form.officehourForm.time.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Office hour time is required.</p>
           </div>
