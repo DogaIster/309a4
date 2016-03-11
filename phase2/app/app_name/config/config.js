@@ -9,6 +9,9 @@ var _ = require('lodash'),
   fs = require('fs'),
   path = require('path');
 
+// newly added
+var moment = require('moment');
+
 /**
  * Get files by glob patterns
  */
