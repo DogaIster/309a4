@@ -1,6 +1,4 @@
-<head>
-      <script src="datetimepicker_css.js"></script>
-</head>
+<script src="datetimepicker_css.js"></script>
 <section>
   <div class="page-header">
     <h1>{{vm.officehour._id ? 'Edit Office hour' : 'New Office hour'}}</h1>
@@ -9,14 +7,15 @@
     <form name="vm.form.officehourForm" class="form-horizontal" ng-submit="vm.save(vm.form.officehourForm.$valid)" novalidate>
       <fieldset>
         <div class="form-group" show-errors>
-          <label class="control-label" for="name">Class</label>
+          <label class="control-label" for="name" >Class</label>
           <input name="class" type="text" ng-model="vm.officehour.class" id="class" class="form-control" placeholder="Class Name" required>
           <div ng-messages="vm.form.officehourForm.name.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Office hour class is required.</p>
           </div>
-          <label class="control-label" for="time">Time</label>
+          <label class="control-label" for="time">Date and Time</label>
           <!-- JS calendar used from http://www.rainforestnet.com/datetimepicker/datetimepicker-tutorial.htm-->
-          <input name="date" ng-model="vm.officehour.time" onclick="javascript:NewCssCal('time')" id="time" class="form-control" placeholder="Date and Time" datetime-picker future-only required>
+          <!-- We're legally allowed to use this because its under the BSD License -->
+          <input name="time" ng-model="vm.officehour.time" onclick="javascript:NewCssCal('demo1')" id="demo1" class="form-control" placeholder="Date and Time" required>
           <div ng-messages="vm.form.officehourForm.time.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Office hour time is required.</p>
           </div>

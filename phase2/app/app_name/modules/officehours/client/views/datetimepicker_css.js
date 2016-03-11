@@ -63,7 +63,7 @@ var ShowMonthYear = true;//Show Month and Year in Calendar header.
 var ThemeBg = "";//Background image of Calendar window.
 var PrecedeZero = true;//Preceding zero [true|false]
 var MondayFirstDay = true;//true:Use Monday as first day; false:Sunday as first day. [true|false]  //added in version 1.7
-var UseImageFiles = true;//Use image files with "arrows" and "close" button
+var UseImageFiles = false;//Use image files with "arrows" and "close" button
 var imageFilesPath = "images2/";
 //Configurable parameters end
 
@@ -475,7 +475,7 @@ function GenCell(pValue, pHighLight, pColor, pClickable)
 
 	if (Cal.ShowTime)
 	{
-		vTimeStr = ' ' + Cal.Hours + ':' + Cal.Minutes;
+		vTimeStr = '-' + Cal.Hours + ':' + Cal.Minutes;
 		if (Cal.ShowSeconds)
 		{
 			vTimeStr += ':' + Cal.Seconds;
