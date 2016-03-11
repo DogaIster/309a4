@@ -1,4 +1,7 @@
 <section>
+  <!-- from https://www.npmjs.com/package/angularjs-datetime-picker -->
+  <link rel="stylesheet" href="angularjs-datetime-picker.css" />
+ <script src="angularjs-datetime-picker.js"></script>
   <div class="page-header">
     <h1>{{vm.officehour._id ? 'Edit Office hour' : 'New Office hour'}}</h1>
   </div>
@@ -12,7 +15,7 @@
             <p class="help-block error-text" ng-message="required">Office hour class is required.</p>
           </div>
           <label class="control-label" for="time">Time</label>
-          <input name="name" type="text" ng-model="vm.officehour.time" id="time" class="form-control" placeholder="Time" required>
+          <input name="name" ng-model="vm.officehour.time" id="time" class="form-control" placeholder="Date and Time" datetime-picker future-only required>
           <div ng-messages="vm.form.officehourForm.time.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Office hour time is required.</p>
           </div>

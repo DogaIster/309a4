@@ -25,8 +25,8 @@ var OfficehourSchema = new Schema({
     ref: 'User'
   },
   time: {
-    type: String,
-    default: Date.now.toString(),
+    type: Date,
+    default: Date.now,
     required: 'Please select a time for this office hour.'
   },
   professor : {
