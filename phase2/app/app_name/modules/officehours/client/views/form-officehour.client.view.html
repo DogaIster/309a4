@@ -1,7 +1,7 @@
+<head>
+      <script src="datetimepicker_css.js"></script>
+</head>
 <section>
-  <!-- from https://www.npmjs.com/package/angularjs-datetime-picker -->
-  <link rel="stylesheet" href="angularjs-datetime-picker.css" />
- <script src="angularjs-datetime-picker.js"></script>
   <div class="page-header">
     <h1>{{vm.officehour._id ? 'Edit Office hour' : 'New Office hour'}}</h1>
   </div>
@@ -10,17 +10,18 @@
       <fieldset>
         <div class="form-group" show-errors>
           <label class="control-label" for="name">Class</label>
-          <input name="name" type="text" ng-model="vm.officehour.class" id="class" class="form-control" placeholder="Class Name" required>
+          <input name="class" type="text" ng-model="vm.officehour.class" id="class" class="form-control" placeholder="Class Name" required>
           <div ng-messages="vm.form.officehourForm.name.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Office hour class is required.</p>
           </div>
           <label class="control-label" for="time">Time</label>
-          <input name="name" ng-model="vm.officehour.time" id="time" class="form-control" placeholder="Date and Time" datetime-picker future-only required>
+          <!-- JS calendar used from http://www.rainforestnet.com/datetimepicker/datetimepicker-tutorial.htm-->
+          <input name="date" ng-model="vm.officehour.time" onclick="javascript:NewCssCal('time')" id="time" class="form-control" placeholder="Date and Time" datetime-picker future-only required>
           <div ng-messages="vm.form.officehourForm.time.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Office hour time is required.</p>
           </div>
         <label class="control-label" for="location">Location</label>
-        <input name="name" type="text" ng-model="vm.officehour.location" id="location" class="form-control" placeholder="Location" required>
+        <input name="location" type="text" ng-model="vm.officehour.location" id="location" class="form-control" placeholder="Location" required>
         <div ng-messages="vm.form.officehourForm.location.$error" role="alert">
           <p class="help-block error-text" ng-message="required">Office hour location is required.</p>
         </div>
