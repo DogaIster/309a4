@@ -13,12 +13,6 @@
 //New Css style version added by Yvan Lavoie (Québec, Canada) 29-Jan-2009
 //Formatted for JSLint compatibility by Labsmedia.com (30-Dec-2010)
 
-// function I added for formatting
-var replaceSpace = function() {
-	var dateInput = document.getElementById("demo1");
-	dateInput.value = dateInput.value.replace(" ", "-");
-}
-
 //Global variables
 
 var winCal;
@@ -487,7 +481,7 @@ function GenCell(pValue, pHighLight, pColor, pClickable)
 		}
 		if (TimeMode === 12)
 		{
-			vTimeStr += ' ' + Cal.AMorPM;
+			vTimeStr += '-' + Cal.AMorPM;
 		}
 	}
 
@@ -837,7 +831,7 @@ function RenderCssCal(bNewCal)
 	funcCalback = "function callback(id, datum) {";
 	funcCalback += " var CalId = document.getElementById(id);if (datum=== 'undefined') { var d = new Date(); datum = d.getDate() + '/' +(d.getMonth()+1) + '/' + d.getFullYear(); } window.calDatum=datum;CalId.value=datum;";
 	funcCalback += " if(Cal.ShowTime){";
-	funcCalback += " CalId.value+=' '+Cal.getShowHour()+':'+Cal.Minutes;";
+	funcCalback += " CalId.value+='-'+Cal.getShowHour()+':'+Cal.Minutes;";
 	funcCalback += " if (Cal.ShowSeconds)  CalId.value+=':'+Cal.Seconds;";
 	funcCalback += " if (TimeMode === 12)  CalId.value+=''+Cal.getShowAMorPM();";
 	funcCalback += "}if(CalId.onchange!=undefined) CalId.onchange();CalId.focus();winCal.style.visibility='hidden';}";

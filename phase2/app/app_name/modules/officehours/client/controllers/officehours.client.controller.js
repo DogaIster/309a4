@@ -10,7 +10,6 @@
 
   function OfficehoursController ($scope, $state, Authentication, officehour) {
     var vm = this;
-    $scope.time = document.getElementById('time').value;
 
     vm.authentication = Authentication;
     vm.officehour = officehour;
@@ -28,9 +27,11 @@
 
     // Save Officehour
     function save(isValid) {
+      if (!isValid && !vm.officehour.time) {
+        vm.officehour.time = document.getElementById('time').value;
+        isValid = true;
+      }
       if (!isValid) {
-        // TODO: fix this ugly hack
-        alert("Confirm date by adding a space to the end.");
         $scope.$broadcast('show-errors-check-validity', 'vm.form.officehourForm');
         return false;
       }

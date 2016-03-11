@@ -9,13 +9,13 @@
         <div class="form-group" show-errors>
           <label class="control-label" for="name" >Class</label>
           <input name="class" type="text" ng-model="vm.officehour.class" id="class" class="form-control" placeholder="Class Name" required>
-          <div ng-messages="vm.form.officehourForm.name.$error" role="alert">
+          <div ng-messages="vm.form.officehourForm.class.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Office hour class is required.</p>
           </div>
           <label class="control-label" for="time">Date and Time</label>
           <!-- JS calendar used from http://www.rainforestnet.com/datetimepicker/datetimepicker-tutorial.htm-->
           <!-- We're legally allowed to use this because its under the BSD License -->
-          <img src="modules/officehours/client/views/images2/cal.gif" onclick="javascript:NewCssCal('time')" style="cursor:pointer"/>
+          <img src="modules/officehours/client/views/images2/cal.gif" onclick="javascript:NewCssCal('time');"style="cursor:pointer"/>
           <input name="time" ng-model="vm.officehour.time" id="time" class="form-control" placeholder="Date and Time" required>
           <div ng-messages="vm.form.officehourForm.time.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Office hour time is required.</p>
@@ -27,7 +27,7 @@
         </div>
         <div class="form-group">
         </div>
-        <button type="submit" onclick="$scope.time = document.getElementById('time').value;" class="btn btn-default">{{vm.officehour._id ? 'Update' : 'Create'}}</button>
+        <button type="submit" class="btn btn-default">{{vm.officehour._id ? 'Update' : 'Create'}}</button>
         <div ng-show="vm.error" class="text-danger">
           <strong ng-bind="vm.error"></strong>
         </div>
