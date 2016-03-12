@@ -42,7 +42,7 @@
       <br />
       <div class="alert alert-danger" data-ng-if="!officehour.professor">No professor signed up yet.</div>
       <div class="alert alert-success" data-ng-if="officehour.professor">
-      <span ng-bind="officehour.professor"></span> is signed up for this office hour.
+      <span ng-bind="officehour.professor.toString()"></span> is signed up for this office hour.
     </div>
       <div class="alert alert-warning" data-ng-if="!officehour.tas.length">No TAs signed up yet.</div>
   </div>

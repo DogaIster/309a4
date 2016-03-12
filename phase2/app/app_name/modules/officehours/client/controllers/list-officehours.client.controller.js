@@ -29,9 +29,9 @@
       }
 
       function successCallback(res) {
-        $state.go('officehours.edit', {
-          officehourId: res._id
-        });
+        //$state.go('officehours.list', {
+        //  officehourId: res._id
+        //});
       }
 
       function errorCallback(res) {
