@@ -31,10 +31,15 @@
   </div>
 
   <br />
- <button data-ng-if="user.typeOfUser == 'professor'" class="btn btn-default"> Participate in this office hour </button>
-
+  <div data-ng-if="user.typeOfUser == 'professor' && !officehour.professor">
+    <div name="professor" ng-bind="user._id" ng-model="officehour.professor" id="professor" hidden></div>
+   <button id="profButon" ng-click="vm.save(officehour)" class="btn btn-default"> Participate in this office hour </button>
+ </div>
 
   <br />
   <div class="alert alert-danger" data-ng-if="!officehour.professor">No professor signed up yet.</div>
+  <div class="alert alert-success" data-ng-if="officehour.professor">
+  <span ng-bind="officehour.professorName"></span> is signed up for this office hour.
+</div>
   <div class="alert alert-warning" data-ng-if="!officehour.tas.length">No TAs signed up yet.</div>
 </section>

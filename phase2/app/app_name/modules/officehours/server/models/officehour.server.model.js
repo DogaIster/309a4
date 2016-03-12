@@ -29,6 +29,10 @@ var OfficehourSchema = new Schema({
     required: 'Please select a time for this office hour.'
   },
   professor : {
+    type: Schema.ObjectId,
+    ref: 'User'
+  },
+  professorName : {
     type: String,
     default: ''
   },

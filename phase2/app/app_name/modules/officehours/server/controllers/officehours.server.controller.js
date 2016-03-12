@@ -23,6 +23,7 @@ exports.create = function(req, res) {
 
   else if (req.user.typeOfUser === 'professor') {
     officehour.professor = req.user;
+    officehour.professorName = req.user.firstName + " " + req.user.lastName;
   }
 
   else if (req.user.typeOfUser === 'ta') {
@@ -59,6 +60,11 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
   var officehour = req.officehour ;
+
+  if (req.user.typeOfUser === 'professor') {
+    officehour.professor = req.user;
+    officehour.professorName = req.user.firstName + " " + req.user.lastName;
+  }
 
   officehour = _.extend(officehour , req.body);
 
