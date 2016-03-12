@@ -4,9 +4,8 @@
     <h3 data-ng-if="user"> Participating as a <span ng-bind='user.typeOfUser | uppercase'></span> </h3>
     <h4 data-ng-if="!user"> If you've just logged in for the first time, please refresh the page to see your user type. </h4>
   </div>
-  <div class="list-group">
-    <a data-ng-repeat="officehour in vm.officehours"
-       data-ui-sref="officehours.view({ officehourId: officehour._id })"
+  <div class="list-group" data-ng-repeat="officehour in vm.officehours">
+    <a data-ui-sref="officehours.view({ officehourId: officehour._id })"
        class="list-group-item">
       <small class="list-group-item-text">
         Requested on
