@@ -23,7 +23,7 @@ exports.create = function(req, res) {
 
   else if (req.user.typeOfUser === 'professor') {
     officehour.professor = req.user;
-    officehour.professorName = req.user.firstName + " " + req.user.lastName;
+    officehour.professorName = req.user.displayName;
   }
 
   else if (req.user.typeOfUser === 'ta') {
