@@ -17,7 +17,17 @@ exports.create = function(req, res) {
   officehour.user = req.user;
 
   // add the requested users to list of users
-  officehour.students.push(req.user);
+  if (req.user.typeOfUser === 'student') {
+    officehour.students.push(req.user);
+  }
+
+  else if (req.user.typeOfUser === 'professor') {
+    officehour.professor = req.user;
+  }
+
+  else if (req.user.typeOfUser === 'ta') {
+    officehour.tas.push(req.user);
+  }
 
   officehour.save(function(err) {
     if (err) {

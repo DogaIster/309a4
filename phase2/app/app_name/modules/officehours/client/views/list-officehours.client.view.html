@@ -30,7 +30,13 @@
 
       <br />
       </a>
-     <button data-ng-if="user.typeOfUser == 'professor'" class="btn btn-default"> Participate in this office hour </button>
+
+    <div data-ng-if="user.typeOfUser == 'professor' && !officehour.professor" name="vm.form.officehourForm" ng-submit="vm.save(true)" novalidate>
+      <div name="professor" ng-bind="user._id" ng-model="officehour.professor" id="professor" class="form-control"></div>
+     <button id="profButon" type="submit" class="btn btn-default"> Participate in this office hour </button>
+   </div>
+
+     <button id="taButton" data-ng-if="user.typeOfUser == 'ta' && !officehour.tas.contains(user)" class="btn btn-default"> Participate in this office hour </button>
 
 
       <br />

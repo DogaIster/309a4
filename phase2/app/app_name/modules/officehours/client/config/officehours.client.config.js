@@ -30,5 +30,14 @@
         roles: ['user']
       });
     }
+
+    if (window.user.typeOfUser === 'professor') {
+      Menus.addSubMenuItem('topbar', 'officehours', {
+        title: 'Offer Office Hour',
+        state: 'officehours.create',
+        roles: ['admin']
+      });
+    }
+
   }
 })();
