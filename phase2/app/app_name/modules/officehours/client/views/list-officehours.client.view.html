@@ -1,20 +1,22 @@
 <section>
   <div class="page-header">
     <h1>All Office Hours</h1>
+    <h3 data-ng-if="user"> Participating as a <span ng-bind='user.typeOfUser | uppercase'></span> </h3>
+    <h4 data-ng-if="!user"> Refresh the page to see your user type. </h4>
   </div>
   <div class="list-group">
     <a data-ng-repeat="officehour in vm.officehours"
        data-ui-sref="officehours.view({ officehourId: officehour._id })"
        class="list-group-item">
       <small class="list-group-item-text">
-        Posted on
+        Requested on
         <span data-ng-bind="officehour.created | date:'mediumDate'"></span>
         by
         <span data-ng-if="officehour.user" data-ng-bind="officehour.user.displayName"></span>
         <span data-ng-if="!officehour.user">Deleted User</span>
       </small>
       <h4 class="list-group-item-heading" data-ng-bind="officehour.class | uppercase"></h4>
-      Time: <div class="list-group-item" data-ng-bind="officehour.time"></div>
+      Time: <div class="list-group-item" data-ng-bind="officehour.time | date:'medium'"></div>
       Location: <div class="list-group-item" data-ng-bind="officehour.location"></div>
 
       Students interested: <div class="list-group-item">
@@ -22,10 +24,14 @@
       <!-- Iterate through the students -->
       <span data-ng-repeat="student in officehour.students">
       <span data-ng-bind="student.id"></span>
-      <span data-ng-repeat="user in vm.users"
-      data-ui-sref="users.view({ userId: user._id })">
-        <span data-ng-if="student.id == user.id" data-ng-bind="student.username"></span>
+      <span data-ng-repeat="user_from_db in vm.users"
+      data-ui-sref="users.view({ user_from_dbId: user_from_db._id })">
+        <span data-ng-if="student.id == user_from_db.id" data-ng-bind="student.username"></span>
       </div>
+
+      <br />
+     <button data-ng-if="user.typeOfUser == 'professor'" class="btn btn-default"> Participate in this office hour </button>
+
 
       <br />
       <div class="alert alert-danger" data-ng-if="!officehour.professor">No professor signed up yet.</div>
