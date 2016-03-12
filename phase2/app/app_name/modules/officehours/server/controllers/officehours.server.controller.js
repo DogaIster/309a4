@@ -63,7 +63,7 @@ exports.update = function(req, res) {
 
   if (req.user.typeOfUser === 'professor') {
     officehour.professor = req.user;
-    officehour.professorName = req.user.firstName + " " + req.user.lastName;
+    officehour.professorName = req.user.firstName + ' ' + req.user.lastName;
   }
 
   officehour = _.extend(officehour , req.body);
