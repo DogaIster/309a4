@@ -14,7 +14,7 @@
   </div>
   <small>
     <em class="text-muted">
-      Posted on
+      Requested on
       <span data-ng-bind="vm.officehour.created | date:'mediumDate'"></span>
       by
       <span data-ng-if="vm.officehour.user"
@@ -22,5 +22,19 @@
       <span data-ng-if="!vm.officehour.user">Deleted User</span>
     </em>
   </small>
-  <p class="lead" data-ng-bind="vm.officehour.content"></p>
+  <h4 class="list-group-item-heading" data-ng-bind="vm.officehour.class | uppercase"></h4>
+  Time: <div class="list-group-item" data-ng-bind="vm.officehour.time | date:'medium'"></div>
+  Location: <div class="list-group-item" data-ng-bind="vm.officehour.location"></div>
+
+  Students interested: <div class="list-group-item">
+    <span data-ng-bind="vm.officehour.students.length"></span>
+  </div>
+
+  <br />
+ <button data-ng-if="user.typeOfUser == 'professor'" class="btn btn-default"> Participate in this office hour </button>
+
+
+  <br />
+  <div class="alert alert-danger" data-ng-if="!officehour.professor">No professor signed up yet.</div>
+  <div class="alert alert-warning" data-ng-if="!officehour.tas.length">No TAs signed up yet.</div>
 </section>
