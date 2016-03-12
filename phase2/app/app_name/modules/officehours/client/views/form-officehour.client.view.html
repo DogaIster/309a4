@@ -25,12 +25,20 @@
         <div ng-messages="vm.form.officehourForm.location.$error" role="alert">
           <p class="help-block error-text" ng-message="required">Office hour location is required.</p>
         </div>
-        <div class="form-group">
+
+        <div data-ng-if="user.typeOfUser == 'professor'">
+        <label class="control-label" for="professor">Professor</label>
+        <div name="professor" type="text" ng-bind="user._id" ng-model="vm.officehour.professor" id="professor" class="form-control" required>
+        <div ng-messages="vm.form.officehourForm.professor.$error" role="alert">
+          <p class="help-block error-text" ng-message="required">Office hour location is required.</p>
         </div>
+      </div>
+
         <button type="submit" class="btn btn-default">{{vm.officehour._id ? 'Update' : 'Create'}}</button>
         <div ng-show="vm.error" class="text-danger">
           <strong ng-bind="vm.error"></strong>
         </div>
+
       </div>
       </fieldset>
     </form>
