@@ -42,11 +42,13 @@
       <br />
       <div class="alert alert-danger" data-ng-if="!officehour.professor">No professor signed up yet.</div>
       <div class="alert alert-success" data-ng-if="officehour.professor">
-      <span ng-bind="officehour.professor.toString()"></span> is signed up for this office hour.
+      <span data-ng-if="!officehour.professor.toString().contains('[')" ng-bind="officehour.professor.toString() + ' is'"></span>
+      <span data-ng-if="officehour.professor.toString().contains('[')" ng-bind="'You are'"></span>
+      signed up for this office hour.
     </div>
       <div class="alert alert-warning" data-ng-if="!officehour.tas.length">No TAs signed up yet.</div>
   </div>
   <div class="alert alert-warning text-center" data-ng-if="vm.officehours.$resolved && !vm.officehours.length">
-    No Officehours yet, why don't you <a data-ui-sref="officehours.create">create one</a>?
+    No Office hours yet, why don't you <a data-ui-sref="officehours.create">create one</a>?
   </div>
 </section>
