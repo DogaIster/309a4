@@ -36,10 +36,18 @@
    <button id="profButon" ng-click="vm.save(officehour)" class="btn btn-default"> Participate in this office hour </button>
  </div>
 
+ <button id="taButton" ng-click="vm.save(officehour)" data-ng-if="user.typeOfUser == 'ta'" class="btn btn-default"> Participate in this office hour </button>
+
   <br />
+
   <div class="alert alert-danger" data-ng-if="!vm.officehour.professor">No professor signed up yet.</div>
   <div class="alert alert-success" data-ng-if="vm.officehour.professor">
-  <span ng-bind="vm.officehour.professor.toString()"></span> is signed up for this office hour.
+  <span data-ng-if="!vm.officehour.professor.toString().contains('[')" ng-bind="vm.officehour.professorName + ' is'"></span>
+  <span data-ng-if="vm.officehour.professor.toString().contains('[')" ng-bind="'You are'"></span>
+  signed up for this office hour.
 </div>
   <div class="alert alert-warning" data-ng-if="!vm.officehour.tas.length">No TAs signed up yet.</div>
+  <div class="alert alert-success" data-ng-if="vm.officehour.tas.length > 1" data-ng-bind="vm.officehour.tas.length.toString() + ' TAs have signed up for this office hour.'"></div>
+  <div class="alert alert-success" data-ng-if="vm.officehour.tas.length == 1" data-ng-bind="'1 TA has signed up for this office hour.'"></div>
+
 </section>

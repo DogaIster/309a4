@@ -13,7 +13,7 @@ var path = require('path'),
   // helper function to see if a user is in an array
   // thank you to http://stackoverflow.com/questions/4587061/how-to-determine-if-object-is-in-array
   // for showing me that there's no easier way to do this in JS.
-var containsObject = function(array, object) {
+var containsUser = function(array, object) {
     for (var i = 0; i < array.length; i++) {
       if (array[i].displayName === object.displayName) {
           return true;
@@ -32,7 +32,7 @@ exports.create = function(req, res) {
 
   // add the requested users to list of users
   if (req.user && req.user.typeOfUser === 'student') {
-    if (req.user.students.indexOf(req.user) === -1) {
+    if (!containsUser(officehour.students, req.user)) {
       officehour.students.push(req.user);
     }
   }
@@ -43,7 +43,7 @@ exports.create = function(req, res) {
   }
 
   else if (req.user && req.user.typeOfUser === 'ta') {
-    if (!containsObject(officehour.tas, req.user)) {
+    if (!containsUser(officehour.tas, req.user)) {
       officehour.tas.push(req.user);
     }
   }
@@ -86,7 +86,7 @@ exports.update = function(req, res) {
   }
 
   else if (req.user && req.user.typeOfUser === 'ta') {
-    if (!containsObject(officehour.tas, req.user)) {
+    if (!containsUser(officehour.tas, req.user)) {
       officehour.tas.push(req.user);
     }
 
