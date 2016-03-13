@@ -17,20 +17,6 @@
 
     vm.officehours = OfficehoursService.query();
     vm.save = save;
-    vm.containsUser = containsUser;
-
-    // helper function to see if a user is in an array
-    // thank you to http://stackoverflow.com/questions/4587061/how-to-determine-if-object-is-in-array
-    // for showing me that there's no easier way to do this in JS.
-    function containsUser(array, object) {
-        for (var i = 0; i < array.length; i++) {
-          if (array[i].displayName === object.displayName) {
-              return true;
-          }
-        }
-
-        return false;
-    }
 
     // Save Officehour
     function save(officehour) {

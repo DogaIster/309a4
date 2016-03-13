@@ -14,13 +14,12 @@ var path = require('path'),
   // thank you to http://stackoverflow.com/questions/4587061/how-to-determine-if-object-is-in-array
   // for showing me that there's no easier way to do this in JS.
 var containsUser = function(array, object) {
-    for (var i = 0; i < array.length; i++) {
-      if (array[i].displayName === object.displayName) {
-          return true;
-      }
+  for (var i = 0; i < array.length; i++) {
+    if (array[i].displayName === object.displayName) {
+      return true;
     }
-
-    return false;
+  }
+  return false;
 };
 
 /**
@@ -68,6 +67,8 @@ exports.read = function(req, res) {
 
   // Add a custom field to the Article, for determining if the current User is the "owner".
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
+  // TAs and Professors are allowed to completely edit office hours, students are only allowed to add themselves to
+  // the interested student list of another office hour.
   officehour.isCurrentUserOwner = (req.user.typeOfUser === 'ta' || req.user.typeOfUser === 'professor') || (req.user && officehour.user && officehour.user._id.toString() === req.user._id.toString()) ? true : false;
 
   res.jsonp(officehour);

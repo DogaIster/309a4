@@ -23,9 +23,17 @@
     });
 
     // Add the dropdown create item
-    if (window.user.typeOfUser !== 'professor') {
+    if (window.user.typeOfUser === 'student') {
       Menus.addSubMenuItem('topbar', 'officehours', {
         title: 'Request Office Hour Booking',
+        state: 'officehours.create',
+        roles: ['user']
+      });
+    }
+
+    if (window.user.typeOfUser === 'ta') {
+      Menus.addSubMenuItem('topbar', 'officehours', {
+        title: 'Offer Office Hour Booking',
         state: 'officehours.create',
         roles: ['user']
       });
