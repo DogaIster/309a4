@@ -64,6 +64,7 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
   var officehour = req.officehour;
+  officehour = _.extend(officehour , req.body);
 
   if (req.user.typeOfUser === 'professor') {
     officehour.professor = req.user;
@@ -75,8 +76,6 @@ exports.update = function(req, res) {
       officehour.tas.push(req.user);
     }
   }
-
-  officehour = _.extend(officehour , req.body);
 
   officehour.save(function(err) {
     if (err) {
