@@ -90,7 +90,12 @@ exports.update = function(req, res) {
     if (!containsUser(officehour.tas, req.user)) {
       officehour.tas.push(req.user);
     }
+  }
 
+  else {
+    if (!containsUser(officehour.students, req.user)) {
+      officehour.students.push(req.user);
+    }
   }
 
   officehour.save(function(err) {
