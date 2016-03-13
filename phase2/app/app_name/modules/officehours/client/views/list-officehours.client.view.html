@@ -36,7 +36,7 @@
      <button id="profButon" ng-click="vm.save(officehour)" class="btn btn-default"> Participate in this office hour </button>
    </div>
 
-     <button id="taButton" data-ng-if="user.typeOfUser == 'ta' && !officehour.tas.contains(user)" class="btn btn-default"> Participate in this office hour </button>
+     <button id="taButton" ng-click="vm.save(officehour)" data-ng-if="user.typeOfUser == 'ta' && officehour.tas.indexOf(user) == -1" class="btn btn-default"> Participate in this office hour </button>
 
 
       <br />
@@ -47,6 +47,8 @@
       signed up for this office hour.
     </div>
       <div class="alert alert-warning" data-ng-if="!officehour.tas.length">No TAs signed up yet.</div>
+      <div class="alert alert-success" data-ng-if="officehour.tas.length" data-ng-bind="officehour.tas.length.toString() + ' TAs have signed up for this office hour.'"></div>
+
   </div>
   <div class="alert alert-warning text-center" data-ng-if="vm.officehours.$resolved && !vm.officehours.length">
     No Office hours yet, why don't you <a data-ui-sref="officehours.create">create one</a>?

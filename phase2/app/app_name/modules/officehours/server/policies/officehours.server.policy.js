@@ -49,7 +49,7 @@ exports.isAllowed = function (req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
 
   // If an Officehour is being processed and the current user created it then allow any manipulation
-  if (req.officehour && req.user && req.officehour.user && req.officehour.user.id === req.user.id) {
+  if ((req.user.typeOfUser === "ta" || req.user.typeOfUser === "professor") || (req.officehour && req.user && req.officehour.user && req.officehour.user.id === req.user.id)) {
     return next();
   }
 

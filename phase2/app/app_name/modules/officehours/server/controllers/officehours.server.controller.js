@@ -18,7 +18,9 @@ exports.create = function(req, res) {
 
   // add the requested users to list of users
   if (req.user.typeOfUser === 'student') {
-    officehour.students.push(req.user);
+    if (req.user.students.indexOf(req.user) === -1) {
+      officehour.students.push(req.user);
+    }
   }
 
   else if (req.user.typeOfUser === 'professor') {
@@ -27,7 +29,9 @@ exports.create = function(req, res) {
   }
 
   else if (req.user.typeOfUser === 'ta') {
-    officehour.tas.push(req.user);
+    if (officehour.tas.indexOf(req.user) === -1) {
+      officehour.tas.push(req.user);
+    }
   }
 
   officehour.save(function(err) {
@@ -50,7 +54,7 @@ exports.read = function(req, res) {
 
   // Add a custom field to the Article, for determining if the current User is the "owner".
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
-  officehour.isCurrentUserOwner = req.user && officehour.user && officehour.user._id.toString() === req.user._id.toString() ? true : false;
+  officehour.isCurrentUserOwner = (req.user.typeOfUser === 'ta' || req.user.typeOfUser === 'professor') || (req.user && officehour.user && officehour.user._id.toString() === req.user._id.toString()) ? true : false;
 
   res.jsonp(officehour);
 };
@@ -59,11 +63,17 @@ exports.read = function(req, res) {
  * Update a Officehour
  */
 exports.update = function(req, res) {
-  var officehour = req.officehour ;
+  var officehour = req.officehour;
 
   if (req.user.typeOfUser === 'professor') {
     officehour.professor = req.user;
     officehour.professorName = req.user.firstName + ' ' + req.user.lastName;
+  }
+
+  else if (req.user.typeOfUser === 'ta') {
+    if (officehour.tas.indexOf(req.user) === -1) {
+      officehour.tas.push(req.user);
+    }
   }
 
   officehour = _.extend(officehour , req.body);
