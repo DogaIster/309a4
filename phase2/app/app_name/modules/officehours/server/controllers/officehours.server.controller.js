@@ -148,7 +148,7 @@ exports.officehourByID = function(req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
-      message: 'Officehour is invalid'
+      message: 'Office hour is invalid'
     });
   }
 
@@ -157,7 +157,7 @@ exports.officehourByID = function(req, res, next, id) {
       return next(err);
     } else if (!officehour) {
       return res.status(404).send({
-        message: 'No Officehour with that identifier has been found'
+        message: 'No Office hour with that identifier has been found'
       });
     }
     req.officehour = officehour;

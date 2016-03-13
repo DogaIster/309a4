@@ -10,14 +10,14 @@
     </div>
   </div>
   <div class="list-group">
-    <div ng-repeat="user in pagedItems" class="list-group-item">
+    <a ng-repeat="user in pagedItems" class="list-group-item">
       <h4 class="list-group-item-heading" ng-bind="user.username"></h4>
       <h5 style="font-weight: bold" class="list-group-item-heading" ng-bind="user.typeOfUser | uppercase "></h5>
       <img ng-src="{{user.profileImageURL}}" alt="Profile Image" width="50px;" height="50px;">
       <span class="list-group-item-text" ng-bind="user.description"></span>
       <p class="list-group-item-text" ng-bind="user.firstName"></p>
       <p class="list-group-item-text" ng-bind="user.email"></p>
-    </div>
+    </a>
   </div>
 
   <pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></pagination>

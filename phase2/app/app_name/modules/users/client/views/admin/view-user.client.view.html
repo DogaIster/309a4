@@ -4,7 +4,7 @@
       <div class="col-md-6">
         <h1 ng-bind="user.username"></h1>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4" data-ng-if="user.typeOfUser == 'professor'">
         <a class="btn btn-primary" ui-sref="admin.user-edit({userId: user._id})">
           <i class="glyphicon glyphicon-edit"></i>
         </a>

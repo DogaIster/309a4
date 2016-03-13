@@ -17,19 +17,26 @@
       <h4 class="list-group-item-heading" data-ng-bind="officehour.class | uppercase"></h4>
       Time: <div class="list-group-item" data-ng-bind="officehour.time | date:'medium'"></div>
       Location: <div class="list-group-item" data-ng-bind="officehour.location"></div>
+      </a>
 
       Students interested: <div class="list-group-item">
-        <span data-ng-bind="officehour.students.length"></span>
+        <div data-ng-if = "officehour.students.length > 1" data-ng-bind="officehour.students.length + ' students are interested in this office hour:'"></div>
+        <div data-ng-if = "officehour.students.length == 1" data-ng-bind="'1 student is interested in this office hour:'"></div>
+        <div data-ng-if = "officehour.students.length == 0" data-ng-bind="'No students are interested in this office hour.'"></div>
+
       <!-- Iterate through the students -->
       <span data-ng-repeat="student in officehour.students">
-      <span data-ng-bind="student.id"></span>
-      <span data-ng-repeat="user_from_db in vm.users"
-      data-ui-sref="users.view({ user_from_dbId: user_from_db._id })">
-        <span data-ng-if="student.id == user_from_db.id" data-ng-bind="student.username"></span>
+        <div>
+        <img data-ng-if="student.profileImageURL" ng-src="{{student.profileImageURL}}" alt="Profile Image" width="20px;" height="20px;">
+        <span data-ng-bind="student.displayName"></span>
+        <span data-ng-if="!student.displayName" data-ng-bind="officehour.user.displayName + ' (creator)'"></span>
+      </span>
       </div>
 
+    </div>
+
       <br />
-      </a>
+
 
     <div data-ng-if="user.typeOfUser == 'professor' && !officehour.professor">
       <div name="professor" ng-bind="user._id" ng-model="officehour.professor" id="professor" hidden></div>
