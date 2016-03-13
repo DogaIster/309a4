@@ -48,7 +48,7 @@
     </div>
       <div class="alert alert-warning" data-ng-if="!officehour.tas.length">No TAs signed up yet.</div>
       <div class="alert alert-success" data-ng-if="officehour.tas.length > 1" data-ng-bind="officehour.tas.length.toString() + ' TAs have signed up for this office hour.'"></div>
-      <div class="alert alert-success" data-ng-if="officehour.tas.length == 1" data-ng-bind="1 TA has signed up for this office hour.'"></div>
+      <div class="alert alert-success" data-ng-if="officehour.tas.length == 1" data-ng-bind="'1 TA has signed up for this office hour.'"></div>
 
   </div>
   <div class="alert alert-warning text-center" data-ng-if="vm.officehours.$resolved && !vm.officehours.length">

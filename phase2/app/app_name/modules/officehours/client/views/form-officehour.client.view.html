@@ -32,11 +32,17 @@
       </div>
     </div>
 
+      <div data-ng-if="user.typeOfUser != 'professor' && !vm.officehour.professor">
+      <label class="control-label" for="professor">Professor</label>
+      <div name="professor" type="text" ng-bind="'None'" id="professor" class="form-control">
+    </div>
+    </div>
+
     <div data-ng-if="user.typeOfUser != 'student'">
     <label class="control-label" for="tas">TAs participating</label>
     <div name="tas" type="text" ng-bind="vm.officehour.tas.length" id="tas" class="form-control">
   </div>
-</div>
+  </div>
 
         <button type="submit" class="btn btn-default">{{vm.officehour._id ? 'Update' : 'Create'}}</button>
         <div ng-show="vm.error" class="text-danger">

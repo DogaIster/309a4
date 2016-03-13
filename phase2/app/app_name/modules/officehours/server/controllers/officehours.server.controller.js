@@ -17,18 +17,18 @@ exports.create = function(req, res) {
   officehour.user = req.user;
 
   // add the requested users to list of users
-  if (req.user.typeOfUser === 'student') {
+  if (req.user && req.user.typeOfUser === 'student') {
     if (req.user.students.indexOf(req.user) === -1) {
       officehour.students.push(req.user);
     }
   }
 
-  else if (req.user.typeOfUser === 'professor') {
+  else if (req.user && req.user.typeOfUser === 'professor') {
     officehour.professor = req.user;
     officehour.professorName = req.user.displayName;
   }
 
-  else if (req.user.typeOfUser === 'ta') {
+  else if (req.user && req.user.typeOfUser === 'ta') {
     if (officehour.tas.indexOf(req.user) === -1) {
       officehour.tas.push(req.user);
     }
@@ -66,15 +66,16 @@ exports.update = function(req, res) {
   var officehour = req.officehour;
   officehour = _.extend(officehour , req.body);
 
-  if (req.user.typeOfUser === 'professor') {
+  if (req.user && req.user.typeOfUser === 'professor') {
     officehour.professor = req.user;
     officehour.professorName = req.user.firstName + ' ' + req.user.lastName;
   }
 
-  else if (req.user.typeOfUser === 'ta') {
+  else if (req.user && req.user.typeOfUser === 'ta') {
     if (officehour.tas.indexOf(req.user) === -1) {
       officehour.tas.push(req.user);
     }
+
   }
 
   officehour.save(function(err) {

@@ -30,7 +30,8 @@ var OfficehourSchema = new Schema({
   },
   professor : {
     type: Schema.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    default: null
   },
   professorName : {
     type: String,
