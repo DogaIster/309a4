@@ -26,6 +26,21 @@ angular.module('users.admin.routes').config(['$stateProvider',
           }]
         }
       })
+      .state('userinfo', {
+        url: '/users/:userId',
+        templateUrl: 'modules/users/client/views/view-user.client.view.nonadmin.html',
+        controller: 'UserController',
+        resolve: {
+          userResolve: ['$stateParams', 'Admin', function ($stateParams, Admin) {
+            return Admin.get({
+              userId: $stateParams.userId
+            });
+          }]
+        }
+      })
+      // TODO: add another controller for non-admins to view a specific user
+      // (but not to edit)
+      // this is why we're getting the server error
       .state('admin.user-edit', {
         url: '/users/:userId/edit',
         templateUrl: 'modules/users/client/views/admin/edit-user.client.view.html',
