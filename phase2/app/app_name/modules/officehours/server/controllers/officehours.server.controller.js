@@ -22,6 +22,17 @@ var containsUser = function(array, object) {
   return false;
 };
 
+// other helper function specifically for students
+var containsCreatedUser = function(array, object) {
+  for (var i = 0; i < array.length; i++) {
+    if (array[i] === object._id) {
+      console.log('found duplicate user');
+      return true;
+    }
+  }
+  return false;
+};
+
 /**
  * Create a Officehour
  */
@@ -31,7 +42,7 @@ exports.create = function(req, res) {
 
   // add the requested users to list of users
   if (req.user && req.user.typeOfUser === 'student') {
-    if (!containsUser(officehour.students, req.user)) {
+    if (!containsCreatedUser(officehour.students, req.user) && !containsUser(officehour.students, req.user)) {
       officehour.students.push(req.user);
     }
   }
