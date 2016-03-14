@@ -27,11 +27,15 @@
       <!-- Iterate through the students -->
       <span data-ng-repeat="student in officehour.students">
         <div>
+          <a data-ng-if="student._id" ng-href="/users/{{student._id}}">
+            <a data-ng-if="!student._id" ng-href="/users/{{officehour.user._id}}">
         <img data-ng-if="student.profileImageURL" ng-src="{{student.profileImageURL}}" alt="Profile Image" width="20px;" height="20px;">
         <span data-ng-bind="student.displayName"></span>
         <span data-ng-if="!student.displayName" data-ng-bind="officehour.user.displayName + ' (creator)'"></span>
-      </span>
+      </a>
+    </a>
       </div>
+      </span>
 
     </div>
 
@@ -50,7 +54,9 @@
       <br />
       <div class="alert alert-danger" data-ng-if="!officehour.professor">No professor signed up yet.</div>
       <div class="alert alert-success" data-ng-if="officehour.professor">
-      <span data-ng-if="!officehour.professor.toString().contains('[')" ng-bind="officehour.professorName + ' is'"></span>
+      <span data-ng-if="!officehour.professor.toString().contains('[')">
+        <a ng-bind="officehour.professorName" ng-href="/users/{{officehour.professor}}"></a> is
+      </span>
       <span data-ng-if="officehour.professor.toString().contains('[')" ng-bind="'You are'"></span>
       signed up for this office hour.
     </div>
