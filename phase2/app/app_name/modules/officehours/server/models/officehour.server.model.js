@@ -13,7 +13,7 @@ var OfficehourSchema = new Schema({
   class: {
     type: String,
     default: '',
-    required: 'Please select a class for this office hour.',
+    required: 'Please select a valid course for this office hour, for example CSC309.',
     trim: true
   },
   created: {
@@ -44,7 +44,7 @@ var OfficehourSchema = new Schema({
   location : {
     type: String,
     default: '',
-    required: 'Please enter a location for this office hour.'
+    required: 'Please enter a valid location for this office hour, like BA3200, for example.'
   },
   students: {
     type: Array,

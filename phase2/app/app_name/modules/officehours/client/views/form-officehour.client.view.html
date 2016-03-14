@@ -8,7 +8,7 @@
       <fieldset>
         <div class="form-group" show-errors>
           <label class="control-label" for="name" >Class</label>
-          <input name="class" type="text" ng-model="vm.officehour.class" id="class" class="form-control" placeholder="Class Name" required>
+          <input ng-pattern="/[a-zA-Z]{3}\d{3}/g" name="class" type="text" ng-model="vm.officehour.class" id="class" class="form-control" placeholder="Class Name" required>
           <div ng-messages="vm.form.officehourForm.class.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Office hour class is required.</p>
           </div>
@@ -21,7 +21,7 @@
             <p class="help-block error-text" ng-message="required">Office hour time is required.</p>
           </div>
         <label class="control-label" for="location">Location</label>
-        <input name="location" type="text" ng-model="vm.officehour.location" id="location" class="form-control" placeholder="Location" required>
+        <input ng-pattern="/[a-zA-Z]{2}\d+[a-zA-Z]*/g" name="location" type="text" ng-model="vm.officehour.location" id="location" class="form-control" placeholder="Location" required>
         <div ng-messages="vm.form.officehourForm.location.$error" role="alert">
           <p class="help-block error-text" ng-message="required">Office hour location is required.</p>
         </div>
