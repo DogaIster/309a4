@@ -5,9 +5,9 @@
     .module('officehours')
     .controller('OfficehoursListController', OfficehoursListController);
 
-  OfficehoursListController.$inject = ['$scope', '$state','OfficehoursService'];
+  OfficehoursListController.$inject = ['$scope', '$filter', '$state','OfficehoursService'];
 
-  function OfficehoursListController($scope, $state, OfficehoursService) {
+  function OfficehoursListController($scope, $filter, $state, OfficehoursService) {
     var vm = this;
 
     // set the user variable in the scope for the current logged-in user
@@ -15,8 +15,36 @@
       $scope.user = window.user;
     }
 
-    vm.officehours = OfficehoursService.query();
+    //vm.officehours = OfficehoursService.query();
+
+    OfficehoursService.query(function (data) {
+      $scope.officehours = data;
+      $scope.buildPager();
+    });
+
     vm.save = save;
+
+    // for search
+    $scope.buildPager = function () {
+      $scope.pagedItems = [];
+      $scope.itemsPerPage = 10;
+      $scope.currentPage = 1;
+      $scope.figureOutItemsToDisplay();
+    };
+
+    $scope.figureOutItemsToDisplay = function () {
+      $scope.filteredItems = $filter('filter')($scope.officehours, {
+        $: $scope.search
+      });
+      $scope.filterLength = $scope.filteredItems.length;
+      var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
+      var end = begin + $scope.itemsPerPage;
+      $scope.pagedItems = $scope.filteredItems.slice(begin, end);
+    };
+
+    $scope.pageChanged = function () {
+      $scope.figureOutItemsToDisplay();
+    };
 
     // Save Officehour
     function save(officehour) {
