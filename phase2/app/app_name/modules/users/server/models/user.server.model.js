@@ -75,6 +75,10 @@ var UserSchema = new Schema({
     type: String,
     default: ''
   },
+  classes: {
+    type: Array,
+    default: []
+  },
   salt: {
     type: String
   },
