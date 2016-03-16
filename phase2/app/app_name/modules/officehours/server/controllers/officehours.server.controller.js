@@ -26,7 +26,6 @@ var containsUser = function(array, object) {
 var containsCreatedUser = function(array, object) {
   for (var i = 0; i < array.length; i++) {
     if (array[i] === object._id) {
-      console.log('found duplicate user');
       return true;
     }
   }

@@ -4,8 +4,13 @@
     <h3 data-ng-if="user"> Participating as a <span ng-bind='user.typeOfUser | uppercase'></span> </h3>
     <h4 data-ng-if="!user"> If you've just logged in for the first time, please refresh the page to see your user type. </h4>
     <div>
-      <input class="form-control col-md-4" type="text" ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
-      <input type="checkbox" ng-model="upcomingOfficeHours" ng-change="figureOutItemsToDisplay()" /> Show Only Upcoming Office Hours?
+      <input class="form-control col-md-4" type="text" ng-model="search" placeholder="Search for any office hour field here" ng-change="figureOutItemsToDisplay()" />
+      <div><input type="checkbox" ng-model="upcomingOfficeHours" ng-init="upcomingOfficeHours = true" ng-change="figureOutItemsToDisplay()" /> Only show upcoming office hours</div>
+      <div><input type="checkbox" ng-model="profOfficeHours" ng-change="figureOutItemsToDisplay()" /> Only show office hours with a Professor signed up</div>
+      <div><input type="checkbox" ng-model="taOfficeHours" ng-change="figureOutItemsToDisplay()" /> Only show office hours with TAs signed up</div>
+      <div><input type="checkbox" ng-model="multipleStudentsInterested" ng-change="figureOutItemsToDisplay()" /> Only show office hours with students interested</div>
+      <div><input type="checkbox" ng-model="studentInterest" ng-change="figureOutItemsToDisplay()" /> Only show office hours that I'm intersted in</div>
+
     </div>
   </div>
   <br />
@@ -21,7 +26,7 @@
       </small>
       <h4 class="list-group-item-heading" data-ng-bind="officehour.class | uppercase"></h4>
       Time: <div class="list-group-item" data-ng-bind="officehour.time | date:'medium'"></div>
-      Location: <div class="list-group-item" data-ng-bind="officehour.location"></div>
+      Location: <div class="list-group-item" data-ng-bind="officehour.location | uppercase"></div>
       </a>
 
       Students interested: <div class="list-group-item">

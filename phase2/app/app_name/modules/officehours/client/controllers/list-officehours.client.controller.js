@@ -26,6 +26,25 @@
 
     var now = new Date();
 
+    var containsUser = function(array, object) {
+      for (var i = 0; i < array.length; i++) {
+        if (array[i].displayName === object.displayName) {
+          return true;
+        }
+      }
+      return false;
+    };
+
+    // other helper function specifically for students
+    var containsCreatedUser = function(array, object) {
+      for (var i = 0; i < array.length; i++) {
+        if (array[i] === object._id) {
+          return true;
+        }
+      }
+      return false;
+    };
+
     // for search
     $scope.buildPager = function () {
       $scope.pagedItems = [];
@@ -42,6 +61,30 @@
       if ($scope.upcomingOfficeHours) {
         $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
           return new Date(array[index].time) > now;
+        });
+      }
+
+      if ($scope.profOfficeHours) {
+        $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
+          return array[index].professor;
+        });
+      }
+
+      if ($scope.taOfficeHours) {
+        $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
+          return array[index].tas.length > 0;
+        });
+      }
+
+      if ($scope.studentInterest) {
+        $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
+          return containsUser(array[index].students, $scope.user) || containsCreatedUser(array[index].students, $scope.user);
+        });
+      }
+
+      if ($scope.multipleStudentsInterested) {
+        $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
+          return array[index].students.length > 0;
         });
       }
 
