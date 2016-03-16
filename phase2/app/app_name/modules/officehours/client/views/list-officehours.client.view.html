@@ -5,6 +5,7 @@
     <h4 data-ng-if="!user"> If you've just logged in for the first time, please refresh the page to see your user type. </h4>
     <div>
       <input class="form-control col-md-4" type="text" ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
+      <input type="checkbox" ng-model="upcomingOfficeHours" ng-change="figureOutItemsToDisplay()" /> Show Only Upcoming Office Hours?
     </div>
   </div>
   <br />
@@ -101,7 +102,5 @@
   <div class="alert alert-warning text-center" data-ng-if="vm.officehours.$resolved && !vm.officehours.length">
     No Office hours yet, why don't you <a data-ui-sref="officehours.create">create one</a>?
   </div>
-
-  <pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></pagination>
-
 </section>
+<pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></pagination>

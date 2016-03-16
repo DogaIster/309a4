@@ -24,6 +24,8 @@
 
     vm.save = save;
 
+    var now = new Date();
+
     // for search
     $scope.buildPager = function () {
       $scope.pagedItems = [];
@@ -36,6 +38,13 @@
       $scope.filteredItems = $filter('filter')($scope.officehours, {
         $: $scope.search
       });
+
+      if ($scope.upcomingOfficeHours) {
+        $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
+          return new Date(array[index].time) > now;
+        });
+      }
+
       $scope.filterLength = $scope.filteredItems.length;
       var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
       var end = begin + $scope.itemsPerPage;
