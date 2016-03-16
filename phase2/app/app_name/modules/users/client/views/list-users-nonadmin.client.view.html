@@ -6,6 +6,12 @@
       </div>
       <div class="col-md-4" style="margin-top: 2em">
         <input class="form-control col-md-4" type="text" ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
+        <select class="form-control" name="selectUserType" ng-model="selectUserType" ng-change="figureOutItemsToDisplay()">
+        <option value="" selected>Show all user types</option>
+        <option value="professor"> Only show professors</option>
+        <option value="ta"> Only show TAs</option>
+        <option value="student"> Only show students</option>
+    </select>
       </div>
     </div>
   </div>

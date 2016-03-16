@@ -18,6 +18,25 @@ angular.module('users.admin').controller('UserNonAdminListController', ['$scope'
       $scope.filteredItems = $filter('filter')($scope.users, {
         $: $scope.search
       });
+
+      if ($scope.selectUserType === 'professor') {
+        $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
+          return array[index].typeOfUser === 'professor';
+        });
+      }
+
+      if ($scope.selectUserType === 'ta') {
+        $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
+          return array[index].typeOfUser === 'ta';
+        });
+      }
+
+      if ($scope.selectUserType === 'student') {
+        $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
+          return array[index].typeOfUser === 'student';
+        });
+      }
+
       $scope.filterLength = $scope.filteredItems.length;
       var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
       var end = begin + $scope.itemsPerPage;
