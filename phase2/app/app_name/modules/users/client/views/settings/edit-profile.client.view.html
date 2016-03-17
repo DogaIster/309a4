@@ -34,8 +34,8 @@
           <input type="classes3" id="classes3" ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="classes3" class="form-control" ng-model="user.classes[3]" placeholder="Classes">
           <input type="classes4" id="classes4" ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="classes4" class="form-control" ng-model="user.classes[4]" placeholder="Classes">
           <input type="classes5" id="classes5" ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="classes5" class="form-control" ng-model="user.classes[5]" placeholder="Classes">
-          <div ng-messages="userForm.classes[0].$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Classes are invalid. Enter a class like CSC309.</p>
+          <div ng-if="!userForm.classes5.test('/[a-zA-Z]{3}\d{3}/i')">
+            <p class="help-block error-text">Classes are invalid. Enter a class like CSC309.</p>
           </div>
         </div>
           <br/>
@@ -64,8 +64,12 @@
         <div ng-show="success" class="text-center text-success">
           <strong>Profile Saved Successfully</strong>
         </div>
+        <div ng-show="!success && !updateUserProfile(userForm.$valid)" class="text-center text-danger">
+          <strong>Please enter classes in the correct format, e.g. CSC309</strong>
+        </div>
         <div ng-show="error" class="text-center text-danger">
-          <strong ng-bind="error"></strong>
+          <strong ng-bind="error">
+          </strong>
         </div>
       </fieldset>
     </form>
