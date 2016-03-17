@@ -26,6 +26,7 @@
           <p class="help-block error-text" ng-message="required">Office hour location is required.</p>
         </div>
 
+        <div ng-hide="true">
         <div data-ng-if="user.typeOfUser == 'professor'">
         <label class="control-label" for="professor">Professor</label>
         <div name="professor" type="text" ng-bind="user._id" id="professor" class="form-control">
@@ -43,6 +44,7 @@
     <div name="tas" type="text" ng-bind="vm.officehour.tas.length" id="tas" class="form-control">
   </div>
   </div>
+</div>
 
         <button type="submit" class="btn btn-default">{{vm.officehour._id ? 'Update' : 'Create'}}</button>
         <div ng-show="vm.error" class="text-danger">

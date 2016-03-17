@@ -28,12 +28,16 @@
         <div class="form-group show-errors">
           <label for="classes">Classes</label>
 
-          <input type="classes" id="classes0" name="classes" class="form-control" ng-model="user.classes[0]" placeholder="Classes">
-          <input type="classes" id="classes1" name="classes" class="form-control" ng-model="user.classes[1]" placeholder="Classes">
-          <input type="classes" id="classes2" name="classes" class="form-control" ng-model="user.classes[2]" placeholder="Classes">
-          <input type="classes" id="classes3" name="classes" class="form-control" ng-model="user.classes[3]" placeholder="Classes">
-          <input type="classes" id="classes4" name="classes" class="form-control" ng-model="user.classes[4]" placeholder="Classes">
-          <input type="classes" id="classes5" name="classes" class="form-control" ng-model="user.classes[5]" placeholder="Classes">
+          <input type="classes0" id="classes0"  ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="classes0" class="form-control" ng-model="user.classes[0]" placeholder="Classes">
+          <input type="classes1" id="classes1" ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="classes1" class="form-control" ng-model="user.classes[1]" placeholder="Classes">
+          <input type="classes2" id="classes2" ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="classes2" class="form-control" ng-model="user.classes[2]" placeholder="Classes">
+          <input type="classes3" id="classes3" ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="classes3" class="form-control" ng-model="user.classes[3]" placeholder="Classes">
+          <input type="classes4" id="classes4" ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="classes4" class="form-control" ng-model="user.classes[4]" placeholder="Classes">
+          <input type="classes5" id="classes5" ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="classes5" class="form-control" ng-model="user.classes[5]" placeholder="Classes">
+          <div ng-messages="userForm.classes[0].$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Classes are invalid. Enter a class like CSC309.</p>
+          </div>
+        </div>
           <br/>
 
         <div class="form-group" show-errors>
