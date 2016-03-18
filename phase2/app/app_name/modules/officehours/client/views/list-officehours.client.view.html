@@ -68,13 +68,13 @@
 
     <div data-ng-if="user.typeOfUser == 'professor' && !officehour.professor">
       <div name="professor" ng-bind="user._id" ng-model="officehour.professor" id="professor" hidden></div>
-     <button id="profButon" ng-click="vm.save(officehour)" class="btn btn-default"> Participate in this office hour </button>
+     <button id="profButon" ng-click="vm.saveInterest(officehour)" class="btn btn-default"> Participate in this office hour </button>
    </div>
 
-     <button id="taButton" ng-click="vm.save(officehour)" data-ng-if="user.typeOfUser == 'ta'" class="btn btn-default"> Participate in this office hour </button>
+     <button id="taButton" ng-click="vm.saveInterest(officehour)" data-ng-if="user.typeOfUser == 'ta'" class="btn btn-default"> Participate in this office hour </button>
 
-     <button id="studentButton" ng-click="vm.save(officehour)" data-ng-if="user.typeOfUser == 'student' && officehour.user._id != user._id" class="btn btn-default"> I'm interested in this office hour </button>
-
+     <button id="studentButton" ng-click="vm.saveInterest(officehour)" data-ng-if="user.typeOfUser == 'student' && officehour.user._id != user._id" class="btn btn-default"> I'm interested in this office hour </button>
+saveInterest
       <br />
       <div class="alert alert-danger" data-ng-if="!officehour.professor">No professor signed up yet.</div>
       <div class="alert alert-success" data-ng-if="officehour.professor">

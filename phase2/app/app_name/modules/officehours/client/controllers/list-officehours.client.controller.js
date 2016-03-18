@@ -22,7 +22,7 @@
       $scope.buildPager();
     });
 
-    vm.save = save;
+    vm.saveInterest = saveInterest;
 
     var now = new Date();
 
@@ -127,8 +127,25 @@
     };
 
     // Save Officehour
-    function save(officehour) {
+    function saveInterest(officehour) {
       // TODO: move create/update logic to service
+      if ($scope.user && $scope.user.typeOfUser === 'professor') {
+        officehour.professor = $scope.user;
+        officehour.professorName = $scope.user.firstName + ' ' + $scope.user.lastName;
+      }
+
+      else if ($scope.user && $scope.user.typeOfUser === 'ta') {
+        if (!containsUser(officehour.tas, $scope.user)) {
+          officehour.tas.push($scope.user);
+        }
+      }
+
+      else {
+        if (!containsUser(officehour.students, $scope.user)) {
+          officehour.students.push($scope.user);
+        }
+      }
+
       if (officehour._id) {
         officehour.$update(successCallback, errorCallback);
       } else {

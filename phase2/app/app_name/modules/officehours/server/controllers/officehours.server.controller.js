@@ -91,23 +91,6 @@ exports.update = function(req, res) {
   var officehour = req.officehour;
   officehour = _.extend(officehour , req.body);
 
-  if (req.user && req.user.typeOfUser === 'professor') {
-    officehour.professor = req.user;
-    officehour.professorName = req.user.firstName + ' ' + req.user.lastName;
-  }
-
-  else if (req.user && req.user.typeOfUser === 'ta') {
-    if (!containsUser(officehour.tas, req.user)) {
-      officehour.tas.push(req.user);
-    }
-  }
-
-  else {
-    if (!containsUser(officehour.students, req.user)) {
-      officehour.students.push(req.user);
-    }
-  }
-
   officehour.save(function(err) {
     if (err) {
       return res.status(400).send({
