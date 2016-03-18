@@ -23,6 +23,7 @@
     });
 
     vm.saveInterest = saveInterest;
+    vm.saveComment = saveComment;
 
     var now = new Date();
 
@@ -145,6 +146,37 @@
           officehour.students.push($scope.user);
         }
       }
+
+      if (officehour._id) {
+        officehour.$update(successCallback, errorCallback);
+      } else {
+        officehour.$save(successCallback, errorCallback);
+      }
+
+      function successCallback(res) {
+        //$state.go('officehours.list', {
+        //  officehourId: res._id
+        //});
+      }
+
+      function errorCallback(res) {
+        vm.error = res.data.message;
+      }
+    }
+
+    //Save comment
+    function saveComment(officehour) {
+
+      officehour.comments.push(
+        { text: officehour.commentSubmission,
+          time: new Date(),
+          _id: $scope.user._id,
+          profileImageURL: $scope.user.profileImageURL,
+          displayName: $scope.user.displayName
+        }
+      );
+
+      officehour.commentSubmission = undefined;
 
       if (officehour._id) {
         officehour.$update(successCallback, errorCallback);
