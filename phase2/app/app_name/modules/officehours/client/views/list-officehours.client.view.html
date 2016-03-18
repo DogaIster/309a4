@@ -116,13 +116,13 @@
 </span>
 <button class="commentButton" ng-init="showComments = false" ng-click="showComments = !showComments" class="btn btn-default"> Show comments </button>
 <div class="commentContainer" ng-show = "showComments">
-      <div  data-ng-repeat="comment in officehour.comments">
+      <div class="list-group-item" data-ng-repeat="comment in officehour.comments">
           <a data-ng-if="comment._id" ng-href="/users/{{comment._id}}">
-            <img data-ng-if="comment.profileImageURL" ng-src="{comment.profileImageURL}}" alt="Profile Image" width="20px;" height="20px;">
+            <img data-ng-if="comment.profileImageURL" ng-src="{{comment.profileImageURL}}" alt="Profile Image" width="20px;" height="20px;">
             <span data-ng-bind="comment.displayName"></span>
           </a>
-          <span data-ng-bind="comment.time"></span>
-          <span data-ng-bind="comment.text"></span>
+          <span data-ng-bind="comment.time | date:'medium'"></span>
+          <p style="padding-top:10px; text-indent:30px;" data-ng-bind="comment.text"></p>
       </div>
       <div class="form-group">
         <label for="newComment">Comment:</label>
