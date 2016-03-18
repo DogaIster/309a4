@@ -10,7 +10,19 @@
       <div><input type="checkbox" ng-model="taOfficeHours" ng-change="figureOutItemsToDisplay()" /> Only show office hours with TAs signed up</div>
       <div><input type="checkbox" ng-model="multipleStudentsInterested" ng-change="figureOutItemsToDisplay()" /> Only show office hours with students interested</div>
       <div><input type="checkbox" ng-model="studentInterest" ng-change="figureOutItemsToDisplay()" /> Only show office hours that I'm intersted in</div>
-
+      <div class="row">
+      <select class="form-control col-sm-2" name="orderByType" ng-model="orderByType" ng-change="figureOutItemsToDisplay()">
+      <option value="" selected>Order by...</option>
+      <option value="numTAs">Number of TAs</option>
+      <option value="numStudents">Number of students</option>
+      <option value="officehourDate">Office hour date</option>
+  </select>
+  <select class="form-control col-sm-2" name="orderByDirection" ng-model="orderByDirection" ng-change="figureOutItemsToDisplay()">
+  <option value="" selected>Direction...</option>
+  <option value="ascending">Ascending</option>
+  <option value="descending">Descending</option>
+</select>
+</div>
     </div>
   </div>
   <br />

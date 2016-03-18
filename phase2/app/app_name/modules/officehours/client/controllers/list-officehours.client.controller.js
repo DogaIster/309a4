@@ -58,6 +58,16 @@
         $: $scope.search
       });
 
+      var sortDirection = true;
+
+      if ($scope.orderByDirection === 'ascending') {
+        sortDirection = true;
+      }
+
+      if ($scope.orderByDirection === 'descending') {
+        sortDirection = false;
+      }
+
       if ($scope.upcomingOfficeHours) {
         $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
           return new Date(array[index].time) > now;
@@ -86,6 +96,18 @@
         $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
           return array[index].students.length > 0;
         });
+      }
+
+      if ($scope.orderByType === 'numTAs') {
+        $scope.filteredItems = $filter('orderBy')($scope.filteredItems, 'tas.length', sortDirection);
+      }
+
+      if ($scope.orderByType === 'numStudents') {
+        $scope.filteredItems = $filter('orderBy')($scope.filteredItems, 'students.length', sortDirection);
+      }
+
+      if ($scope.orderByType === 'officehourDate') {
+        $scope.filteredItems = $filter('orderBy')($scope.filteredItems, 'time', sortDirection);
       }
 
       $scope.filterLength = $scope.filteredItems.length;
