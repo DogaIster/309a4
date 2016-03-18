@@ -33,10 +33,10 @@
   <br />
   <div data-ng-if="user.typeOfUser == 'professor' && !vm.officehour.professor">
     <div name="professor" ng-bind="user._id" ng-model="vm.officehour.professor" id="professor" hidden></div>
-   <button id="profButon" ng-click="vm.save(officehour)" class="btn btn-default"> Participate in this office hour </button>
+   <button id="profButon" ng-click="vm.saveInterest(vm.officehour)" class="btn btn-default"> Participate in this office hour </button>
  </div>
 
- <button id="taButton" ng-click="vm.save(officehour)" data-ng-if="user.typeOfUser == 'ta'" class="btn btn-default"> Participate in this office hour </button>
+ <button id="taButton" ng-click="vm.saveInterest(vm.officehour)" data-ng-if="user.typeOfUser == 'ta'" class="btn btn-default"> Participate in this office hour </button>
 
   <br />
 
@@ -50,4 +50,19 @@
   <div class="alert alert-success" data-ng-if="vm.officehour.tas.length > 1" data-ng-bind="vm.officehour.tas.length.toString() + ' TAs have signed up for this office hour.'"></div>
   <div class="alert alert-success" data-ng-if="vm.officehour.tas.length == 1" data-ng-bind="'1 TA has signed up for this office hour.'"></div>
 
+  <div class="commentContainer" >
+        <div class="list-group-item" data-ng-repeat="comment in vm.officehour.comments">
+            <a data-ng-if="comment._id" ng-href="/users/{{comment._id}}">
+              <img data-ng-if="comment.profileImageURL" ng-src="{{comment.profileImageURL}}" alt="Profile Image" width="20px;" height="20px;">
+              <span data-ng-bind="comment.displayName"></span>
+            </a>
+            <span data-ng-bind="comment.time | date:'medium'"></span>
+            <p style="padding-top:10px; text-indent:30px;" data-ng-bind="comment.text"></p>
+        </div>
+        <div class="form-group">
+          <label for="newComment">Comment:</label>
+          <textarea class="form-control" ng-model="vm.officehour.commentSubmission" rows="5" class="newComment"></textarea>
+        </div>
+        <button class="submitCommentButton" ng-click="vm.saveComment(vm.officehour)" class="btn btn-default"> Submit comment </button>
+  </div>
 </section>
