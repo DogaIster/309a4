@@ -44,11 +44,8 @@
           <input type="classes3" id="classes3" ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="classes3" class="form-control" ng-model="credentials.classes[3]" placeholder="Classes">
           <input type="classes4" id="classes4" ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="classes4" class="form-control" ng-model="credentials.classes[4]" placeholder="Classes">
           <input type="classes5" id="classes5" ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="classes5" class="form-control" ng-model="credentials.classes[5]" placeholder="Classes">
-          <div ng-if="!userForm.classes5.test('/[a-zA-Z]{3}\d{3}/i')">
+          <div ng-if="!userForm.classes5.test('/[a-zA-Z]{3}\d{3}/i')" || "userForm.classes0.$error.required">
             <p class="help-block error-text">Classes are invalid. Enter a class like CSC309.</p>
-          </div>
-          <div ng-if="userForm.classes0.$error.required">
-            <p class="help-block error-text">Please add at least one class.</p>
           </div>
         </div>
 
@@ -77,6 +74,9 @@
           <button type="submit" class="btn btn-primary">Sign up</button>
           &nbsp; or&nbsp;
           <a ui-sref="authentication.signin" class="show-signup">Sign in</a>
+        </div>
+        <div ng-show="!success && !updateUserProfile(userForm.$valid)" class="text-center text-danger">
+          <strong>Please enter classes in the correct format, e.g. CSC309</strong>
         </div>
         <div ng-show="error" class="text-center text-danger">
           <strong ng-bind="error"></strong>
