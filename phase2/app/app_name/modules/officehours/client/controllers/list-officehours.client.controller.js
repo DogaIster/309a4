@@ -98,6 +98,12 @@
         });
       }
 
+      if ($scope.myClasses) {
+        $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
+          return $scope.user.classes.indexOf(array[index].class) > -1;
+        });
+      }
+
       if ($scope.orderByType === 'numTAs') {
         $scope.filteredItems = $filter('orderBy')($scope.filteredItems, 'tas.length', sortDirection);
       }
