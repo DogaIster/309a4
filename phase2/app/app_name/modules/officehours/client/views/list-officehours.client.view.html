@@ -115,7 +115,22 @@
   </a>
 </div>
 </span>
-<button id="commentButton" ng-click="" class="btn btn-default"> Show comments </button>
+<button class="commentButton" ng-init="showComments = false" ng-click="showComments = !showComments" class="btn btn-default"> Show comments </button>
+<div class="commentContainer" ng-show = "showComments">
+      <div  data-ng-repeat="comment in officehour.comments">
+          <a data-ng-if="comment._id" ng-href="/users/{{comment._id}}">
+            <img data-ng-if="comment.profileImageURL" ng-src="{comment.profileImageURL}}" alt="Profile Image" width="20px;" height="20px;">
+            <span data-ng-bind="comment.displayName"></span>
+          </a>
+          <span data-ng-bind="comment.time"></span>
+          <span data-ng-bind="comment.text"></span>
+      </div>
+      <div class="form-group">
+        <label for="newComment">Comment:</label>
+        <textarea class="form-control" rows="5" class="newComment"></textarea>
+      </div>
+      <button class="submitCommentButton" ng-click="vm.save(officehour)" class="btn btn-default"> Submit comment </button>
+</div>
 
 
   <div class="alert alert-warning text-center" data-ng-if="vm.officehours.$resolved && !vm.officehours.length">
