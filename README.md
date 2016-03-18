@@ -2,10 +2,10 @@
 CSC309 A4 Repo
 
 ##Members:
-Adam Kasztenny
-Doga Ister
-Sean Williams
-Patrick Moran
+Adam Kasztenny <br/>
+Doga Ister <br/>
+Sean Williams <br/>
+Patrick Moran 
 
 ##Idea:
 A system for students that they can book office hours with professors/TAs.
