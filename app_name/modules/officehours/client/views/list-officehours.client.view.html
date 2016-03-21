@@ -1,0 +1,139 @@
+<section>
+  <div class="page-header">
+    <h1>All Office Hours</h1>
+    <h3 data-ng-if="user"> Participating as a <span ng-bind='user.typeOfUser | uppercase'></span> </h3>
+    <h4 data-ng-if="!user"> If you've just logged in for the first time, please refresh the page to see your user type. </h4>
+    <div>
+      <input class="form-control col-md-4" type="text" ng-model="search" placeholder="Search for any office hour field here" ng-change="figureOutItemsToDisplay()" />
+      <div><input type="checkbox" ng-model="upcomingOfficeHours" ng-init="upcomingOfficeHours = true" ng-change="figureOutItemsToDisplay()" /> Only show upcoming office hours</div>
+      <div><input type="checkbox" ng-model="profOfficeHours" ng-change="figureOutItemsToDisplay()" /> Only show office hours with a Professor signed up</div>
+      <div><input type="checkbox" ng-model="taOfficeHours" ng-change="figureOutItemsToDisplay()" /> Only show office hours with TAs signed up</div>
+      <div><input type="checkbox" ng-model="multipleStudentsInterested" ng-change="figureOutItemsToDisplay()" /> Only show office hours with students interested</div>
+      <div><input type="checkbox" ng-model="studentInterest" ng-change="figureOutItemsToDisplay()" /> Only show office hours that I'm interested in</div>
+      <div><input type="checkbox" ng-model="myClasses" ng-change="figureOutItemsToDisplay()" ng-init="myClasses = true"/> Only show office hours for my classes</div>
+      <div class="row">
+      <select class="form-control col-sm-2" name="orderByType" ng-model="orderByType" ng-change="figureOutItemsToDisplay()">
+      <option value="" selected>Order by...</option>
+      <option value="numTAs">Number of TAs</option>
+      <option value="numStudents">Number of students</option>
+      <option value="officehourDate">Office hour date</option>
+  </select>
+  <select class="form-control col-sm-2" name="orderByDirection" ng-model="orderByDirection" ng-change="figureOutItemsToDisplay()">
+  <option value="" selected>Direction...</option>
+  <option value="ascending">Ascending</option>
+  <option value="descending">Descending</option>
+</select>
+</div>
+    </div>
+  </div>
+  <br />
+  <div class="list-group" data-ng-repeat="officehour in pagedItems">
+    <a data-ui-sref="officehours.view({ officehourId: officehour._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Requested on
+        <span data-ng-bind="officehour.created | date:'mediumDate'"></span>
+        by
+        <span data-ng-if="officehour.user" data-ng-bind="officehour.user.displayName"></span>
+        <span data-ng-if="!officehour.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" data-ng-bind="officehour.class | uppercase"></h4>
+      Time: <div class="list-group-item" data-ng-bind="officehour.time | date:'medium'"></div>
+      Location: <div class="list-group-item" data-ng-bind="officehour.location | uppercase"></div>
+      </a>
+
+      Students interested: <div class="list-group-item">
+        <div data-ng-if = "officehour.students.length > 1" data-ng-bind="officehour.students.length + ' students are interested in this office hour:'"></div>
+        <div data-ng-if = "officehour.students.length == 1" data-ng-bind="'1 student is interested in this office hour:'"></div>
+        <div data-ng-if = "officehour.students.length == 0" data-ng-bind="'No students are interested in this office hour.'"></div>
+
+      <!-- Iterate through the students -->
+      <span data-ng-repeat="student in officehour.students">
+        <div>
+          <a data-ng-if="student._id" ng-href="/users/{{student._id}}">
+        <img data-ng-if="student.profileImageURL" ng-src="{{student.profileImageURL}}" alt="Profile Image" width="20px;" height="20px;">
+        <span data-ng-bind="student.displayName"></span>
+      </a>
+
+      <a data-ng-if="!student._id" ng-href="/users/{{officehour.user._id}}">
+        <span data-ng-if="!student.displayName" data-ng-bind="officehour.user.displayName + ' (creator)'"></span>
+    </a>
+      </div>
+      </span>
+
+    </div>
+
+      <br />
+
+
+    <div data-ng-if="user.typeOfUser == 'professor' && !officehour.professor">
+      <div name="professor" ng-bind="user._id" ng-model="officehour.professor" id="professor" hidden></div>
+     <button id="profButon" ng-click="vm.saveInterest(officehour)" class="btn btn-default"> Participate in this office hour </button>
+   </div>
+
+     <button id="taButton" ng-click="vm.saveInterest(officehour)" data-ng-if="user.typeOfUser == 'ta'" class="btn btn-default"> Participate in this office hour </button>
+
+     <button id="studentButton" ng-click="vm.saveInterest(officehour)" data-ng-if="user.typeOfUser == 'student' && officehour.user._id != user._id" class="btn btn-default"> I'm interested in this office hour </button>
+      <br />
+      <div class="alert alert-danger" data-ng-if="!officehour.professor">No professor signed up yet.</div>
+      <div class="alert alert-success" data-ng-if="officehour.professor">
+      <span data-ng-if="!officehour.professor.toString().contains('[')">
+        <a ng-bind="officehour.professorName" ng-href="/users/{{officehour.professor}}"></a> is
+      </span>
+      <span data-ng-if="officehour.professor.toString().contains('[')" ng-bind="'You are'"></span>
+      signed up for this office hour.
+    </div>
+      <div class="alert alert-warning" data-ng-if="!officehour.tas.length">No TAs signed up yet.</div>
+      <div class="alert alert-success" data-ng-if="officehour.tas.length > 1" data-ng-bind="officehour.tas.length.toString() + ' TAs have signed up for this office hour.'"></div>
+
+<span class="list-group-item" data-ng-if="officehour.tas.length > 1">
+        <div data-ng-repeat="ta in officehour.tas">
+          <a data-ng-if="ta._id" ng-href="/users/{{ta._id}}">
+        <img data-ng-if="ta.profileImageURL" ng-src="{{ta.profileImageURL}}" alt="Profile Image" width="20px;" height="20px;">
+        <span data-ng-bind="ta.displayName"></span>
+      </a>
+
+      <a data-ng-if="!ta._id" ng-href="/users/{{officehour.user._id}}">
+        <span data-ng-if="!ta.displayName" data-ng-bind="officehour.user.displayName + ' (creator)'"></span>
+    </a>
+  </div>
+</span>
+
+      <div class="alert alert-success" data-ng-if="officehour.tas.length == 1" data-ng-bind="'1 TA has signed up for this office hour.'">
+      </div>
+
+      <span class="list-group-item" data-ng-if="officehour.tas.length == 1">
+      <div  data-ng-repeat="ta in officehour.tas">
+        <a data-ng-if="ta._id" ng-href="/users/{{ta._id}}">
+      <img data-ng-if="ta.profileImageURL" ng-src="{{ta.profileImageURL}}" alt="Profile Image" width="20px;" height="20px;">
+      <span data-ng-bind="ta.displayName"></span>
+    </a>
+
+    <a data-ng-if="!ta._id" ng-href="/users/{{officehour.user._id}}">
+      <span data-ng-if="!ta.displayName" data-ng-bind="officehour.user.displayName + ' (creator)'"></span>
+  </a>
+</div>
+</span>
+<button class="commentButton" ng-init="showComments = false" ng-click="showComments = !showComments" class="btn btn-default"> Show comments </button>
+<div class="commentContainer" ng-show = "showComments">
+      <div class="list-group-item" data-ng-repeat="comment in officehour.comments">
+          <a data-ng-if="comment._id" ng-href="/users/{{comment._id}}">
+            <img data-ng-if="comment.profileImageURL" ng-src="{{comment.profileImageURL}}" alt="Profile Image" width="20px;" height="20px;">
+            <span data-ng-bind="comment.displayName"></span>
+          </a>
+          <span data-ng-bind="comment.time | date:'medium'"></span>
+          <p style="padding-top:10px; text-indent:30px;" data-ng-bind="comment.text"></p>
+      </div>
+      <div class="form-group">
+        <label for="newComment">Comment:</label>
+        <textarea class="form-control" ng-model="officehour.commentSubmission" rows="5" class="newComment"></textarea>
+      </div>
+      <button class="submitCommentButton" ng-click="vm.saveComment(officehour)" class="btn btn-default"> Submit comment </button>
+</div>
+
+
+  <div class="alert alert-warning text-center" data-ng-if="vm.officehours.$resolved && !vm.officehours.length">
+    No Office hours yet, why don't you <a data-ui-sref="officehours.create">create one</a>?
+  </div>
+</section>
+<pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></pagination>
