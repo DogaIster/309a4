@@ -49,13 +49,13 @@ describe('Officehour CRUD tests', function () {
     // Save a user to the test db and create new Officehour
     user.save(function () {
       officehour = {
-        user: user,
+        user: user._id.toString(),
         time: new Date(),
         comments: [],
-        students: [user],
+        students: [user._id.toString()],
         class: 'CSC108',
         tas: [],
-        created: new Date(),
+        created: new Date(), // this is overwritten by the server
         professor: null,
         professorName: '',
         location: 'BA3200',
@@ -255,8 +255,17 @@ describe('Officehour CRUD tests', function () {
     officehourObj.save(function () {
       request(app).get('/api/officehours/' + officehourObj._id)
         .end(function (req, res) {
-          // Set assertion
-          res.body.should.be.instanceof(Object).and.have.property('name', officehour.name);
+          // check every field, except times since the formats get changed on the server side
+          res.body.should.be.instanceof(Object).and.have.property('class', officehour.class);
+          res.body.should.be.instanceof(Object).and.have.property('comments', officehour.comments);
+          res.body.should.be.instanceof(Object).and.have.property('isCurrentUserOwner', false);
+          res.body.should.be.instanceof(Object).and.have.property('length', officehour.length);
+          res.body.should.be.instanceof(Object).and.have.property('location', officehour.location);
+          res.body.should.be.instanceof(Object).and.have.property('professor', officehour.professor);
+          res.body.should.be.instanceof(Object).and.have.property('professorName', officehour.professorName);
+          res.body.should.be.instanceof(Object).and.have.property('students', officehour.students);
+          res.body.should.be.instanceof(Object).and.have.property('user', null);
+          res.body.should.be.instanceof(Object).and.have.property('tas', officehour.tas);
 
           // Call the assertion callback
           done();
@@ -269,7 +278,7 @@ describe('Officehour CRUD tests', function () {
     request(app).get('/api/officehours/test')
       .end(function (req, res) {
         // Set assertion
-        res.body.should.be.instanceof(Object).and.have.property('message', 'Officehour is invalid');
+        res.body.should.be.instanceof(Object).and.have.property('message', 'Office hour is invalid');
 
         // Call the assertion callback
         done();
@@ -281,7 +290,7 @@ describe('Officehour CRUD tests', function () {
     request(app).get('/api/officehours/559e9cd815f80b4c256a8f41')
       .end(function (req, res) {
         // Set assertion
-        res.body.should.be.instanceof(Object).and.have.property('message', 'No Officehour with that identifier has been found');
+        res.body.should.be.instanceof(Object).and.have.property('message', 'No Office hour with that identifier has been found');
 
         // Call the assertion callback
         done();
@@ -361,16 +370,22 @@ describe('Officehour CRUD tests', function () {
       password: 'M3@n.jsI$Aw3$0m3'
     };
 
-    // Create orphan user
-    var _orphan = new User({
+    var _orphanObject = {
       firstName: 'Full',
       lastName: 'Name',
       displayName: 'Full Name',
       email: 'orphan@test.com',
       username: _creds.username,
       password: _creds.password,
-      provider: 'local'
-    });
+      provider: 'local',
+      classes: ['CSC108'],
+      typeOfUser: 'professor',
+      description: 'Orphan user',
+      profileImageURL: 'modules/users/client/img/profile/default.png'
+    };
+    // Create orphan user
+    var _orphan = new User(_orphanObject);
+
 
     _orphan.save(function (err, orphan) {
       // Handle save error
@@ -401,9 +416,19 @@ describe('Officehour CRUD tests', function () {
               }
 
               // Set assertions on new Officehour
-              (officehourSaveRes.body.name).should.equal(officehour.name);
+              // the orphan is acutally a professor, so we're also testing the professor functionality here
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('class', officehour.class);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('comments', officehour.comments);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('length', officehour.length);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('location', officehour.location);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('professorName', _orphanObject.displayName);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('students', officehour.students);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('tas', officehour.tas);
               should.exist(officehourSaveRes.body.user);
               should.equal(officehourSaveRes.body.user._id, orphanId);
+              // since the user is a professor
+              should.equal(officehourSaveRes.body.professor._id, orphanId);
+
 
               // force the Officehour to have an orphaned user reference
               orphan.remove(function () {
