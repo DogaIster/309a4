@@ -51,7 +51,7 @@ exports.isAllowed = function (req, res, next) {
   // If an Officehour is being processed and the current user created it then allow any manipulation
  // TAs and Professors are allowed to completely edit office hours, students are only allowed to add themselves to
 // the interested student list of another office hour.
-  if ((req.user.typeOfUser === 'ta' || req.user.typeOfUser === 'professor' || req.user.typeOfUser === 'student') || (req.officehour && req.user && req.officehour.user && req.officehour.user.id === req.user.id)) {
+  if (req.user && (req.user.typeOfUser === 'ta' || req.user.typeOfUser === 'professor' || req.user.typeOfUser === 'student') || (req.officehour && req.user && req.officehour.user && req.officehour.user.id === req.user.id)) {
     return next();
   }
 
