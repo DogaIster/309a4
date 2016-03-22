@@ -146,13 +146,17 @@
       else if ($scope.user && $scope.user.typeOfUser === 'ta') {
         if (containsUser(officehour.tas, $scope.user)) {
           var taIndex = indexOfUser(officehour.tas, $scope.user);
-          officehour.tas[taIndex] = null;
+          if (taIndex > -1) {
+            officehour.tas.splice(taIndex, 1);
+          }
         }
       }
 
       else {
         var studentIndex = indexOfUser(officehour.students, $scope.user);
-        officehour.students[studentIndex] = null;
+        if (studentIndex > -1) {
+          officehour.students.splice(studentIndex, 1);
+        }
       }
 
       if (officehour._id) {
