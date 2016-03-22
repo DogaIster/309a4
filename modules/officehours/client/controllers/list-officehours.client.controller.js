@@ -30,11 +30,20 @@
 
     var containsUser = function(array, object) {
       for (var i = 0; i < array.length; i++) {
-        if (array[i].displayName === object.displayName) {
+        if (array[i] !== null && array[i].displayName === object.displayName) {
           return true;
         }
       }
       return false;
+    };
+
+    var indexOfUser = function(array, object) {
+      for (var i = 0; i < array.length; i++) {
+        if (array[i] !== null && array[i].displayName === object.displayName) {
+          return i;
+        }
+      }
+      return -1;
     };
 
     // other helper function specifically for students
@@ -135,15 +144,15 @@
       }
 
       else if ($scope.user && $scope.user.typeOfUser === 'ta') {
-        if (!containsUser(officehour.tas, $scope.user)) {
-          officehour.tas.push($scope.user);
+        if (containsUser(officehour.tas, $scope.user)) {
+          var taIndex = indexOfUser(officehour.tas, $scope.user);
+          officehour.tas[taIndex] = null;
         }
       }
 
       else {
-        if (!containsUser(officehour.students, $scope.user)) {
-          officehour.students.push($scope.user);
-        }
+        var studentIndex = indexOfUser(officehour.students, $scope.user);
+        officehour.students[studentIndex] = null;
       }
 
       if (officehour._id) {
