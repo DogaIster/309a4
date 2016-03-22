@@ -84,15 +84,33 @@
         sortDirection = false;
       }
 
-      // make sure the user hasn't already expressed interest in this office hour
-      $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
-        return !containsUser(array[index].students, $scope.user) && !containsCreatedUser(array[index].students, $scope.user);
-      });
-
       // only recommend upcoming office hours
       $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
         return new Date(array[index].time) > now;
       });
+
+      // before any filtration, other than the date, has occured
+      var prefilteredItems = $scope.filteredItems;
+
+      // make sure the user hasn't already expressed interest in this office hour
+      if ($scope.user.typeOfUser === 'student') {
+        $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
+          return !containsUser(array[index].students, $scope.user) && !containsCreatedUser(array[index].students, $scope.user);
+        });
+      }
+
+      if ($scope.user.typeOfUser === 'professor') {
+        $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
+          return array[index].professorName !== $scope.user.displayName;
+        });
+      }
+
+
+      if ($scope.user.typeOfUser === 'ta') {
+        $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
+          return !containsUser(array[index].tas, $scope.user) && !containsCreatedUser(array[index].tas, $scope.user);
+        });
+      }
 
       var backupList = $scope.filteredItems;
 
@@ -130,6 +148,14 @@
       if ($scope.filterLength === 0) {
         $scope.filteredItems = backupList;
       }
+
+      $scope.filterLength = $scope.filteredItems.length;
+
+      if ($scope.filterLength === 0) {
+        $scope.filteredItems = prefilteredItems;
+      }
+
+      $scope.filterLength = $scope.filteredItems.length;
 
       shuffle($scope.filteredItems);
       var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
