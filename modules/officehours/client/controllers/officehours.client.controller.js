@@ -24,16 +24,26 @@
 
     vm.saveInterest = saveInterest;
     vm.saveComment = saveComment;
+    vm.saveDisInterest = saveDisInterest;
 
     var now = new Date();
 
     var containsUser = function(array, object) {
       for (var i = 0; i < array.length; i++) {
-        if (array[i].displayName === object.displayName) {
+        if (array[i] !== null && array[i].displayName === object.displayName) {
           return true;
         }
       }
       return false;
+    };
+
+    var indexOfUser = function(array, object) {
+      for (var i = 0; i < array.length; i++) {
+        if (array[i] !== null && array[i].displayName === object.displayName) {
+          return i;
+        }
+      }
+      return -1;
     };
 
     // other helper function specifically for students
@@ -121,6 +131,44 @@
       }
     }
 
+    function saveDisInterest(officehour) {
+      if ($scope.user && $scope.user.typeOfUser === 'professor') {
+        officehour.professor = null;
+        officehour.professorName = '';
+      }
+
+      else if ($scope.user && $scope.user.typeOfUser === 'ta') {
+        if (containsUser(officehour.tas, $scope.user)) {
+          var taIndex = indexOfUser(officehour.tas, $scope.user);
+          if (taIndex > -1) {
+            officehour.tas.splice(taIndex, 1);
+          }
+        }
+      }
+
+      else {
+        var studentIndex = indexOfUser(officehour.students, $scope.user);
+        if (studentIndex > -1) {
+          officehour.students.splice(studentIndex, 1);
+        }
+      }
+
+      if (officehour._id) {
+        officehour.$update(successCallback, errorCallback);
+      } else {
+        officehour.$save(successCallback, errorCallback);
+      }
+
+      function successCallback(res) {
+        //$state.go('officehours.list', {
+        //  officehourId: res._id
+        //});
+      }
+
+      function errorCallback(res) {
+        vm.error = res.data.message;
+      }
+    }
 
 
     // Save Officehour

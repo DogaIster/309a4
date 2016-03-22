@@ -51,8 +51,8 @@
         <span data-ng-bind="student.displayName"></span>
       </a>
 
-      <a data-ng-if="!student._id" ng-href="/users/{{officehour.user._id}}">
-        <span data-ng-if="!student.displayName" data-ng-bind="officehour.user.displayName + ' (creator)'"></span>
+      <a data-ng-if="!student._id && student != null" ng-href="/users/{{officehour.user._id}}">
+        <span data-ng-if="!student.displayName && student != null" data-ng-bind="officehour.user.displayName + ' (creator)'"></span>
     </a>
       </div>
       </span>
@@ -66,10 +66,17 @@
       <div name="professor" ng-bind="user._id" ng-model="officehour.professor" id="professor" hidden></div>
      <button id="profButon" ng-click="vm.saveInterest(officehour)" class="btn btn-default"> Participate in this office hour </button>
    </div>
+   <div data-ng-if="user.typeOfUser == 'professor' && officehour.professorName == user.displayName">
+     <div name="professor" ng-bind="user._id" ng-model="officehour.professor" id="professor" hidden></div>
+     <button id="removeProfButton" ng-click="vm.saveDisInterest(officehour)" class="btn btn-default"> Stop participating in this office hour </button>
+  </div>
 
      <button id="taButton" ng-click="vm.saveInterest(officehour)" data-ng-if="user.typeOfUser == 'ta'" class="btn btn-default"> Participate in this office hour </button>
+     <button id="removeTAButton" ng-click="vm.saveDisInterest(officehour)" data-ng-if="user.typeOfUser == 'ta'" class="btn btn-default"> Stop Participating in this office hour </button>
 
      <button id="studentButton" ng-click="vm.saveInterest(officehour)" data-ng-if="user.typeOfUser == 'student' && officehour.user._id != user._id" class="btn btn-default"> I'm interested in this office hour </button>
+     <button id="removeStudentButton" ng-click="vm.saveDisInterest(officehour)" data-ng-if="user.typeOfUser == 'student'" class="btn btn-default"> I'm not interested in this office hour </button>
+
       <br />
       <div class="alert alert-danger" data-ng-if="!officehour.professor">No professor signed up yet.</div>
       <div class="alert alert-success" data-ng-if="officehour.professor">

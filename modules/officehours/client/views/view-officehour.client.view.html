@@ -37,8 +37,13 @@
     <div name="professor" ng-bind="user._id" ng-model="vm.officehour.professor" id="professor" hidden></div>
    <button id="profButon" ng-click="vm.saveInterest(vm.officehour)" class="btn btn-default"> Participate in this office hour </button>
  </div>
+ <div data-ng-if="user.typeOfUser == 'professor' && officehour.professorName == user.displayName">
+   <div name="professor" ng-bind="user._id" ng-model="officehour.professor" id="professor" hidden></div>
+   <button id="removeProfButton" ng-click="vm.saveDisInterest(vm.officehour)" class="btn btn-default"> Stop participating in this office hour </button>
+</div>
 
  <button id="taButton" ng-click="vm.saveInterest(vm.officehour)" data-ng-if="user.typeOfUser == 'ta'" class="btn btn-default"> Participate in this office hour </button>
+ <button id="removeTAButton" ng-click="vm.saveDisInterest(vm.officehour)" data-ng-if="user.typeOfUser == 'ta'" class="btn btn-default"> Stop Participating in this office hour </button>
 
   <br />
 
