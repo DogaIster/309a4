@@ -89,12 +89,14 @@
         return !containsUser(array[index].students, $scope.user) && !containsCreatedUser(array[index].students, $scope.user);
       });
 
-      var backupList = $scope.filteredItems;
-
+      // only recommend upcoming office hours
       $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
           return new Date(array[index].time) > now;
       });
 
+      var backupList = $scope.filteredItems;
+
+      // randomly determine if the office hours should include professors & student interest
       if (Math.random() * 10 < 3) {
         $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
           return array[index].professor;
