@@ -24,13 +24,25 @@ describe('Officehour Model Unit Tests:', function() {
       displayName: 'Full Name',
       email: 'test@test.com',
       username: 'username',
-      password: 'password'
+      password: 'password',
+      classes: ['CSC108'],
+      typeOfUser: 'professor',
+      description: 'Test user!'
     });
 
     user.save(function() { 
       officehour = new Officehour({
-        name: 'Officehour Name',
-        user: user
+        user: user,
+        time: new Date(),
+        comments: [],
+        students: [user],
+        class: 'CSC108',
+        tas: [],
+        created: new Date(),
+        professor: null,
+        professorName: '',
+        location: 'BA3200',
+        length: 1
       });
 
       done();
@@ -46,14 +58,24 @@ describe('Officehour Model Unit Tests:', function() {
       });
     });
 
-    it('should be able to show an error when try to save without name', function(done) { 
-      officehour.name = '';
+    it('should be able to show an error when try to save without time', function(done) { 
+      officehour.time = null;
 
       return officehour.save(function(err) {
         should.exist(err);
         done();
       });
     });
+
+    it('should be able to show an error when try to save without location', function(done) { 
+      officehour.location = '';
+
+      return officehour.save(function(err) {
+        should.exist(err);
+        done();
+      });
+    });
+
   });
 
   afterEach(function(done) { 
