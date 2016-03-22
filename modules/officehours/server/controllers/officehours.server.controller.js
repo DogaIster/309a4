@@ -75,12 +75,17 @@ exports.read = function(req, res) {
   // convert mongoose document to JSON
   var officehour = req.officehour ? req.officehour.toJSON() : {};
 
-  // Add a custom field to the Article, for determining if the current User is the "owner".
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
   // TAs and Professors are allowed to completely edit office hours, students are only allowed to add themselves to
   // the interested student list of another office hour.
-  officehour.isCurrentUserOwner = (req.user.typeOfUser === 'ta' || req.user.typeOfUser === 'professor') || (req.user && officehour.user && officehour.user._id.toString() === req.user._id.toString()) ? true : false;
+  if (req.user === undefined) {
+    officehour.isCurrentUserOwner = false;
+  }
 
+  else {
+    officehour.isCurrentUserOwner = (req.user !== undefined && req.user.typeOfUser === 'ta' || req.user.typeOfUser === 'professor') || (req.user && officehour.user && officehour.user._id.toString() === req.user._id.toString()) ? true : false;
+  }
+  
   res.jsonp(officehour);
 };
 

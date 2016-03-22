@@ -39,15 +39,27 @@ describe('Officehour CRUD tests', function () {
       lastName: 'Name',
       displayName: 'Full Name',
       email: 'test@test.com',
-      username: credentials.username,
-      password: credentials.password,
-      provider: 'local'
+      username: 'username',
+      password: 'password',
+      classes: ['CSC108'],
+      typeOfUser: 'professor',
+      description: 'Test user!'
     });
 
     // Save a user to the test db and create new Officehour
     user.save(function () {
       officehour = {
-        name: 'Officehour name'
+        user: user,
+        time: new Date(),
+        comments: [],
+        students: [user],
+        class: 'CSC108',
+        tas: [],
+        created: new Date(),
+        professor: null,
+        professorName: '',
+        location: 'BA3200',
+        length: 1
       };
 
       done();
@@ -109,9 +121,39 @@ describe('Officehour CRUD tests', function () {
       });
   });
 
-  it('should not be able to save an Officehour if no name is provided', function (done) {
-    // Invalidate name field
-    officehour.name = '';
+  it('should not be able to save an Officehour if no location is provided', function (done) {
+    // Invalidate location field
+    officehour.location = '';
+
+    agent.post('/api/auth/signin')
+      .send(credentials)
+      .expect(200)
+      .end(function (signinErr, signinRes) {
+        // Handle signin error
+        if (signinErr) {
+          return done(signinErr);
+        }
+
+        // Get the userId
+        var userId = user.id;
+
+        // Save a new Officehour
+        agent.post('/api/officehours')
+          .send(officehour)
+          .expect(400)
+          .end(function (officehourSaveErr, officehourSaveRes) {
+            // Set message assertion
+            (officehourSaveRes.body.message).should.match('Please enter a valid location for this office hour, like BA3200, for example.');
+
+            // Handle Officehour save error
+            done(officehourSaveErr);
+          });
+      });
+  });
+
+  it('should not be able to save an Officehour if no time is provided', function (done) {
+    // Invalidate location field
+    officehour.time = null;
 
     agent.post('/api/auth/signin')
       .send(credentials)
