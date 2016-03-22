@@ -46,10 +46,25 @@
       return false;
     };
 
+    // This function is taken from http://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array-in-javascript
+    /**
+    * Shuffles array in place.
+    * @param {Array} a items The array containing the items.
+    */
+    var shuffle = function(a) {
+      var j, x, i;
+      for (i = a.length; i; i -= 1) {
+          j = Math.floor(Math.random() * i);
+          x = a[i - 1];
+          a[i - 1] = a[j];
+          a[j] = x;
+        }
+    };
+
     // for search
     $scope.buildPager = function () {
       $scope.pagedItems = [];
-      $scope.itemsPerPage = Math.round(Math.random() * 15);
+      $scope.itemsPerPage = Math.round(Math.random() * 10);
       $scope.currentPage = 1;
       $scope.figureOutItemsToDisplay();
     };
@@ -69,32 +84,24 @@
         sortDirection = false;
       }
 
+      // make sure the user hasn't already expressed interest in this office hour
+      $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
+        return !containsUser(array[index].students, $scope.user) && !containsCreatedUser(array[index].students, $scope.user);
+      });
+
       var backupList = $scope.filteredItems;
-      alert(JSON.stringify(backupList));
 
       $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
           return new Date(array[index].time) > now;
       });
 
-      if (Math.random() * 10 < 5) {
+      if (Math.random() * 10 < 3) {
         $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
           return array[index].professor;
         });
       }
 
-      if (Math.random() * 10 < 5) {
-        $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
-          return array[index].tas.length > 0;
-        });
-      }
-
-      if (Math.random() * 10 < 5 && containsUser(array[index].students, $scope.user) || containsCreatedUser(array[index].students, $scope.user)) {
-        $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
-          return containsUser(array[index].students, $scope.user) || containsCreatedUser(array[index].students, $scope.user);
-        });
-      }
-
-      if (Math.random() * 10 < 5) {
+      if (Math.random() * 10 < 3) {
         $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
           return array[index].students.length > 0;
         });
@@ -118,10 +125,11 @@
 
       $scope.filterLength = $scope.filteredItems.length;
 
-      if ($scope.filterLength < 0) {
+      if ($scope.filterLength === 0) {
         $scope.filteredItems = backupList;
       }
 
+      shuffle($scope.filteredItems);
       var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
       var end = begin + $scope.itemsPerPage;
       $scope.pagedItems = $scope.filteredItems.slice(begin, end);
