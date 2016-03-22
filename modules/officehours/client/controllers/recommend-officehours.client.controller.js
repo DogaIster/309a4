@@ -70,6 +70,7 @@
       }
 
       var backupList = $scope.filteredItems;
+      alert(JSON.stringify(backupList));
 
       $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
           return new Date(array[index].time) > now;
@@ -87,7 +88,7 @@
         });
       }
 
-      if (Math.random() * 10 < 5) {
+      if (Math.random() * 10 < 5 && containsUser(array[index].students, $scope.user) || containsCreatedUser(array[index].students, $scope.user)) {
         $scope.filteredItems = $filter('filter')($scope.filteredItems, function(value, index, array) {
           return containsUser(array[index].students, $scope.user) || containsCreatedUser(array[index].students, $scope.user);
         });

@@ -25,7 +25,7 @@
     // Add the dropdown Recomend item
     Menus.addSubMenuItem('topbar', 'officehours', {
       title: 'Recomended Office Hours',
-      state: 'officehours.reccomend'
+      state: 'officehours.recommend'
     });
 
     // Add the dropdown create item

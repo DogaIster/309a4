@@ -23,7 +23,7 @@
           pageTitle: 'List Office Hours'
         }
       })
-      .state('officehours.reccomend', {
+      .state('officehours.recommend', {
         url: '',
         templateUrl: 'modules/officehours/client/views/recommend-officehours.client.view.html',
         controller: 'OfficehoursRecommendController',
