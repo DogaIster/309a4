@@ -1,4 +1,4 @@
-<div ng-controller="AuthenticationController">
+<div ng-controller="AuthenticationController" ng-init="credentials.classes = []">
   <h3 class="col-md-12 text-center">Or sign up using your email</h3>
   <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
     <form name="userForm" ng-submit="signup(userForm.$valid)" class="signin" novalidate autocomplete="off">
@@ -38,12 +38,12 @@
         <div class="form-group show-errors">
           <label for="classes">Classes</label>
 
-          <input type="classes0" id="classes0"  ng-pattern="/[a-zA-Z]{3}\d{3}/i" ng-required="true" name="classes0" class="form-control" ng-model="credentials.classes[0]" placeholder="Classes">
-          <input type="classes1" id="classes1" ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="classes1" class="form-control" ng-model="credentials.classes[1]" placeholder="Classes">
-          <input type="classes2" id="classes2" ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="classes2" class="form-control" ng-model="credentials.classes[2]" placeholder="Classes">
-          <input type="classes3" id="classes3" ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="classes3" class="form-control" ng-model="credentials.classes[3]" placeholder="Classes">
-          <input type="classes4" id="classes4" ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="classes4" class="form-control" ng-model="credentials.classes[4]" placeholder="Classes">
-          <input type="classes5" id="classes5" ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="classes5" class="form-control" ng-model="credentials.classes[5]" placeholder="Classes">
+          <input  id="classes0"  ng-pattern="/[a-zA-Z]{3}\d{3}/i" ng-required="true" name="classes0" class="form-control" ng-model="credentials.classes[0]" placeholder="Classes">
+          <input  id="classes1" ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="classes1" class="form-control" ng-model="credentials.classes[1]" placeholder="Classes">
+          <input  id="classes2" ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="classes2" class="form-control" ng-model="credentials.classes[2]" placeholder="Classes">
+          <input  id="classes3" ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="classes3" class="form-control" ng-model="credentials.classes[3]" placeholder="Classes">
+          <input  id="classes4" ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="classes4" class="form-control" ng-model="credentials.classes[4]" placeholder="Classes">
+          <input id="classes5" ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="classes5" class="form-control" ng-model="credentials.classes[5]" placeholder="Classes">
           <div ng-if="!userForm.classes5.test('/[a-zA-Z]{3}\d{3}/i')" || "userForm.classes0.$error.required">
             <p class="help-block error-text">Classes are invalid. Enter a class like CSC309.</p>
           </div>
