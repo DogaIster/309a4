@@ -22,6 +22,12 @@
       state: 'officehours.list'
     });
 
+    // Add the dropdown Recomend item
+    Menus.addSubMenuItem('topbar', 'officehours', {
+      title: 'Recomended Office Hours',
+      state: 'officehours.reccomend'
+    });
+
     // Add the dropdown create item
     if (window.user.typeOfUser === 'student') {
       Menus.addSubMenuItem('topbar', 'officehours', {

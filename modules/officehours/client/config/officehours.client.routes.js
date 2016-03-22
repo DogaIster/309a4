@@ -20,7 +20,16 @@
         controller: 'OfficehoursListController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Officehours List'
+          pageTitle: 'List Office Hours'
+        }
+      })
+      .state('officehours.reccomend', {
+        url: '',
+        templateUrl: 'modules/officehours/client/views/recommend-officehours.client.view.html',
+        controller: 'OfficehoursRecommendController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Recomend Office Hours'
         }
       })
       .state('officehours.create', {
