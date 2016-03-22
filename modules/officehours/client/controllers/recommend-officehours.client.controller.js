@@ -24,26 +24,26 @@
 
     vm.saveInterest = saveInterest;
     vm.saveComment = saveComment;
+    vm.saveDisInterest = saveDisInterest;
 
     var now = new Date();
 
     var containsUser = function(array, object) {
       for (var i = 0; i < array.length; i++) {
-        if (array[i].displayName === object.displayName) {
+        if (array[i] !== null && array[i].displayName === object.displayName) {
           return true;
         }
       }
       return false;
     };
 
-    // other helper function specifically for students
-    var containsCreatedUser = function(array, object) {
+    var indexOfUser = function(array, object) {
       for (var i = 0; i < array.length; i++) {
-        if (array[i] === object._id) {
-          return true;
+        if (array[i] !== null && array[i].displayName === object.displayName) {
+          return i;
         }
       }
-      return false;
+      return -1;
     };
 
     // This function is taken from http://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array-in-javascript
@@ -59,6 +59,16 @@
         a[i - 1] = a[j];
         a[j] = x;
       }
+    };
+
+    // other helper function specifically for students
+    var containsCreatedUser = function(array, object) {
+      for (var i = 0; i < array.length; i++) {
+        if (array[i] === object._id) {
+          return true;
+        }
+      }
+      return false;
     };
 
     // for search
@@ -184,6 +194,45 @@
       else {
         if (!containsUser(officehour.students, $scope.user)) {
           officehour.students.push($scope.user);
+        }
+      }
+
+      if (officehour._id) {
+        officehour.$update(successCallback, errorCallback);
+      } else {
+        officehour.$save(successCallback, errorCallback);
+      }
+
+      function successCallback(res) {
+        //$state.go('officehours.list', {
+        //  officehourId: res._id
+        //});
+      }
+
+      function errorCallback(res) {
+        vm.error = res.data.message;
+      }
+    }
+
+    function saveDisInterest(officehour) {
+      if ($scope.user && $scope.user.typeOfUser === 'professor') {
+        officehour.professor = null;
+        officehour.professorName = '';
+      }
+
+      else if ($scope.user && $scope.user.typeOfUser === 'ta') {
+        if (containsUser(officehour.tas, $scope.user)) {
+          var taIndex = indexOfUser(officehour.tas, $scope.user);
+          if (taIndex > -1) {
+            officehour.tas.splice(taIndex, 1);
+          }
+        }
+      }
+
+      else {
+        var studentIndex = indexOfUser(officehour.students, $scope.user);
+        if (studentIndex > -1) {
+          officehour.students.splice(studentIndex, 1);
         }
       }
 
