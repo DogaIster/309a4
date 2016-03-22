@@ -8,8 +8,7 @@
       <fieldset>
         <div class="form-group" show-errors>
           <label class="control-label" for="name" >Class</label>
-        <!--  <input ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="class" type="text" ng-model="vm.officehour.class" id="class" class="form-control" placeholder="Class Name" required> -->
-        <select class="form-control" name="orderByType" ng-model="vm.officehour.class" id="class" name="class">
+        <select class="form-control" ng-model="vm.officehour.class" id="class" name="class">
           <div >
         <option value="" selected>Choose a class...</option>
         <option data-ng-if="class" data-ng-repeat="class in user.classes" ng-value="class" data-ng-bind="class | uppercase"></option>
@@ -26,6 +25,14 @@
           <div ng-messages="vm.form.officehourForm.time.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Office hour time is required.</p>
           </div>
+
+          <label class="control-label" for="length">Length</label>
+          <select class="form-control" ng-model="vm.officehour.length" id="length" name="length">
+            <div>
+          <option value="" selected>Choose a length (in hours)...</option>
+          <option data-ng-repeat="x in [1, 2, 3]" ng-value="x" data-ng-bind="x"></option>
+        </div>
+      </select>
         <label class="control-label" for="location">Location</label>
         <input ng-pattern="/[a-zA-Z]{2}\d+[a-zA-Z]*/i" name="location" type="text" ng-model="vm.officehour.location" id="location" class="form-control" placeholder="Location" required>
         <div ng-messages="vm.form.officehourForm.location.$error" role="alert">

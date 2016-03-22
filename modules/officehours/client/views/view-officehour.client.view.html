@@ -25,6 +25,8 @@
   <h4 class="list-group-item-heading" data-ng-bind="vm.officehour.class | uppercase"></h4>
   Time: <div class="list-group-item" data-ng-bind="vm.officehour.time | date:'medium'"></div>
   Location: <div class="list-group-item" data-ng-bind="vm.officehour.location"></div>
+  Length: <div data-ng-if="vm.officehour.length > 1" class="list-group-item" data-ng-bind="vm.officehour.length + ' hours'"></div>
+  <div data-ng-if="vm.officehour.length == 1" class="list-group-item" data-ng-bind="vm.officehour.length + ' hour'"></div>
 
   Students interested: <div class="list-group-item">
     <span data-ng-bind="vm.officehour.students.length"></span>
