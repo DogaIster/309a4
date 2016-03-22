@@ -28,6 +28,14 @@
 
     var now = new Date();
 
+    var addRandom = function(destArray, sourceArray) {
+      for (var i = 0; i < sourceArray.length; i++) {
+        if (Math.random() * 10 < 2) {
+          destArray.push(sourceArray[i]);
+        }
+      }
+    };
+
     var containsUser = function(array, object) {
       for (var i = 0; i < array.length; i++) {
         if (array[i] !== null && array[i].displayName === object.displayName) {
@@ -167,6 +175,7 @@
 
       $scope.filterLength = $scope.filteredItems.length;
 
+      addRandom($scope.filteredItems, prefilteredItems);
       shuffle($scope.filteredItems);
       var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
       var end = begin + $scope.itemsPerPage;
