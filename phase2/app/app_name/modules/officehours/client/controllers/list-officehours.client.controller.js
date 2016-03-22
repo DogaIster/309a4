@@ -56,7 +56,7 @@
 
     $scope.figureOutItemsToDisplay = function () {
       $scope.filteredItems = $filter('filter')($scope.officehours, {
-        $: $scope.search
+        class: $scope.search
       });
 
       var sortDirection = true;
