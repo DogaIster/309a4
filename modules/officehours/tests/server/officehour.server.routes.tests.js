@@ -369,7 +369,7 @@ describe('Officehour CRUD tests', function () {
     });
   });
 
-  it('should be able to get a single Officehour that has an orphaned user reference', function (done) {
+  it('should be able to get a single Officehour that has an orphaned professor user reference', function (done) {
     // Create orphan user creds
     var _creds = {
       username: 'orphan',
@@ -472,6 +472,242 @@ describe('Officehour CRUD tests', function () {
                         officehourInfoRes.body.should.be.instanceof(Object).and.have.property('professorName', _orphanObject.displayName);
                         officehourInfoRes.body.should.be.instanceof(Object).and.have.property('students', officehour.students);
                         officehourInfoRes.body.should.be.instanceof(Object).and.have.property('tas', officehour.tas);
+
+                        should.equal(officehourInfoRes.body.user, undefined);
+
+                        // Call the assertion callback
+                        done();
+                      });
+                  });
+              });
+            });
+        });
+    });
+  });
+
+  it('should be able to get a single Officehour that has an orphaned student user reference', function (done) {
+      // Create orphan user creds
+    var _creds = {
+      username: 'orphan',
+      password: 'M3@n.jsI$Aw3$0m3'
+    };
+
+    var _orphanObject = {
+      firstName: 'Full',
+      lastName: 'Name',
+      displayName: 'Full Name',
+      email: 'orphan@test.com',
+      username: _creds.username,
+      password: _creds.password,
+      provider: 'local',
+      classes: ['CSC108'],
+      typeOfUser: 'student',
+      description: 'Orphan user',
+      profileImageURL: 'modules/users/client/img/profile/default.png'
+    };
+    // Create orphan user
+    var _orphan = new User(_orphanObject);
+
+
+    _orphan.save(function (err, orphan) {
+      // Handle save error
+      if (err) {
+        return done(err);
+      }
+
+      agent.post('/api/auth/signin')
+        .send(_creds)
+        .expect(200)
+        .end(function (signinErr, signinRes) {
+          // the only reason the 400 error above happens is because we refresh the page.
+          // there should be no errors (i.e. it should be null)
+          should.equal(err, null);
+          // Handle signin error
+          if (signinErr) {
+            return done(signinErr);
+          }
+
+          // Get the userId
+          var orphanId = orphan._id;
+
+          // Save a new Officehour
+          agent.post('/api/officehours')
+            .send(officehour)
+            .expect(200)
+            .end(function (officehourSaveErr, officehourSaveRes) {
+              // Handle Officehour save error
+              if (officehourSaveErr) {
+                return done(officehourSaveErr);
+              }
+
+              // Set assertions on new Officehour
+              // the orphan is acutally a professor, so we're also testing the professor functionality here
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('class', officehour.class);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('comments', officehour.comments);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('length', officehour.length);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('location', officehour.location);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('professorName', '');
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('students');
+              officehourSaveRes.body.students.should.be.instanceof(Object).and.have.lengthOf(2);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('tas', officehour.tas);
+              should.exist(officehourSaveRes.body.user);
+              should.equal(officehourSaveRes.body.user._id, orphanId);
+              // since the user is a professor
+              should.equal(officehourSaveRes.body.professor, null);
+
+
+              // force the Officehour to have an orphaned user reference
+              orphan.remove(function () {
+                // now signin with valid user
+                agent.post('/api/auth/signin')
+                  .send(credentials)
+                  .expect(400)
+                  .end(function (err, res) {
+                    // the only reason the 400 error above happens is because we refresh the page.
+                    // there should be no errors (i.e. it should be null)
+                    should.equal(err, null);
+                    // Handle signin error
+                    if (err) {
+                      return done(err);
+                    }
+
+                    // Get the Officehour
+                    agent.get('/api/officehours/' + officehourSaveRes.body._id)
+                      .expect(200)
+                      .end(function (officehourInfoErr, officehourInfoRes) {
+                        // Handle Officehour error
+                        if (officehourInfoErr) {
+                          return done(officehourInfoErr);
+                        }
+
+                        // Set assertions
+                        (officehourInfoRes.body._id).should.equal(officehourSaveRes.body._id);
+                        officehourInfoRes.body.should.be.instanceof(Object).and.have.property('class', officehour.class);
+                        officehourInfoRes.body.should.be.instanceof(Object).and.have.property('comments', officehour.comments);
+                        officehourInfoRes.body.should.be.instanceof(Object).and.have.property('length', officehour.length);
+                        officehourInfoRes.body.should.be.instanceof(Object).and.have.property('location', officehour.location);
+                        officehourInfoRes.body.should.be.instanceof(Object).and.have.property('professorName', '');
+                        officehourInfoRes.body.should.be.instanceof(Object).and.have.property('students');
+                        officehourSaveRes.body.students.should.be.instanceof(Object).and.have.lengthOf(2);
+                        officehourInfoRes.body.should.be.instanceof(Object).and.have.property('tas', officehour.tas);
+
+                        should.equal(officehourInfoRes.body.user, undefined);
+
+                        // Call the assertion callback
+                        done();
+                      });
+                  });
+              });
+            });
+        });
+    });
+  });
+
+  it('should be able to get a single Officehour that has an orphaned TA user reference', function (done) {
+      // Create orphan user creds
+    var _creds = {
+      username: 'orphan',
+      password: 'M3@n.jsI$Aw3$0m3'
+    };
+
+    var _orphanObject = {
+      firstName: 'Full',
+      lastName: 'Name',
+      displayName: 'Full Name',
+      email: 'orphan@test.com',
+      username: _creds.username,
+      password: _creds.password,
+      provider: 'local',
+      classes: ['CSC108'],
+      typeOfUser: 'TA',
+      description: 'Orphan user',
+      profileImageURL: 'modules/users/client/img/profile/default.png'
+    };
+    // Create orphan user
+    var _orphan = new User(_orphanObject);
+
+
+    _orphan.save(function (err, orphan) {
+      // Handle save error
+      if (err) {
+        return done(err);
+      }
+
+      agent.post('/api/auth/signin')
+        .send(_creds)
+        .expect(200)
+        .end(function (signinErr, signinRes) {
+          // the only reason the 400 error above happens is because we refresh the page.
+          // there should be no errors (i.e. it should be null)
+          should.equal(err, null);
+          // Handle signin error
+          if (signinErr) {
+            return done(signinErr);
+          }
+
+          // Get the userId
+          var orphanId = orphan._id;
+
+          // Save a new Officehour
+          agent.post('/api/officehours')
+            .send(officehour)
+            .expect(200)
+            .end(function (officehourSaveErr, officehourSaveRes) {
+              // Handle Officehour save error
+              if (officehourSaveErr) {
+                return done(officehourSaveErr);
+              }
+
+              // Set assertions on new Officehour
+              // the orphan is acutally a professor, so we're also testing the professor functionality here
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('class', officehour.class);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('comments', officehour.comments);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('length', officehour.length);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('location', officehour.location);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('professorName', '');
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('tas');
+              officehourSaveRes.body.students.should.be.instanceof(Object).and.have.lengthOf(1);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('students', officehour.students);
+              should.exist(officehourSaveRes.body.user);
+              should.equal(officehourSaveRes.body.user._id, orphanId);
+              // since the user is a professor
+              should.equal(officehourSaveRes.body.professor, null);
+
+
+              // force the Officehour to have an orphaned user reference
+              orphan.remove(function () {
+                // now signin with valid user
+                agent.post('/api/auth/signin')
+                  .send(credentials)
+                  .expect(400)
+                  .end(function (err, res) {
+                    // the only reason the 400 error above happens is because we refresh the page.
+                    // there should be no errors (i.e. it should be null)
+                    should.equal(err, null);
+                    // Handle signin error
+                    if (err) {
+                      return done(err);
+                    }
+
+                    // Get the Officehour
+                    agent.get('/api/officehours/' + officehourSaveRes.body._id)
+                      .expect(200)
+                      .end(function (officehourInfoErr, officehourInfoRes) {
+                        // Handle Officehour error
+                        if (officehourInfoErr) {
+                          return done(officehourInfoErr);
+                        }
+
+                        // Set assertions
+                        (officehourInfoRes.body._id).should.equal(officehourSaveRes.body._id);
+                        officehourInfoRes.body.should.be.instanceof(Object).and.have.property('class', officehour.class);
+                        officehourInfoRes.body.should.be.instanceof(Object).and.have.property('comments', officehour.comments);
+                        officehourInfoRes.body.should.be.instanceof(Object).and.have.property('length', officehour.length);
+                        officehourInfoRes.body.should.be.instanceof(Object).and.have.property('location', officehour.location);
+                        officehourInfoRes.body.should.be.instanceof(Object).and.have.property('professorName', '');
+                        officehourInfoRes.body.should.be.instanceof(Object).and.have.property('tas');
+                        officehourSaveRes.body.students.should.be.instanceof(Object).and.have.lengthOf(1);
+                        officehourInfoRes.body.should.be.instanceof(Object).and.have.property('students', officehour.students);
 
                         should.equal(officehourInfoRes.body.user, undefined);
 
