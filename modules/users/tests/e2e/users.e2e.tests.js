@@ -154,7 +154,7 @@ describe('Users E2E Tests:', function () {
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Username Error
-      expect(element.all(by.tagName('.error-text')).get(0).getText()).toBe('Username is required.');
+      expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Username is required.');
     });
 
     it('Should report a password with less than 10 characters long - "P@$$w0rd!"', function () {
