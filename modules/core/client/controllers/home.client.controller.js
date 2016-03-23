@@ -5,7 +5,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
     // This provides Authentication context.
     $scope.authentication = Authentication;
 
-    if (window.user !== $scope.authentication.user) {
+    if (window.user !== $scope.authentication.user && window.location !== '/authentication/signin') {
       window.location = '/';
       location.reload();
     }
