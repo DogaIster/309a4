@@ -71,8 +71,10 @@
      <button id="removeProfButton" ng-click="vm.saveDisInterest(officehour)" class="btn btn-default"> Stop participating in this office hour </button>
   </div>
 
+      <div ng-show="officehour.user._id != user._id">
      <button id="taButton" ng-click="vm.saveInterest(officehour)" data-ng-if="user.typeOfUser == 'ta'" class="btn btn-default"> Participate in this office hour </button>
      <button id="removeTAButton" ng-click="vm.saveDisInterest(officehour)" data-ng-if="user.typeOfUser == 'ta'" class="btn btn-default"> Stop Participating in this office hour </button>
+   </div>
 
      <button id="studentButton" ng-click="vm.saveInterest(officehour)" data-ng-if="user.typeOfUser == 'student' && officehour.user._id != user._id" class="btn btn-default"> I'm interested in this office hour </button>
      <button id="removeStudentButton" ng-click="vm.saveDisInterest(officehour)" data-ng-if="user.typeOfUser == 'student' && officehour.user._id != user._id" class="btn btn-default"> I'm not interested in this office hour </button>
