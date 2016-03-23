@@ -76,7 +76,7 @@
           <a ui-sref="authentication.signin" class="show-signup">Sign in</a>
         </div>
         <div ng-show="!success && !userForm.$valid" class="text-center text-danger">
-          <b>Please enter classes in the correct format, e.g. CSC309</b>
+          <b class='our-error'>Please check the pinned areas with red.</b>
         </div>
         <div ng-show="error" class="text-center text-danger">
           <strong ng-bind="error"></strong>

@@ -49,6 +49,43 @@ describe('Users E2E Tests:', function () {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('First name is required.');
     });
 
+    it('Should report missing class', function () {
+      browser.get('http://localhost:3001/authentication/signup');
+      // Enter Last Name
+      element(by.model('credentials.lastName')).sendKeys(user1.lastName);
+      // Enter Email
+      element(by.model('credentials.email')).sendKeys(user1.email);
+      // type of user
+      element(by.model('credentials.typeOfUser')).sendKeys(user1.typeOfUser);
+      // Enter Username
+      element(by.model('credentials.username')).sendKeys(user1.username);
+      // Enter Password
+      element(by.model('credentials.password')).sendKeys(user1.password);
+      // Click Submit button
+      element(by.css('button[type=submit]')).click();
+      // First Name Error
+      expect(element.all(by.css('.our-error')).get(0).getText()).toBe('Please check the pinned areas with red.');
+    });
+
+    it('Should report missing type of user', function () {
+      browser.get('http://localhost:3001/authentication/signup');
+      // Enter Last Name
+      element(by.model('credentials.lastName')).sendKeys(user1.lastName);
+      // Enter Email
+      element(by.model('credentials.email')).sendKeys(user1.email);
+      // class
+      element(by.model('credentials.classes[0]')).sendKeys(user1.classes[0]);
+      // Enter Username
+      element(by.model('credentials.username')).sendKeys(user1.username);
+      // Enter Password
+      element(by.model('credentials.password')).sendKeys(user1.password);
+      // Click Submit button
+      element(by.css('button[type=submit]')).click();
+      // First Name Error
+      expect(element.all(by.css('.our-error')).get(0).getText()).toBe('Please check the pinned areas with red.');
+    });
+
+
     it('Should report missing last name', function () {
       browser.get('http://localhost:3001/authentication/signup');
       // Enter First Name
