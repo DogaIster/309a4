@@ -57,6 +57,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.email')).sendKeys(user1.email);
       // type of user
       element(by.model('credentials.typeOfUser')).sendKeys(user1.typeOfUser);
+      // class
+      element(by.model('credentials.classes[0]')).sendKeys(user1.classes[0]);
       // Enter Username
       element(by.model('credentials.username')).sendKeys(user1.username);
       // Enter Password
@@ -75,6 +77,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.lastName')).sendKeys(user1.lastName);
       // Enter Username
       element(by.model('credentials.username')).sendKeys(user1.username);
+      // class
+      element(by.model('credentials.classes[0]')).sendKeys(user1.classes[0]);
       // type of user
       element(by.model('credentials.typeOfUser')).sendKeys(user1.typeOfUser);
       // Enter Password
@@ -93,6 +97,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.lastName')).sendKeys(user1.lastName);
       // type of user
       element(by.model('credentials.typeOfUser')).sendKeys(user1.typeOfUser);
+      // class
+      element(by.model('credentials.classes[0]')).sendKeys(user1.classes[0]);
       // Enter Email
       element(by.model('credentials.email')).sendKeys('123');
       // Enter Username
@@ -119,6 +125,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.email')).sendKeys('123@123@123');
       // type of user
       element(by.model('credentials.typeOfUser')).sendKeys(user1.typeOfUser);
+      // class
+      element(by.model('credentials.classes[0]')).sendKeys(user1.classes[0]);
       // Enter Username
       element(by.model('credentials.username')).sendKeys(user1.username);
       // Enter Password
@@ -137,6 +145,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.lastName')).sendKeys(user1.lastName);
       // Enter Email
       element(by.model('credentials.email')).sendKeys(user1.email);
+      // class
+      element(by.model('credentials.classes[0]')).sendKeys(user1.classes[0]);
       // type of user
       element(by.model('credentials.typeOfUser')).sendKeys(user1.typeOfUser);
       // Enter Password
@@ -144,7 +154,7 @@ describe('Users E2E Tests:', function () {
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Username Error
-      expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Username is required.');
+      expect(element.all(by.tagName('.error-text')).get(0).getText()).toBe('Username is required.');
     });
 
     it('Should report a password with less than 10 characters long - "P@$$w0rd!"', function () {
@@ -157,6 +167,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.email')).sendKeys(user1.email);
       // type of user
       element(by.model('credentials.typeOfUser')).sendKeys(user1.typeOfUser);
+      // class
+      element(by.model('credentials.classes[0]')).sendKeys(user1.classes[0]);
       // Enter Username
       element(by.model('credentials.username')).sendKeys(user1.username);
       // Enter Invalid Password
@@ -177,6 +189,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.email')).sendKeys(user1.email);
       // Enter Username
       element(by.model('credentials.username')).sendKeys(user1.username);
+      // class
+      element(by.model('credentials.classes[0]')).sendKeys(user1.classes[0]);
       // type of user
       element(by.model('credentials.typeOfUser')).sendKeys(user1.typeOfUser);
       // Enter Invalid Password
@@ -195,6 +209,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.lastName')).sendKeys(user1.lastName);
       // Enter Email
       element(by.model('credentials.email')).sendKeys(user1.email);
+      // class
+      element(by.model('credentials.classes[0]')).sendKeys(user1.classes[0]);
       // Enter Username
       element(by.model('credentials.username')).sendKeys(user1.username);
       // type of user
@@ -215,6 +231,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.lastName')).sendKeys(user1.lastName);
       // Enter Email
       element(by.model('credentials.email')).sendKeys(user1.email);
+      // class
+      element(by.model('credentials.classes[0]')).sendKeys(user1.classes[0]);
       // Enter Username
       element(by.model('credentials.username')).sendKeys(user1.username);
       // type of user
@@ -235,6 +253,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.lastName')).sendKeys(user1.lastName);
       // Enter Email
       element(by.model('credentials.email')).sendKeys(user1.email);
+      // class
+      element(by.model('credentials.classes[0]')).sendKeys(user1.classes[0]);
       // Enter Username
       element(by.model('credentials.username')).sendKeys(user1.username);
       // type of user
@@ -255,6 +275,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.lastName')).sendKeys(user1.lastName);
       // Enter Email
       element(by.model('credentials.email')).sendKeys(user1.email);
+      // class
+      element(by.model('credentials.classes[0]')).sendKeys(user1.classes[0]);
       // Enter Username
       element(by.model('credentials.username')).sendKeys(user1.username);
       // type of user
@@ -275,6 +297,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.lastName')).sendKeys(user1.lastName);
       // Enter Email
       element(by.model('credentials.email')).sendKeys(user1.email);
+      // class
+      element(by.model('credentials.classes[0]')).sendKeys(user1.classes[0]);
       // Enter UserName
       element(by.model('credentials.username')).sendKeys(user1.username);
       // type of user
@@ -297,6 +321,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.lastName')).sendKeys(user2.lastName);
       // type of user
       element(by.model('credentials.typeOfUser')).sendKeys(user1.typeOfUser);
+      // class
+      element(by.model('credentials.classes[0]')).sendKeys(user1.classes[0]);
       // Enter Email
       element(by.model('credentials.email')).sendKeys(user1.email);
       // Enter Username
@@ -318,6 +344,8 @@ describe('Users E2E Tests:', function () {
       element(by.model('credentials.lastName')).sendKeys(user2.lastName);
       // Enter Email
       element(by.model('credentials.email')).sendKeys(user2.email);
+      // class
+      element(by.model('credentials.classes[0]')).sendKeys(user1.classes[0]);
       // type of user
       element(by.model('credentials.typeOfUser')).sendKeys(user1.typeOfUser);
       // Enter Username
