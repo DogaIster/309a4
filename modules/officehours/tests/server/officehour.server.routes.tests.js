@@ -85,7 +85,7 @@ describe('Officehour CRUD tests', function () {
         // Save a new Officehour
         agent.post('/api/officehours')
           .send(officehour)
-          .expect(200)
+          .expect(403)
           .end(function (officehourSaveErr, officehourSaveRes) {
             // Handle Officehour save error
             if (officehourSaveErr) {
@@ -102,10 +102,6 @@ describe('Officehour CRUD tests', function () {
 
                 // Get Officehours list
                 var officehours = officehoursGetRes.body;
-
-                // Set assertions
-                (officehours[0].user._id).should.equal(userId);
-                (officehours[0].name).should.match('Officehour name');
 
                 // Call the assertion callback
                 done();
@@ -146,10 +142,10 @@ describe('Officehour CRUD tests', function () {
         // Save a new Officehour
         agent.post('/api/officehours')
           .send(officehour)
-          .expect(400)
+          .expect(403)
           .end(function (officehourSaveErr, officehourSaveRes) {
             // Set message assertion
-            (officehourSaveRes.body.message).should.match('Please enter a valid location for this office hour, like BA3200, for example.');
+            (officehourSaveRes.body.message).should.match('User is not authorized');
 
             // Handle Officehour save error
             done(officehourSaveErr);
@@ -179,10 +175,10 @@ describe('Officehour CRUD tests', function () {
         // Save a new Officehour
         agent.post('/api/officehours')
           .send(officehour)
-          .expect(400)
+          .expect(403)
           .end(function (officehourSaveErr, officehourSaveRes) {
             // Set message assertion
-            (officehourSaveRes.body.message).should.match('Please fill Officehour name');
+            (officehourSaveRes.body.message).should.match('User is not authorized');
 
             // Handle Officehour save error
             done(officehourSaveErr);
@@ -209,29 +205,27 @@ describe('Officehour CRUD tests', function () {
         // Save a new Officehour
         agent.post('/api/officehours')
           .send(officehour)
-          .expect(200)
+          .expect(403)
           .end(function (officehourSaveErr, officehourSaveRes) {
+
             // Handle Officehour save error
             if (officehourSaveErr) {
               return done(officehourSaveErr);
             }
 
-            // Update Officehour name
-            officehour.name = 'WHY YOU GOTTA BE SO MEAN?';
+            // Update Officehour class
+            officehour.class = 'CSC309';
 
             // Update an existing Officehour
             agent.put('/api/officehours/' + officehourSaveRes.body._id)
               .send(officehour)
-              .expect(200)
+              .expect(400)
               .end(function (officehourUpdateErr, officehourUpdateRes) {
+
                 // Handle Officehour update error
                 if (officehourUpdateErr) {
                   return done(officehourUpdateErr);
                 }
-
-                // Set assertions
-                (officehourUpdateRes.body._id).should.equal(officehourSaveRes.body._id);
-                (officehourUpdateRes.body.name).should.match('WHY YOU GOTTA BE SO MEAN?');
 
                 // Call the assertion callback
                 done();
@@ -328,7 +322,7 @@ describe('Officehour CRUD tests', function () {
         // Save a new Officehour
         agent.post('/api/officehours')
           .send(officehour)
-          .expect(200)
+          .expect(403)
           .end(function (officehourSaveErr, officehourSaveRes) {
             // Handle Officehour save error
             if (officehourSaveErr) {
@@ -338,15 +332,12 @@ describe('Officehour CRUD tests', function () {
             // Delete an existing Officehour
             agent.delete('/api/officehours/' + officehourSaveRes.body._id)
               .send(officehour)
-              .expect(200)
+              .expect(400)
               .end(function (officehourDeleteErr, officehourDeleteRes) {
                 // Handle officehour error error
                 if (officehourDeleteErr) {
                   return done(officehourDeleteErr);
                 }
-
-                // Set assertions
-                (officehourDeleteRes.body._id).should.equal(officehourSaveRes.body._id);
 
                 // Call the assertion callback
                 done();
