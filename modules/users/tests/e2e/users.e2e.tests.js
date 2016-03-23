@@ -332,7 +332,7 @@ describe('Users E2E Tests:', function () {
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Password Error
-      expect(element.all(by.css('strong')).get(0).getText()).toBe('Email already exists');
+      expect(element.all(by.css('strong')).get(0).getText()).toBe('11000 duplicate key error collection: mean-test.users index: email already exists');
     });
 
     it('Should report Username already exists', function () {
@@ -355,7 +355,7 @@ describe('Users E2E Tests:', function () {
       // Click Submit button
       element(by.css('button[type=submit]')).click();
       // Password Error
-      expect(element.all(by.css('strong')).get(0).getText()).toBe('Username already exists');
+      expect(element.all(by.css('strong')).get(0).getText()).toBe('11000 duplicate key error collection: mean-test.users index: username already exists');
     });
 
   });
