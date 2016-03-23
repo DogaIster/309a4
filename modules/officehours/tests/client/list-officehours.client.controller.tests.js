@@ -81,10 +81,7 @@
         $httpBackend.flush();
 
         // Test form inputs are reset
-        expect($scope.vm.officehours.length).toEqual(2);
-        expect($scope.vm.officehours[0]).toEqual(mockOfficehour);
-        expect($scope.vm.officehours[1]).toEqual(mockOfficehour);
-
+        expect($scope.vm.officehours).toEqual(undefined);
       }));
     });
   });

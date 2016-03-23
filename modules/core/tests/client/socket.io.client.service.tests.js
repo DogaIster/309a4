@@ -5,6 +5,7 @@
    * Functionality of the service is tested through
    * the chat controller tests.
    */
+   
   window.io = function() {
     this.cbs = {};
     this.on = function(msg, cb) {
@@ -22,3 +23,5 @@
     return this;
   };
 })();
+
+

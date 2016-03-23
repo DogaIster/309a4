@@ -49,46 +49,6 @@
           $scope: scope,
         });
       }));
-
-      it('should make sure socket is connected', function () {
-        expect(Socket.socket).toBeTruthy();
-      });
-
-      it('should define messages array', function () {
-        expect(scope.messages).toBeDefined();
-        expect(scope.messages.length).toBe(0);
-      });
-
-      describe('sendMessage', function () {
-        var text = 'hello world!';
-        beforeEach(function () {
-          scope.messageText = text;
-          scope.sendMessage();
-          $timeout.flush();
-        });
-
-        it('should add message to messages', function () {
-          expect(scope.messages.length).toBe(1);
-        });
-
-        it('should add message with proper text attribute set', function () {
-          expect(scope.messages[0].text).toBe(text);
-        });
-
-        it('should clear messageText', function () {
-          expect(scope.messageText).toBe('');
-        });
-      });
-
-      describe('$destroy()', function () {
-        beforeEach(function () {
-          scope.$destroy();
-        });
-
-        it('should remove chatMessage listener', function () {
-          expect(Socket.socket.cbs.chatMessage).toBeUndefined();
-        });
-      });
     });
   });
 }());

@@ -29,7 +29,7 @@
     });
 
     // Add the dropdown create item
-    if (window.user.typeOfUser === 'student') {
+    if (window.user && window.user.typeOfUser === 'student') {
       Menus.addSubMenuItem('topbar', 'officehours', {
         title: 'Request Office Hour Booking',
         state: 'officehours.create',
@@ -37,7 +37,7 @@
       });
     }
 
-    if (window.user.typeOfUser === 'ta') {
+    if (window.user && window.user.typeOfUser === 'ta') {
       Menus.addSubMenuItem('topbar', 'officehours', {
         title: 'Offer Office Hour Booking',
         state: 'officehours.create',
@@ -45,7 +45,7 @@
       });
     }
 
-    if (window.user.typeOfUser === 'professor') {
+    if (window.user && window.user.typeOfUser === 'professor') {
       Menus.addSubMenuItem('topbar', 'officehours', {
         title: 'Offer Office Hour',
         state: 'officehours.create',
