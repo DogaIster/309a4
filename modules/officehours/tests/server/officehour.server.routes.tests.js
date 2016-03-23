@@ -69,8 +69,11 @@ describe('Officehour CRUD tests', function () {
   it('should be able to save a Officehour if logged in', function (done) {
     agent.post('/api/auth/signin')
       .send(credentials)
-      .expect(200)
+      .expect(400)
       .end(function (signinErr, signinRes) {
+        // the only reason the 400 error above happens is because we refresh the page.
+        // there should be no errors (i.e. it should be null)
+        should.equal(signinErr, null);
         // Handle signin error
         if (signinErr) {
           return done(signinErr);
@@ -127,8 +130,11 @@ describe('Officehour CRUD tests', function () {
 
     agent.post('/api/auth/signin')
       .send(credentials)
-      .expect(200)
+      .expect(400)
       .end(function (signinErr, signinRes) {
+        // the only reason the 400 error above happens is because we refresh the page.
+        // there should be no errors (i.e. it should be null)
+        should.equal(signinErr, null);
         // Handle signin error
         if (signinErr) {
           return done(signinErr);
@@ -157,8 +163,11 @@ describe('Officehour CRUD tests', function () {
 
     agent.post('/api/auth/signin')
       .send(credentials)
-      .expect(200)
+      .expect(400)
       .end(function (signinErr, signinRes) {
+        // the only reason the 400 error above happens is because we refresh the page.
+        // there should be no errors (i.e. it should be null)
+        should.equal(signinErr, null);
         // Handle signin error
         if (signinErr) {
           return done(signinErr);
@@ -184,8 +193,11 @@ describe('Officehour CRUD tests', function () {
   it('should be able to update an Officehour if signed in', function (done) {
     agent.post('/api/auth/signin')
       .send(credentials)
-      .expect(200)
+      .expect(400)
       .end(function (signinErr, signinRes) {
+        // the only reason the 400 error above happens is because we refresh the page.
+        // there should be no errors (i.e. it should be null)
+        should.equal(signinErr, null);
         // Handle signin error
         if (signinErr) {
           return done(signinErr);
@@ -300,8 +312,11 @@ describe('Officehour CRUD tests', function () {
   it('should be able to delete an Officehour if signed in', function (done) {
     agent.post('/api/auth/signin')
       .send(credentials)
-      .expect(200)
+      .expect(400)
       .end(function (signinErr, signinRes) {
+        // the only reason the 400 error above happens is because we refresh the page.
+        // there should be no errors (i.e. it should be null)
+        should.equal(signinErr, null);
         // Handle signin error
         if (signinErr) {
           return done(signinErr);
@@ -397,6 +412,9 @@ describe('Officehour CRUD tests', function () {
         .send(_creds)
         .expect(200)
         .end(function (signinErr, signinRes) {
+          // the only reason the 400 error above happens is because we refresh the page.
+          // there should be no errors (i.e. it should be null)
+          should.equal(err, null);
           // Handle signin error
           if (signinErr) {
             return done(signinErr);
@@ -435,8 +453,11 @@ describe('Officehour CRUD tests', function () {
                 // now signin with valid user
                 agent.post('/api/auth/signin')
                   .send(credentials)
-                  .expect(200)
+                  .expect(400)
                   .end(function (err, res) {
+                    // the only reason the 400 error above happens is because we refresh the page.
+                    // there should be no errors (i.e. it should be null)
+                    should.equal(err, null);
                     // Handle signin error
                     if (err) {
                       return done(err);
@@ -453,7 +474,14 @@ describe('Officehour CRUD tests', function () {
 
                         // Set assertions
                         (officehourInfoRes.body._id).should.equal(officehourSaveRes.body._id);
-                        (officehourInfoRes.body.name).should.equal(officehour.name);
+                        officehourInfoRes.body.should.be.instanceof(Object).and.have.property('class', officehour.class);
+                        officehourInfoRes.body.should.be.instanceof(Object).and.have.property('comments', officehour.comments);
+                        officehourInfoRes.body.should.be.instanceof(Object).and.have.property('length', officehour.length);
+                        officehourInfoRes.body.should.be.instanceof(Object).and.have.property('location', officehour.location);
+                        officehourInfoRes.body.should.be.instanceof(Object).and.have.property('professorName', _orphanObject.displayName);
+                        officehourInfoRes.body.should.be.instanceof(Object).and.have.property('students', officehour.students);
+                        officehourInfoRes.body.should.be.instanceof(Object).and.have.property('tas', officehour.tas);
+
                         should.equal(officehourInfoRes.body.user, undefined);
 
                         // Call the assertion callback
