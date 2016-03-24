@@ -52,8 +52,59 @@ describe('User CRUD tests', function () {
     });
   });
 
-  it('should be able to register a new user', function (done) {
+  it('should be able to register a new student user', function (done) {
+    _user.typeOfUser = 'student';
+    _user.username = 'register_new_user';
+    _user.email = 'register_new_user_@test.com';
 
+    agent.post('/api/auth/signup')
+      .send(_user)
+      .expect(200)
+      .end(function (signupErr, signupRes) {
+        // Handle signpu error
+        if (signupErr) {
+          return done(signupErr);
+        }
+
+        signupRes.body.username.should.equal(_user.username);
+        signupRes.body.email.should.equal(_user.email);
+        // Assert a proper profile image has been set, even if by default
+        signupRes.body.profileImageURL.should.not.be.empty();
+        // Assert we have just the default 'user' role
+        signupRes.body.roles.should.be.instanceof(Array).and.have.lengthOf(1);
+        signupRes.body.roles.indexOf('user').should.equal(0);
+        return done();
+      });
+  });
+  //professor
+  it('should be able to register a new professor user', function (done) {
+    _user.typeOfUser = 'professor';
+    _user.username = 'register_new_user';
+    _user.email = 'register_new_user_@test.com';
+
+    agent.post('/api/auth/signup')
+      .send(_user)
+      .expect(200)
+      .end(function (signupErr, signupRes) {
+        // Handle signpu error
+        if (signupErr) {
+          return done(signupErr);
+        }
+
+        signupRes.body.username.should.equal(_user.username);
+        signupRes.body.email.should.equal(_user.email);
+        // Assert a proper profile image has been set, even if by default
+        signupRes.body.profileImageURL.should.not.be.empty();
+        // Professor should be admin as well
+        signupRes.body.roles.should.be.instanceof(Array).and.have.lengthOf(2);
+        signupRes.body.roles.indexOf('user').should.not.equal(-1);
+        signupRes.body.roles.indexOf('admin').should.not.equal(-1);
+        return done();
+      });
+  });
+  //TA
+  it('should be able to register a new TA user', function (done) {
+    _user.typeOfUser = 'ta';
     _user.username = 'register_new_user';
     _user.email = 'register_new_user_@test.com';
 
@@ -106,7 +157,7 @@ describe('User CRUD tests', function () {
       });
   });
 
-  it('should not be able to retrieve a list of users', function (done) {
+  it('should be able to retrieve a list of users', function (done) {
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
@@ -131,6 +182,7 @@ describe('User CRUD tests', function () {
 
   it('should be able to retrieve a list of users if admin', function (done) {
     user.roles = ['user', 'admin'];
+    user.typeOfUser = 'professor';
 
     user.save(function (err) {
       should.not.exist(err);
@@ -162,6 +214,7 @@ describe('User CRUD tests', function () {
 
   it('should be able to get a single user details if admin', function (done) {
     user.roles = ['user', 'admin'];
+    user.typeOfUser = 'professor';
 
     user.save(function (err) {
       should.not.exist(err);
@@ -194,6 +247,7 @@ describe('User CRUD tests', function () {
 
   it('should be able to update a single user details if admin', function (done) {
     user.roles = ['user', 'admin'];
+    user.typeOfUser = 'professor';
 
     user.save(function (err) {
       should.not.exist(err);
@@ -237,6 +291,7 @@ describe('User CRUD tests', function () {
 
   it('should be able to delete a single user if admin', function (done) {
     user.roles = ['user', 'admin'];
+    user.typeOfUser = 'professor';
 
     user.save(function (err) {
       should.not.exist(err);
@@ -259,6 +314,204 @@ describe('User CRUD tests', function () {
 
               userInfoRes.body.should.be.instanceof(Object);
               userInfoRes.body._id.should.be.equal(String(user._id));
+
+              // Call the assertion callback
+              return done();
+            });
+        });
+    });
+  });
+
+  it('should be able to retrieve a list of users if student', function (done) {
+    user.roles = ['user'];
+    user.typeOfUser = 'student';
+
+    user.save(function (err) {
+      should.not.exist(err);
+      agent.post('/api/auth/signin')
+        .send(credentials)
+        .expect(200)
+        .end(function (signinErr, signinRes) {
+          // Handle signin error
+          if (signinErr) {
+            return done(signinErr);
+          }
+
+          // Request list of users
+          agent.get('/api/users')
+            .expect(200)
+            .end(function (usersGetErr, usersGetRes) {
+              if (usersGetErr) {
+                return done(usersGetErr);
+              }
+
+              usersGetRes.body.should.be.instanceof(Array).and.have.lengthOf(1);
+
+              // Call the assertion callback
+              return done();
+            });
+        });
+    });
+  });
+
+  it('should be able to get a single user details if student', function (done) {
+    user.roles = ['user'];
+    user.typeOfUser = 'student';
+
+    user.save(function (err) {
+      should.not.exist(err);
+      agent.post('/api/auth/signin')
+        .send(credentials)
+        .expect(200)
+        .end(function (signinErr, signinRes) {
+          // Handle signin error
+          if (signinErr) {
+            return done(signinErr);
+          }
+
+          // Get single user information from the database
+          agent.get('/api/users/' + user._id)
+            .expect(200)
+            .end(function (userInfoErr, userInfoRes) {
+              if (userInfoErr) {
+                return done(userInfoErr);
+              }
+
+              userInfoRes.body.should.be.instanceof(Object);
+              userInfoRes.body._id.should.be.equal(String(user._id));
+
+              // Call the assertion callback
+              return done();
+            });
+        });
+    });
+  });
+
+  it('should be able to retrieve a list of users if ta', function (done) {
+    user.roles = ['user'];
+    user.typeOfUser = 'ta';
+
+    user.save(function (err) {
+      should.not.exist(err);
+      agent.post('/api/auth/signin')
+        .send(credentials)
+        .expect(200)
+        .end(function (signinErr, signinRes) {
+          // Handle signin error
+          if (signinErr) {
+            return done(signinErr);
+          }
+
+          // Request list of users
+          agent.get('/api/users')
+            .expect(200)
+            .end(function (usersGetErr, usersGetRes) {
+              if (usersGetErr) {
+                return done(usersGetErr);
+              }
+
+              usersGetRes.body.should.be.instanceof(Array).and.have.lengthOf(1);
+
+              // Call the assertion callback
+              return done();
+            });
+        });
+    });
+  });
+
+  it('should be able to get a single user details if ta', function (done) {
+    user.roles = ['user'];
+    user.typeOfUser = 'ta';
+
+    user.save(function (err) {
+      should.not.exist(err);
+      agent.post('/api/auth/signin')
+        .send(credentials)
+        .expect(200)
+        .end(function (signinErr, signinRes) {
+          // Handle signin error
+          if (signinErr) {
+            return done(signinErr);
+          }
+
+          // Get single user information from the database
+          agent.get('/api/users/' + user._id)
+            .expect(200)
+            .end(function (userInfoErr, userInfoRes) {
+              if (userInfoErr) {
+                return done(userInfoErr);
+              }
+
+              userInfoRes.body.should.be.instanceof(Object);
+              userInfoRes.body._id.should.be.equal(String(user._id));
+
+              // Call the assertion callback
+              return done();
+            });
+        });
+    });
+  });
+
+  it('should be able to update a single user details if ta', function (done) {
+    user.roles = ['user'];
+    user.typeOfUser = 'ta';
+
+    user.save(function (err) {
+      should.not.exist(err);
+      agent.post('/api/auth/signin')
+        .send(credentials)
+        .expect(200)
+        .end(function (signinErr, signinRes) {
+          // Handle signin error
+          if (signinErr) {
+            return done(signinErr);
+          }
+
+          // Get single user information from the database
+
+          var userUpdate = {
+            firstName: 'admin_update_first',
+            lastName: 'admin_update_last',
+            roles: ['admin']
+          };
+
+          agent.put('/api/users/' + user._id)
+            .send(userUpdate)
+            .expect(200)
+            .end(function (userInfoErr, userInfoRes) {
+              if (userInfoErr) {
+                return done(userInfoErr);
+              }
+
+              // Call the assertion callback
+              return done();
+            });
+        });
+    });
+  });
+
+  it('should not be able to delete a single user if ta', function (done) {
+    user.roles = ['user'];
+    user.typeOfUser = 'ta';
+
+    user.save(function (err) {
+      should.not.exist(err);
+      agent.post('/api/auth/signin')
+        .send(credentials)
+        .expect(200)
+        .end(function (signinErr, signinRes) {
+          // Handle signin error
+          if (signinErr) {
+            return done(signinErr);
+          }
+
+          agent.delete('/api/users/' + user._id)
+            //.send(userUpdate)
+            .expect(200)
+            .end(function (userInfoErr, userInfoRes) {
+              if (userInfoErr) {
+                return done(userInfoErr);
+              }
 
               // Call the assertion callback
               return done();
