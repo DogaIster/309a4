@@ -186,6 +186,39 @@ describe('Officehour CRUD tests', function () {
       });
   });
 
+  it('should not be able to save an Officehour if no class is provided', function (done) {
+    // Invalidate class field
+    officehour.class = null;
+
+    agent.post('/api/auth/signin')
+      .send(credentials)
+      .expect(400)
+      .end(function (signinErr, signinRes) {
+        // the only reason the 400 error above happens is because we refresh the page.
+        // there should be no errors (i.e. it should be null)
+        should.equal(signinErr, null);
+        // Handle signin error
+        if (signinErr) {
+          return done(signinErr);
+        }
+
+        // Get the userId
+        var userId = user.id;
+
+        // Save a new Officehour
+        agent.post('/api/officehours')
+          .send(officehour)
+          .expect(403)
+          .end(function (officehourSaveErr, officehourSaveRes) {
+            // Set message assertion
+            (officehourSaveRes.body.message).should.match('User is not authorized');
+
+            // Handle Officehour save error
+            done(officehourSaveErr);
+          });
+      });
+  });
+
   it('should be able to update an Officehour if signed in', function (done) {
     agent.post('/api/auth/signin')
       .send(credentials)
@@ -366,6 +399,224 @@ describe('Officehour CRUD tests', function () {
           done(officehourDeleteErr);
         });
 
+    });
+  });
+
+  it('a professor should be able to put an Office hour', function (done) {
+    var _creds = {
+      username: 'prof',
+      password: 'M3@n.jsI$Aw3$0m3'
+    };
+
+    var _profObject = {
+      firstName: 'Full',
+      lastName: 'Name',
+      displayName: 'Full Name',
+      email: 'prof@test.com',
+      username: _creds.username,
+      password: _creds.password,
+      provider: 'local',
+      classes: ['CSC108'],
+      typeOfUser: 'professor',
+      description: 'prof user',
+      profileImageURL: 'modules/users/client/img/profile/default.png'
+    };
+    var _prof = new User(_profObject);
+
+
+    _prof.save(function (err, orphan) {
+      // Handle save error
+      if (err) {
+        return done(err);
+      }
+
+      agent.post('/api/auth/signin')
+        .send(_creds)
+        .expect(200)
+        .end(function (signinErr, signinRes) {
+          // the only reason the 400 error above happens is because we refresh the page.
+          // there should be no errors (i.e. it should be null)
+          should.equal(err, null);
+          // Handle signin error
+          if (signinErr) {
+            return done(signinErr);
+          }
+
+          // Get the userId
+          var profId = _prof._id;
+
+          // Save a new Officehour
+          agent.post('/api/officehours')
+            .send(officehour)
+            .expect(200)
+            .end(function (officehourSaveErr, officehourSaveRes) {
+              // Handle Officehour save error
+              if (officehourSaveErr) {
+                return done(officehourSaveErr);
+              }
+
+              // Set assertions on new Officehour
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('class', officehour.class);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('comments', officehour.comments);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('length', officehour.length);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('location', officehour.location);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('professorName', _profObject.displayName);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('students', officehour.students);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('tas', officehour.tas);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('professor');
+              should.exist(officehourSaveRes.body.user);
+              should.equal(officehourSaveRes.body.user._id, profId);
+              // since the user is a professor
+              should.equal(officehourSaveRes.body.professor._id, profId);
+
+              // Call the assertion callback
+              done();
+            });
+        });
+    });
+  });
+
+  it('a student should be able to put an Office hour', function (done) {
+    var _creds = {
+      username: 'student',
+      password: 'M3@n.jsI$Aw3$0m3'
+    };
+
+    var _studentObject = {
+      firstName: 'Full',
+      lastName: 'Name',
+      displayName: 'Full Name',
+      email: 'student@test.com',
+      username: _creds.username,
+      password: _creds.password,
+      provider: 'local',
+      classes: ['CSC108'],
+      typeOfUser: 'student',
+      description: 'student user',
+      profileImageURL: 'modules/users/client/img/profile/default.png'
+    };
+    var _student = new User(_studentObject);
+
+
+    _student.save(function (err, orphan) {
+      // Handle save error
+      if (err) {
+        return done(err);
+      }
+
+      agent.post('/api/auth/signin')
+        .send(_creds)
+        .expect(200)
+        .end(function (signinErr, signinRes) {
+          // the only reason the 400 error above happens is because we refresh the page.
+          // there should be no errors (i.e. it should be null)
+          should.equal(err, null);
+          // Handle signin error
+          if (signinErr) {
+            return done(signinErr);
+          }
+
+          // Get the userId
+          var studentId = _student._id;
+          agent.post('/api/officehours')
+            .send(officehour)
+            .expect(200)
+            .end(function (officehourSaveErr, officehourSaveRes) {
+              // Handle Officehour save error
+              if (officehourSaveErr) {
+                return done(officehourSaveErr);
+              }
+
+              // Set assertions on new Officehour
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('class', officehour.class);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('comments', officehour.comments);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('length', officehour.length);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('location', officehour.location);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('professorName', '');
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('students');
+              officehourSaveRes.body.students.should.be.instanceof(Object).and.have.lengthOf(2);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('tas', officehour.tas);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('professor');
+              should.exist(officehourSaveRes.body.user);
+              should.equal(officehourSaveRes.body.user._id, studentId);
+              should.equal(officehourSaveRes.body.professor, null);
+
+              // Call the assertion callback
+              done();
+            });
+        });
+    });
+  });
+
+  it('a ta should be able to put an Office hour', function (done) {
+    var _creds = {
+      username: 'ta',
+      password: 'M3@n.jsI$Aw3$0m3'
+    };
+
+    var _taObject = {
+      firstName: 'Full',
+      lastName: 'Name',
+      displayName: 'Full Name',
+      email: 'ta@test.com',
+      username: _creds.username,
+      password: _creds.password,
+      provider: 'local',
+      classes: ['CSC108'],
+      typeOfUser: 'ta',
+      description: 'ta user',
+      profileImageURL: 'modules/users/client/img/profile/default.png'
+    };
+    var _ta = new User(_taObject);
+
+
+    _ta.save(function (err, orphan) {
+      // Handle save error
+      if (err) {
+        return done(err);
+      }
+
+      agent.post('/api/auth/signin')
+        .send(_creds)
+        .expect(200)
+        .end(function (signinErr, signinRes) {
+          // the only reason the 400 error above happens is because we refresh the page.
+          // there should be no errors (i.e. it should be null)
+          should.equal(err, null);
+          // Handle signin error
+          if (signinErr) {
+            return done(signinErr);
+          }
+
+          // Get the userId
+          var taId = _ta._id;
+          agent.post('/api/officehours')
+            .send(officehour)
+            .expect(200)
+            .end(function (officehourSaveErr, officehourSaveRes) {
+              // Handle Officehour save error
+              if (officehourSaveErr) {
+                return done(officehourSaveErr);
+              }
+
+              // Set assertions on new Officehour
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('class', officehour.class);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('comments', officehour.comments);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('length', officehour.length);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('location', officehour.location);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('professorName', '');
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('students');
+              officehourSaveRes.body.tas.should.be.instanceof(Object).and.have.lengthOf(1);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('students', officehour.students);
+              officehourSaveRes.body.should.be.instanceof(Object).and.have.property('professor');
+              should.exist(officehourSaveRes.body.user);
+              should.equal(officehourSaveRes.body.user._id, taId);
+              should.equal(officehourSaveRes.body.professor, null);
+
+              // Call the assertion callback
+              done();
+            });
+        });
     });
   });
 
@@ -659,7 +910,6 @@ describe('Officehour CRUD tests', function () {
               }
 
               // Set assertions on new Officehour
-              // the orphan is acutally a professor, so we're also testing the professor functionality here
               officehourSaveRes.body.should.be.instanceof(Object).and.have.property('class', officehour.class);
               officehourSaveRes.body.should.be.instanceof(Object).and.have.property('comments', officehour.comments);
               officehourSaveRes.body.should.be.instanceof(Object).and.have.property('length', officehour.length);
@@ -670,7 +920,6 @@ describe('Officehour CRUD tests', function () {
               officehourSaveRes.body.should.be.instanceof(Object).and.have.property('students', officehour.students);
               should.exist(officehourSaveRes.body.user);
               should.equal(officehourSaveRes.body.user._id, orphanId);
-              // since the user is a professor
               should.equal(officehourSaveRes.body.professor, null);
 
 
