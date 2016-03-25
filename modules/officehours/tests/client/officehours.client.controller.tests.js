@@ -138,6 +138,97 @@
         expect($scope.vm.error).toBe(errorMessage);
       }));
     });
+    
+    describe('vm.saveInterest() as update', function () {
+      beforeEach(function () {
+        // Mock Officehour in $scope
+        $scope.vm.officehour = mockOfficehour;
+        $scope.vm.officehour.students = [];
+        $scope.user = {
+          typeOfUser: 'student'
+        };
+      });
+
+      it('should update a valid Officehour', inject(function (OfficehoursService) {
+        $httpBackend.expectPUT(/api\/officehours\/([0-9a-fA-F]{24})$/).respond();
+        // Run controller functionality
+        $scope.vm.saveInterest($scope.vm.officehour);
+        $httpBackend.flush();
+      }));
+
+      it('should set $scope.vm.error if error', inject(function (OfficehoursService) {
+        var errorMessage = 'error';
+        $httpBackend.expectPUT(/api\/officehours\/([0-9a-fA-F]{24})$/).respond(400, {
+          message: errorMessage
+        });
+
+        $scope.vm.saveInterest($scope.vm.officehour);
+        $httpBackend.flush();
+
+        expect($scope.vm.error).toBe(errorMessage);
+      }));
+    });
+
+    describe('vm.saveDisInterest() as update', function () {
+      beforeEach(function () {
+        // Mock Officehour in $scope
+        $scope.vm.officehour = mockOfficehour;
+        $scope.vm.officehour.students = [];
+        $scope.user = {
+          typeOfUser: 'student'
+        };
+      });
+
+      it('should update a valid Officehour', inject(function (OfficehoursService) {
+        $httpBackend.expectPUT(/api\/officehours\/([0-9a-fA-F]{24})$/).respond();
+        // Run controller functionality
+        $scope.vm.saveDisInterest($scope.vm.officehour);
+        $httpBackend.flush();
+      }));
+
+      it('should set $scope.vm.error if error', inject(function (OfficehoursService) {
+        var errorMessage = 'error';
+        $httpBackend.expectPUT(/api\/officehours\/([0-9a-fA-F]{24})$/).respond(400, {
+          message: errorMessage
+        });
+
+        $scope.vm.saveDisInterest($scope.vm.officehour);
+        $httpBackend.flush();
+
+        expect($scope.vm.error).toBe(errorMessage);
+      }));
+    });
+
+    describe('vm.saveComment() as update', function () {
+      beforeEach(function () {
+        // Mock Officehour in $scope
+        $scope.vm.officehour = mockOfficehour;
+        $scope.vm.officehour.students = [];
+        $scope.vm.officehour.comments = ['Hi!'];
+        $scope.user = {
+          typeOfUser: 'student'
+        };
+      });
+
+      it('should update a valid Officehour', inject(function (OfficehoursService) {
+        $httpBackend.expectPUT(/api\/officehours\/([0-9a-fA-F]{24})$/).respond();
+        // Run controller functionality
+        $scope.vm.saveComment($scope.vm.officehour);
+        $httpBackend.flush();
+      }));
+
+      it('should set $scope.vm.error if error', inject(function (OfficehoursService) {
+        var errorMessage = 'error';
+        $httpBackend.expectPUT(/api\/officehours\/([0-9a-fA-F]{24})$/).respond(400, {
+          message: errorMessage
+        });
+
+        $scope.vm.saveComment($scope.vm.officehour);
+        $httpBackend.flush();
+
+        expect($scope.vm.error).toBe(errorMessage);
+      }));
+    });
 
     describe('vm.remove()', function () {
       beforeEach(function () {
