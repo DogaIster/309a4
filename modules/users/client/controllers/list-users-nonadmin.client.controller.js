@@ -14,6 +14,22 @@ angular.module('users.admin').controller('UserNonAdminListController', ['$scope'
       $scope.figureOutItemsToDisplay();
     };
 
+    // set the user variable in the scope for the current logged-in user
+    if (!$scope.user) {
+      $scope.user = window.user;
+    }
+
+    $scope.classesInCommon = function(comparingUser) {
+      var inCommon = [];
+      alert("hi");
+      for (var i = 0; i < comparingUser.length; i++) {
+        if ($scope.user.classes.indexOf(comparingUser[i]) > -1) {
+          inCommon.push(comparingUser[i]);
+        }
+      }
+      return inCommon;    
+    };
+
     $scope.figureOutItemsToDisplay = function () {
       $scope.filteredItems = $filter('filter')($scope.users, {
         $: $scope.search

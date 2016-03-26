@@ -33,6 +33,12 @@
       <div class="col-md-3"><strong>Description</strong></div>
       <div class="col-md-6" ng-bind="user.description"></div>
     </div>
+    <hr />
+
+    <div class="row">
+      <div class="col-md-3"><strong>Classes</strong></div>
+      <div class="col-md-6" ng-bind="'Classes: ' + user.classes.join(', ')"></div>
+    </div>
     <hr/>
 
     </div>
