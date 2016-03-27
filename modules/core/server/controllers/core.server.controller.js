@@ -13,7 +13,7 @@ exports.renderIndex = function (req, res) {
  * Render the Admin login page
  */
 exports.renderAdmin = function (req, res) {
-  res.render('modules/users/client/views/authentication/signin.client', {
+  res.render('modules/users/client/views/authentication/signin', {
     user: req.user || null
   });
 };

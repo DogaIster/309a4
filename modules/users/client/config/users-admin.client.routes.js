@@ -9,6 +9,16 @@ angular.module('users.admin.routes').config(['$stateProvider',
         templateUrl: 'modules/users/client/views/admin/list-users.client.view.html',
         controller: 'UserListController'
       })
+      .state('admin.users2', { // for /admin/ page
+        url: '/',
+        templateUrl: 'modules/users/client/views/admin/list-users.client.view.html',
+        controller: 'UserListController'
+      })
+      .state('admin.users3', { // for /admin page
+        url: '',
+        templateUrl: 'modules/users/client/views/admin/list-users.client.view.html',
+        controller: 'UserListController'
+      })
       .state('list', { // added for listing users
         url: '/users',
         templateUrl: 'modules/users/client/views/list-users-nonadmin.client.view.html',
@@ -38,9 +48,6 @@ angular.module('users.admin.routes').config(['$stateProvider',
           }]
         }
       })
-      // TODO: add another controller for non-admins to view a specific user
-      // (but not to edit)
-      // this is why we're getting the server error
       .state('admin.user-edit', {
         url: '/users/:userId/edit',
         templateUrl: 'modules/users/client/views/admin/edit-user.client.view.html',

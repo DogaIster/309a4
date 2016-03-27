@@ -21,7 +21,6 @@ angular.module('users.admin').controller('UserNonAdminListController', ['$scope'
 
     $scope.classesInCommon = function(comparingUser) {
       var inCommon = [];
-      alert("hi");
       for (var i = 0; i < comparingUser.length; i++) {
         if ($scope.user.classes.indexOf(comparingUser[i]) > -1) {
           inCommon.push(comparingUser[i]);
