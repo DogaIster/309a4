@@ -7,34 +7,4 @@ footer{
 	height: 50px;
 }
 
-#image{
-	padding-top: 300px;
-	position: absolute;
-	bottom: 50px;
-	text-align: center;
-	margin-left: -170px;
-	width: 20%;
-}
 
-.description p{
-	font-size: 2em;
-	font-style: bold;
-}
-
-#postMessage {
-	padding-top: 50px;
-	padding-bottom: 50px;
-}
-
-#messageForm {
-	padding-top: 50px;
-}
-
-#postMessage {
-    	width: 1000px;
-    	height: 80px;
-}
-
-#navbar {
-	padding-bottom: 50px;
-}
