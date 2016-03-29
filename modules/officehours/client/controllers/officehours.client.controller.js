@@ -58,7 +58,6 @@
 
     // Save Officehour
     function saveInterest(officehour) {
-      // TODO: move create/update logic to service
       if ($scope.user && $scope.user.typeOfUser === 'professor') {
         officehour.professor = $scope.user;
         officehour.professorName = $scope.user.firstName + ' ' + $scope.user.lastName;
@@ -83,9 +82,6 @@
       }
 
       function successCallback(res) {
-        //$state.go('officehours.list', {
-        //  officehourId: res._id
-        //});
       }
 
       function errorCallback(res) {
@@ -114,9 +110,7 @@
       }
 
       function successCallback(res) {
-        //$state.go('officehours.list', {
-        //  officehourId: res._id
-        //});
+
       }
 
       function errorCallback(res) {
@@ -160,9 +154,7 @@
       }
 
       function successCallback(res) {
-        //$state.go('officehours.list', {
-        //  officehourId: res._id
-        //});
+
       }
 
       function errorCallback(res) {
@@ -182,7 +174,6 @@
         return false;
       }
 
-      // TODO: move create/update logic to service
       if (vm.officehour._id) {
         vm.officehour.$update(successCallback, errorCallback);
       } else {

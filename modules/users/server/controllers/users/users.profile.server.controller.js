@@ -45,41 +45,6 @@ exports.update = function (req, res) {
       }
     });
 
-
-    // TODO : ADD UPDATE TO ALL OFFICE HOUR FIELDS SO THAT
-    // IF THE USER CHANGES THEIR NAME THE CHANGES ARE REFLECTED IN
-    // THE OFFICE HOUR DB ENTRY
-    // need to do this here since this is where the user changes
-
-    // NOTE: this is a WIP
-
-    // for updating officehours
-    var errorCallback = function (err) {
-      if(err) {
-        console.error(err);
-      }
-    };
-    /*
-    Officehour.find().exec(function(err, officehours) {
-      for (var i = 0; i < officehours.length; i++) {
-        var officehour = new Officehour(officehours[i]);
-        officehour = _.extend(officehour, officehours[i]);
-        delete officehour._id;
-        officehour._id = officehours[i]._id;
-        console.log(officehour);
-
-        for (var j = 0; j < officehour.comments.length; j++) {
-          if (user._id.toString() === officehour.comments[j]._id.toString() && user.displayName !== officehour.comments[j].displayName) {
-            officehour.comments[j].displayName = user.displayName;
-            officehour.comments[j].profileImageURL = user.profileImageURL;
-            console.log('updating user ' + user._id);
-          }
-        }
-
-        officehour.update(errorCallback);
-      }
-    });
-    */
   } else {
     res.status(400).send({
       message: 'User is not signed in'

@@ -30,7 +30,7 @@
 
     var addRandom = function(destArray, sourceArray) {
       for (var i = 0; i < sourceArray.length; i++) {
-        if (Math.random() * 10 < 2) {
+        if (Math.random() * 10 < 2 && destArray.indexOf(sourceArray[i]) === -1) {
           destArray.push(sourceArray[i]);
         }
       }
@@ -77,6 +77,18 @@
         }
       }
       return false;
+    };
+
+    // adds classes in the same department to a list
+    var addUserDepartmentClasses = function(arrayToAddTo, arrayToAddFrom) {
+      for (var i = 0; i < arrayToAddFrom.length; i++) {
+        for (var j = 0; j < $scope.user.classes; j++) {
+          // if the class is in the same department
+          if (arrayToAddTo.indexOf(arrayToAddFrom[i]) === -1 && $scope.user.classes[j].substring(0, 2) === arrayToAddFrom[i].substring(0,2)) {
+            arrayToAddTo.push(arrayToAddFrom[i]);
+          }
+        }
+      }
     };
 
     // for search
@@ -131,6 +143,7 @@
       }
 
       var backupList = $scope.filteredItems;
+      addUserDepartmentClasses($scope.filteredItems, backupList);
 
       // randomly determine if the office hours should include professors & student interest
       if (Math.random() * 10 < 3) {
