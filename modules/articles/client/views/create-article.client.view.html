@@ -9,9 +9,18 @@
           <label for="title">Title</label>
           <input name="title" type="text" ng-model="title" id="title" class="form-control" placeholder="Title" required>
           <div ng-messages="articleForm.title.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Article title is required.</p>
+            <p class="help-block error-text" ng-message="required">Announcement title is required.</p>
           </div>
         </div>
+              <div class="form-group" show-errors>
+            <label class="control-label" for="name" >Class</label>
+          <select class="form-control" ng-model="article.class" id="class" name="class">
+            <div>
+          <option value="" selected>Choose a class...</option>
+          <option data-ng-repeat="class in user.classes" ng-value="class" data-ng-bind="class | uppercase"></option>
+        </div>
+      </select>
+    </div>
         <div class="form-group">
           <label for="content">Content</label>
           <textarea name="content" ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>

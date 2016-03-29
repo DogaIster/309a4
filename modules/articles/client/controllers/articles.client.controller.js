@@ -5,6 +5,10 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
   function ($scope, $stateParams, $location, Authentication, Articles) {
     $scope.authentication = Authentication;
 
+    if ($scope.user === undefined) {
+      $scope.user = window.user;
+    }
+
     // Create new Article
     $scope.create = function (isValid) {
       $scope.error = null;

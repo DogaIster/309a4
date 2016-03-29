@@ -11,10 +11,11 @@
         <span ng-bind="article.user.displayName"></span>
       </small>
       <h4 class="list-group-item-heading" ng-bind="article.title"></h4>
+      <h5 class="list-group-item-heading" ng-bind="article.class"></h5>
       <p class="list-group-item-text" ng-bind="article.content"></p>
     </a>
   </div>
   <div class="alert alert-warning text-center" ng-if="articles.$resolved && !articles.length">
-    No articles yet, why don't you <a ui-sref="articles.create">create one</a>?
+    No announcements yet, why don't you <a ui-sref="articles.create">create one</a>?
   </div>
 </section>

@@ -28,6 +28,9 @@ var ArticleSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User'
+  },
+  class : {
+    type: String
   }
 });
 
