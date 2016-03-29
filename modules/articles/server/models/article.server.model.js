@@ -30,7 +30,8 @@ var ArticleSchema = new Schema({
     ref: 'User'
   },
   class : {
-    type: String
+    type: String,
+    default: 'None'
   }
 });
 

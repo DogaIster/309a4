@@ -11,7 +11,7 @@
         <span ng-bind="article.user.displayName"></span>
       </small>
       <h4 class="list-group-item-heading" ng-bind="article.title"></h4>
-      <h5 class="list-group-item-heading" ng-bind="article.class"></h5>
+      <h5 class="list-group-item-heading" ng-bind="'Class: ' + (article.class | uppercase)"></h5>
       <p class="list-group-item-text" ng-bind="article.content"></p>
     </a>
   </div>
