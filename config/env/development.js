@@ -5,17 +5,17 @@ var defaultEnvConfig = require('./default');
 // our db, which is hosted on MongoLab
 process.env.MONGOLAB_URI = 'mongodb://app:app@ds019668.mlab.com:19668/309a4';
 
-process.env.GITHUB_ID = 'b0d5c2d66ae9ddfe4f78';
-process.env.GITHUB_SECRET = '61ff23f04a0a0a55ad0b1499568628fa71cf386e';
+process.env.GITHUB_ID = '1d64748640e93f9c19ae';
+process.env.GITHUB_SECRET = '1f1e2c66e6410ccc823b1821223ce40ed19840c5';
 
-process.env.FACEBOOK_ID = '215754862119515';
-process.env.FACEBOOK_SECRET = '8bdfeb18474560bf2ac0c4b97e9ab3cc';
+process.env.FACEBOOK_ID = '542158889323267';
+process.env.FACEBOOK_SECRET = '5d8514985c81649c4af02bd73111bbd4';
 
-process.env.GOOGLE_ID = '911205614913-8g2oalr1rcivt5rfpj0hh44qa23d5vgd.apps.googleusercontent.com';
-process.env.GOOGLE_SECRET = 'c0qZGBiUiNYRP3jWCZ87vSiy';
+process.env.GOOGLE_ID = '911205614913-eop4099vagvv0q6fg58mbki5jdjqmlpf.apps.googleusercontent.com';
+process.env.GOOGLE_SECRET = 'VN6AZWDfS61q7ngt176o7Omq';
 
-process.env.TWITTER_ID = '9fQlr7AT8ZcFPkPMcZlQhBmpt';
-process.env.TWITTER_SECRET = 'Wrop29B7qgknK5SkPiGYLTK3JBVHUhLyn8JjdrWfjNbkfJIZWI';
+process.env.TWITTER_ID = '715289858592403458-5atx5AsqyV0EsO9qrM2eoPazE5O1HDH';
+process.env.TWITTER_SECRET = 'IDT5jFJzwh9X3drTMQideyNvIh50ICpUhEBThPvpnSyCc';
 
 process.env.LINKEDIN_ID = '770v1vn0ulwjov';
 process.env.LINKEDIN_SECRET = 't6W8Fzc3TzBuz9bX';
