@@ -11,8 +11,8 @@ process.env.GITHUB_SECRET = '1f1e2c66e6410ccc823b1821223ce40ed19840c5';
 process.env.FACEBOOK_ID = '542158889323267';
 process.env.FACEBOOK_SECRET = '5d8514985c81649c4af02bd73111bbd4';
 
-process.env.GOOGLE_ID = '911205614913-eop4099vagvv0q6fg58mbki5jdjqmlpf.apps.googleusercontent.com';
-process.env.GOOGLE_SECRET = 'VN6AZWDfS61q7ngt176o7Omq';
+process.env.GOOGLE_ID = '911205614913-8g2oalr1rcivt5rfpj0hh44qa23d5vgd.apps.googleusercontent.com';
+process.env.GOOGLE_SECRET = 'c0qZGBiUiNYRP3jWCZ87vSiy';
 
 process.env.TWITTER_ID = '715289858592403458-5atx5AsqyV0EsO9qrM2eoPazE5O1HDH';
 process.env.TWITTER_SECRET = 'IDT5jFJzwh9X3drTMQideyNvIh50ICpUhEBThPvpnSyCc';
