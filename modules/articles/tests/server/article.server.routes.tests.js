@@ -48,7 +48,8 @@ describe('Article CRUD tests', function () {
     user.save(function () {
       article = {
         title: 'Article Title',
-        content: 'Article Content'
+        content: 'Article Content',
+        class: 'CSC309'
       };
 
       done();
@@ -92,6 +93,7 @@ describe('Article CRUD tests', function () {
                 // Set assertions
                 (articles[0].user._id).should.equal(userId);
                 (articles[0].title).should.match('Article Title');
+                (articles[0].class).should.match('CSC309');
 
                 // Call the assertion callback
                 done();
@@ -137,6 +139,30 @@ describe('Article CRUD tests', function () {
             // Handle article save error
             done(articleSaveErr);
           });
+      });
+  });
+
+  it('should be able to save an article if no class is provided', function (done) {
+    // Invalidate title field
+    article.class = '';
+
+    agent.post('/api/auth/signin')
+      .send(credentials)
+      .expect(200)
+      .end(function (signinErr, signinRes) {
+        // Handle signin error
+        if (signinErr) {
+          return done(signinErr);
+        }
+
+        // Get the userId
+        var userId = user.id;
+
+        // Save a new article
+        agent.post('/api/articles')
+          .send(article)
+          .expect(200);
+        done();
       });
   });
 

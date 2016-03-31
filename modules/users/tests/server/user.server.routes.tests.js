@@ -40,7 +40,8 @@ describe('User CRUD tests', function () {
       email: 'test@test.com',
       username: credentials.username,
       password: credentials.password,
-      provider: 'local'
+      provider: 'local',
+      typeOfUser: 'student'
     };
 
     user = new User(_user);

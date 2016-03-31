@@ -25,7 +25,8 @@ describe('User Model Unit Tests:', function () {
       email: 'test@test.com',
       username: 'username',
       password: 'M3@n.jsI$Aw3$0m3',
-      provider: 'local'
+      provider: 'local',
+      typeOfUser: 'student'
     };
     // user2 is a clone of user1
     user2 = user1;
@@ -36,7 +37,8 @@ describe('User Model Unit Tests:', function () {
       email: 'test3@test.com',
       username: 'different_username',
       password: 'Different_Password1!',
-      provider: 'local'
+      provider: 'local',
+      typeOfUser: 'professor'
     };
   });
 
@@ -91,6 +93,38 @@ describe('User Model Unit Tests:', function () {
       _user1.save(function (err) {
         should.not.exist(err);
         _user1.roles = ['user', 'admin'];
+        _user1.save(function (err) {
+          should.not.exist(err);
+          _user1.remove(function (err) {
+            should.not.exist(err);
+            done();
+          });
+        });
+      });
+    });
+
+    it('should be able to add a description to an existing user without problems', function (done) {
+      var _user1 = new User(user1);
+
+      _user1.save(function (err) {
+        should.not.exist(err);
+        _user1.description = 'Im a student!';
+        _user1.save(function (err) {
+          should.not.exist(err);
+          _user1.remove(function (err) {
+            should.not.exist(err);
+            done();
+          });
+        });
+      });
+    });
+
+    it('should be able to change an existing users type without problems', function (done) {
+      var _user1 = new User(user1);
+
+      _user1.save(function (err) {
+        should.not.exist(err);
+        _user1.typeOfUser = 'professor';
         _user1.save(function (err) {
           should.not.exist(err);
           _user1.remove(function (err) {
