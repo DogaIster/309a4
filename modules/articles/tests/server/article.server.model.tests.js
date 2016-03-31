@@ -32,6 +32,7 @@ describe('Article Model Unit Tests:', function () {
       article = new Article({
         title: 'Article Title',
         content: 'Article Content',
+        class: 'CSC309',
         user: user
       });
 
@@ -56,7 +57,16 @@ describe('Article Model Unit Tests:', function () {
         done();
       });
     });
-  });
+
+    it('should be able to save without class', function (done) {
+      article.class = '';
+
+      return article.save(function (err) {
+        should.not.exist(err);
+        done();
+      });
+    });
+  }); 
 
   afterEach(function (done) {
     Article.remove().exec(function () {
