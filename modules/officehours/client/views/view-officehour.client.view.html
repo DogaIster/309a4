@@ -68,10 +68,10 @@
             <span data-ng-bind="comment.time | date:'medium'"></span>
             <p style="padding-top:10px; text-indent:30px;" data-ng-bind="comment.text"></p>
         </div>
-        <div ng-if="$scope.user" class="form-group">
+        <div class="form-group">
           <label for="newComment">Comment:</label>
           <textarea class="form-control" ng-model="vm.officehour.commentSubmission" rows="5" class="newComment"></textarea>
         </div>
-        <button class="submitCommentButton" ng-click="vm.saveComment(vm.officehour)" class="btn btn-default"> Submit comment </button>
+        <button ng-if="$scope.user" class="submitCommentButton" ng-click="vm.saveComment(vm.officehour)" class="btn btn-default"> Submit comment </button>
   </div>
 </section>
