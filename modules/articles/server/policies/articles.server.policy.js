@@ -18,6 +18,9 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/articles',
       permissions: '*'
     }, {
+      resources: '/api/announcements',
+      permissions: '*'
+    }, {
       resources: '/api/articles/:articleId',
       permissions: '*'
     }]
@@ -36,7 +39,13 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/articles',
       permissions: ['get']
     }, {
+      resources: '/api/announcements',
+      permissions: ['get']
+    }, {
       resources: '/api/articles/:articleId',
+      permissions: ['get']
+    }, {
+      resources: '/api/announcements/:articleId',
       permissions: ['get']
     }]
   }]);

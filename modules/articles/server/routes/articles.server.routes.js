@@ -18,6 +18,19 @@ module.exports = function (app) {
     .put(articles.update)
     .delete(articles.delete);
 
+  // same routes, except renamed to Announcements
+  // this is for REST APIs
+  // Announcement collection routes
+  app.route('/api/announcements').all(articlesPolicy.isAllowed)
+    .get(articles.list)
+    .post(articles.create);
+
+  // Single announcement routes
+  app.route('/api/announcements/:articleId').all(articlesPolicy.isAllowed)
+    .get(articles.read)
+    .put(articles.update)
+    .delete(articles.delete);
+
   // Finish by binding the article middleware
   app.param('articleId', articles.articleByID);
 };
