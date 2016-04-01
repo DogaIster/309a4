@@ -136,7 +136,7 @@
           <span data-ng-bind="comment.time | date:'medium'"></span>
           <p style="padding-top:10px; text-indent:30px;" data-ng-bind="comment.text"></p>
       </div>
-      <div class="form-group">
+      <div ng-if="$scope.user" class="form-group">
         <label for="newComment">Comment:</label>
         <textarea class="form-control" ng-model="officehour.commentSubmission" rows="5" class="newComment"></textarea>
       </div>
