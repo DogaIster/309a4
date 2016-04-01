@@ -16,7 +16,7 @@ var app, agent, credentials, user, officehour;
 /**
  * Officehour routes tests
  */
-describe('Officehour CRUD tests', function () {
+describe('Office hour CRUD tests', function () {
 
   before(function (done) {
     // Get application
@@ -66,7 +66,7 @@ describe('Officehour CRUD tests', function () {
     });
   });
 
-  it('should be able to save a Officehour if logged in', function (done) {
+  it('should be able to save a Office hour if logged in', function (done) {
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(400)
@@ -110,7 +110,7 @@ describe('Officehour CRUD tests', function () {
       });
   });
 
-  it('should not be able to save an Officehour if not logged in', function (done) {
+  it('should not be able to save an Office hour if not logged in', function (done) {
     agent.post('/api/officehours')
       .send(officehour)
       .expect(403)
@@ -120,7 +120,7 @@ describe('Officehour CRUD tests', function () {
       });
   });
 
-  it('should not be able to save an Officehour if no location is provided', function (done) {
+  it('should not be able to save an Office hour if no location is provided', function (done) {
     // Invalidate location field
     officehour.location = '';
 
@@ -153,7 +153,7 @@ describe('Officehour CRUD tests', function () {
       });
   });
 
-  it('should not be able to save an Officehour if no time is provided', function (done) {
+  it('should not be able to save an Office hour if no time is provided', function (done) {
     // Invalidate location field
     officehour.time = null;
 
@@ -186,7 +186,7 @@ describe('Officehour CRUD tests', function () {
       });
   });
 
-  it('should not be able to save an Officehour if no class is provided', function (done) {
+  it('should not be able to save an Office hour if no class is provided', function (done) {
     // Invalidate class field
     officehour.class = null;
 
@@ -219,7 +219,7 @@ describe('Officehour CRUD tests', function () {
       });
   });
 
-  it('should be able to update an Officehour if signed in', function (done) {
+  it('should be able to update an Office hour if signed in', function (done) {
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(400)
@@ -267,7 +267,7 @@ describe('Officehour CRUD tests', function () {
       });
   });
 
-  it('should be able to get a list of Officehours if not signed in', function (done) {
+  it('should be able to get a list of Office hours if not signed in', function (done) {
     // Create new Officehour model instance
     var officehourObj = new Officehour(officehour);
 
@@ -286,7 +286,27 @@ describe('Officehour CRUD tests', function () {
     });
   });
 
-  it('should be able to get a single Officehour if not signed in', function (done) {
+  it('should be able to get a list of Office hours via RESTful API in valid JSON format', function (done) {
+    // Create new Officehour model instance
+    var officehourObj = new Officehour(officehour);
+
+    // Save the officehour
+    officehourObj.save(function () {
+      // Request Officehours
+      request(app).get('/api/officehours')
+        .end(function (req, res) {
+          var response = JSON.parse(res.text.toString());
+          // thanks to http://stackoverflow.com/questions/4295386/how-can-i-check-if-a-value-is-a-json-object
+          response.should.be.instanceof(Object);
+
+          // Call the assertion callback
+          done();
+        });
+
+    });
+  });
+
+  it('should be able to get a single Office hour if not signed in', function (done) {
     // Create new Officehour model instance
     var officehourObj = new Officehour(officehour);
 
@@ -336,7 +356,7 @@ describe('Officehour CRUD tests', function () {
       });
   });
 
-  it('should be able to delete an Officehour if signed in', function (done) {
+  it('should be able to delete an Office hour if signed in', function (done) {
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(400)
@@ -379,7 +399,7 @@ describe('Officehour CRUD tests', function () {
       });
   });
 
-  it('should not be able to delete an Officehour if not signed in', function (done) {
+  it('should not be able to delete an Office hour if not signed in', function (done) {
     // Set Officehour user
     officehour.user = user;
 
@@ -620,7 +640,7 @@ describe('Officehour CRUD tests', function () {
     });
   });
 
-  it('should be able to get a single Officehour that has an orphaned professor user reference', function (done) {
+  it('should be able to get a single Office hour that has an orphaned professor user reference', function (done) {
     // Create orphan user creds
     var _creds = {
       username: 'orphan',
@@ -736,7 +756,7 @@ describe('Officehour CRUD tests', function () {
     });
   });
 
-  it('should be able to get a single Officehour that has an orphaned student user reference', function (done) {
+  it('should be able to get a single Office hour that has an orphaned student user reference', function (done) {
       // Create orphan user creds
     var _creds = {
       username: 'orphan',
@@ -854,7 +874,7 @@ describe('Officehour CRUD tests', function () {
     });
   });
 
-  it('should be able to get a single Officehour that has an orphaned TA user reference', function (done) {
+  it('should be able to get a single Office hour that has an orphaned TA user reference', function (done) {
       // Create orphan user creds
     var _creds = {
       username: 'orphan',

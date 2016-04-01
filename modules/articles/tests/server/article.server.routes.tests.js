@@ -16,7 +16,7 @@ var app, agent, credentials, user, article;
 /**
  * Article routes tests
  */
-describe('Article CRUD tests', function () {
+describe('Announcement CRUD tests', function () {
 
   before(function (done) {
     // Get application
@@ -56,7 +56,7 @@ describe('Article CRUD tests', function () {
     });
   });
 
-  it('should be able to save an article if logged in', function (done) {
+  it('should be able to save an announcement if logged in', function (done) {
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
@@ -102,7 +102,7 @@ describe('Article CRUD tests', function () {
       });
   });
 
-  it('should not be able to save an article if not logged in', function (done) {
+  it('should not be able to save an announcement if not logged in', function (done) {
     agent.post('/api/articles')
       .send(article)
       .expect(403)
@@ -112,7 +112,7 @@ describe('Article CRUD tests', function () {
       });
   });
 
-  it('should not be able to save an article if no title is provided', function (done) {
+  it('should not be able to save an announcement if no title is provided', function (done) {
     // Invalidate title field
     article.title = '';
 
@@ -142,7 +142,7 @@ describe('Article CRUD tests', function () {
       });
   });
 
-  it('should be able to save an article if no class is provided', function (done) {
+  it('should be able to save an announcement if no class is provided', function (done) {
     // Invalidate title field
     article.class = '';
 
@@ -166,7 +166,7 @@ describe('Article CRUD tests', function () {
       });
   });
 
-  it('should be able to update an article if signed in', function (done) {
+  it('should be able to update an announcement if signed in', function (done) {
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
@@ -213,7 +213,7 @@ describe('Article CRUD tests', function () {
       });
   });
 
-  it('should be able to get a list of articles if not signed in', function (done) {
+  it('should be able to get a list of announcements if not signed in', function (done) {
     // Create new article model instance
     var articleObj = new Article(article);
 
@@ -232,7 +232,27 @@ describe('Article CRUD tests', function () {
     });
   });
 
-  it('should be able to get a single article if not signed in', function (done) {
+  it('should be able to get a list of announcements via RESTful calls in valid JSON format', function (done) {
+    // Create new article model instance
+    var articleObj = new Article(article);
+
+    // Save the article
+    articleObj.save(function () {
+      // Request articles
+      request(app).get('/api/articles')
+        .end(function (req, res) {
+          var response = JSON.parse(res.text.toString());
+          // thanks to http://stackoverflow.com/questions/4295386/how-can-i-check-if-a-value-is-a-json-object
+          response.should.be.instanceof(Object);
+
+          // Call the assertion callback
+          done();
+        });
+
+    });
+  });
+
+  it('should be able to get a single announcement if not signed in', function (done) {
     // Create new article model instance
     var articleObj = new Article(article);
 
@@ -249,7 +269,7 @@ describe('Article CRUD tests', function () {
     });
   });
 
-  it('should return proper error for single article with an invalid Id, if not signed in', function (done) {
+  it('should return proper error for single announcement with an invalid Id, if not signed in', function (done) {
     // test is not a valid mongoose Id
     request(app).get('/api/articles/test')
       .end(function (req, res) {
@@ -261,7 +281,7 @@ describe('Article CRUD tests', function () {
       });
   });
 
-  it('should return proper error for single article which doesnt exist, if not signed in', function (done) {
+  it('should return proper error for single announcement which doesnt exist, if not signed in', function (done) {
     // This is a valid mongoose Id but a non-existent article
     request(app).get('/api/articles/559e9cd815f80b4c256a8f41')
       .end(function (req, res) {
@@ -273,7 +293,7 @@ describe('Article CRUD tests', function () {
       });
   });
 
-  it('should be able to delete an article if signed in', function (done) {
+  it('should be able to delete an announcement if signed in', function (done) {
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
@@ -316,7 +336,7 @@ describe('Article CRUD tests', function () {
       });
   });
 
-  it('should not be able to delete an article if not signed in', function (done) {
+  it('should not be able to delete an announcement if not signed in', function (done) {
     // Set article user
     article.user = user;
 

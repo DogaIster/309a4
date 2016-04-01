@@ -16,7 +16,7 @@ var user, officehour;
 /**
  * Unit tests
  */
-describe('Officehour Model Unit Tests:', function() {
+describe('Office hour Model Unit Tests:', function() {
   beforeEach(function(done) {
     user = new User({
       firstName: 'Full',
