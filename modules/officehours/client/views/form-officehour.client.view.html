@@ -38,6 +38,9 @@
         <div ng-messages="vm.form.officehourForm.location.$error" role="alert">
           <p class="help-block error-text" ng-message="required">Office hour location is required.</p>
         </div>
+        <div ng-messages="vm.form.officehourForm.location.$error" role="alert">
+          <p class="help-block error-text">Office hour location is required. Please enter a valid office hour location, such as SF101.</p>
+        </div>
 
         <div ng-hide="true">
         <div data-ng-if="user.typeOfUser == 'professor'">

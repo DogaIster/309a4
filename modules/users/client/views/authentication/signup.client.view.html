@@ -45,7 +45,7 @@
           <input  id="classes4" ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="classes4" class="form-control" ng-model="credentials.classes[4]" placeholder="Classes">
           <input id="classes5" ng-pattern="/[a-zA-Z]{3}\d{3}/i" name="classes5" class="form-control" ng-model="credentials.classes[5]" placeholder="Classes">
           <div ng-if="!userForm.classes5.test('/[a-zA-Z]{3}\d{3}/i')" || "userForm.classes0.$error.required">
-            <p class="help-block">Classes are invalid. Enter a class like CSC309.</p>
+            <p class="help-block">Enter a classes in a format like CSC309, for example.</p>
           </div>
         </div>
 
