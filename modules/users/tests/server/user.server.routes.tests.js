@@ -208,6 +208,33 @@ describe('User CRUD tests', function () {
       });
   });
 
+  it('should be able to retrieve a single user via RESTful calls in valid JSON format', function (done) {
+    agent.post('/api/auth/signin')
+      .send(credentials)
+      .expect(200)
+      .end(function (signinErr, signinRes) {
+        // Handle signin error
+        if (signinErr) {
+          return done(signinErr);
+        }
+
+        // Request list of users
+        agent.get('/api/users/' + user._id)
+          .expect(200)
+          .end(function (usersGetErr, usersGetRes) {
+            var response = JSON.parse(usersGetRes.text.toString());
+            // thanks to http://stackoverflow.com/questions/4295386/how-can-i-check-if-a-value-is-a-json-object
+            response.should.be.instanceof(Object);
+            
+            if (usersGetErr) {
+              return done(usersGetErr);
+            }
+
+            return done();
+          });
+      });
+  });
+
   it('should be able to retrieve a list of users if admin', function (done) {
     user.roles = ['user', 'admin'];
     user.typeOfUser = 'professor';

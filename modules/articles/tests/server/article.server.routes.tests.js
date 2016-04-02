@@ -252,6 +252,24 @@ describe('Announcement CRUD tests', function () {
     });
   });
 
+  it('should be able to get a specific announcement via RESTful calls in valid JSON format', function (done) {
+    // Create new article model instance
+    var articleObj = new Article(article);
+
+    // Save the article
+    articleObj.save(function () {
+      request(app).get('/api/articles/' + articleObj._id)
+        .end(function (req, res) {
+          var response = JSON.parse(res.text.toString());
+          // thanks to http://stackoverflow.com/questions/4295386/how-can-i-check-if-a-value-is-a-json-object
+          response.should.be.instanceof(Object);
+
+          // Call the assertion callback
+          done();
+        });
+    });
+  });
+
   it('should be able to get a single announcement if not signed in', function (done) {
     // Create new article model instance
     var articleObj = new Article(article);

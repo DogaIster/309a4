@@ -306,6 +306,26 @@ describe('Office hour CRUD tests', function () {
     });
   });
 
+  it('should be able to get a single Office hour via RESTful API in valid JSON format', function (done) {
+    // Create new Officehour model instance
+    var officehourObj = new Officehour(officehour);
+
+    // Save the officehour
+    officehourObj.save(function () {
+      // Request Officehours
+      request(app).get('/api/officehours/' + officehourObj._id)
+        .end(function (req, res) {
+          var response = JSON.parse(res.text.toString());
+          // thanks to http://stackoverflow.com/questions/4295386/how-can-i-check-if-a-value-is-a-json-object
+          response.should.be.instanceof(Object);
+
+          // Call the assertion callback
+          done();
+        });
+
+    });
+  });
+
   it('should be able to get a single Office hour if not signed in', function (done) {
     // Create new Officehour model instance
     var officehourObj = new Officehour(officehour);
