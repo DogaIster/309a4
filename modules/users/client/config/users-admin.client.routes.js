@@ -28,6 +28,7 @@ angular.module('users.admin.routes').config(['$stateProvider',
         url: '/users/:userId',
         templateUrl: 'modules/users/client/views/admin/view-user.client.view.html',
         controller: 'UserController',
+        controllerAs: 'vm',
         resolve: {
           userResolve: ['$stateParams', 'Admin', function ($stateParams, Admin) {
             return Admin.get({
@@ -40,10 +41,12 @@ angular.module('users.admin.routes').config(['$stateProvider',
         url: '/users/:userId',
         templateUrl: 'modules/users/client/views/view-user.client.view.nonadmin.html',
         controller: 'UserController',
+        controllerAs: 'vm',
         resolve: {
           userResolve: ['$stateParams', 'Admin', function ($stateParams, Admin) {
+            console.log("inner");
             return Admin.get({
-              userId: $stateParams.userId
+              userId:  $stateParams.userId
             });
           }]
         }
@@ -61,4 +64,6 @@ angular.module('users.admin.routes').config(['$stateProvider',
         }
       });
   }
+
+
 ]);
