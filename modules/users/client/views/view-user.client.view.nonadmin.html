@@ -40,21 +40,7 @@
       <div class="col-md-6" ng-bind="'Classes: ' + user.classes.join(', ')"></div>
     </div>
     <hr/>
-    <div class="commentContainer" >
-        <div class="list-group-item" data-ng-repeat="comment in user.comments">
-            <a data-ng-if="comment._id" ng-href="/users/{{comment._id}}">
-              <img data-ng-if="comment.profileImageURL" ng-src="{{comment.profileImageURL}}" alt="Profile Image" width="20px;" height="20px;">
-              <span data-ng-bind="comment.displayName"></span>
-            </a>
-            <span data-ng-bind="comment.time | date:'medium'"></span>
-            <p style="padding-top:10px; text-indent:30px;" data-ng-bind="comment.text"></p>
-        </div>
-        <div class="form-group">
-          <label for="newComment">Comment:</label>
-          <textarea class="form-control" ng-model="user.commentSubmission" rows="5" class="newComment"></textarea>
-        </div>
-        <button class="submitCommentButton" ng-click="vm.saveComment(user)" class="btn btn-default"> Submit comment </button>
-  </div>
+    
    </div>
   </div>
 </section>
