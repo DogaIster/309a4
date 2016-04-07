@@ -32,33 +32,33 @@ angular.module('users.admin').controller('UserController', ['$scope', '$state', 
       function saveComment(user) {
      
       //console.log 
-      vm.user.comments.push(
-        { text: user.commentSubmission,
-          time: new Date(),
-          _id: $scope.user._id,
-          profileImageURL: $scope.user.profileImageURL,
-          displayName: $scope.user.displayName
+        vm.user.comments.push(
+          { text: user.commentSubmission,
+            time: new Date(),
+            _id: $scope.user._id,
+            profileImageURL: $scope.user.profileImageURL,
+            displayName: $scope.user.displayName
+          }
+        );
+
+        user.commentSubmission = undefined;
+
+        //should always exist...
+        if (user._id) {
+          user.$update(successCallback, errorCallback);
+        } else {
+          user.$save(successCallback, errorCallback);
         }
-      );
 
-      user.commentSubmission = undefined;
+        function successCallback(res) {
+          console.log('success'); 
 
-      //should always exist...
-      if (user._id) {
-        user.$update(successCallback, errorCallback);
-      } else {
-        user.$save(successCallback, errorCallback);
+        }
+
+        function errorCallback(res) {
+          vm.error = res.data.message;
+        }
       }
-
-      function successCallback(res) {
-        console.log('success'); 
-
-      }
-
-      function errorCallback(res) {
-        vm.error = res.data.message;
-      }
-    }
 
       user.$update(function () {
         $state.go('admin.user', {

@@ -44,7 +44,6 @@ angular.module('users.admin.routes').config(['$stateProvider',
         controllerAs: 'vm',
         resolve: {
           userResolve: ['$stateParams', 'Admin', function ($stateParams, Admin) {
-            console.log("inner");
             return Admin.get({
               userId:  $stateParams.userId
             });
